@@ -1,0 +1,5 @@
+# SAVE ME AS config.yml!
+
+token: BOTTOKENHERE
+admin_roles:
+  - Admin
