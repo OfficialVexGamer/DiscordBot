@@ -1,12 +1,14 @@
 from bot.commands.draw import DrawCommand
 from bot.commands.mute import MuteCommand
+from bot.commands.unmute import UnmuteCommand
 import discord
 import asyncio
 
 client = discord.Client()
 commands = {
+    "unmute": UnmuteCommand(),
     "mute": MuteCommand(),
-    "çekiliş": DrawCommand()
+    "çekiliş": DrawCommand(),
 }
 
 
