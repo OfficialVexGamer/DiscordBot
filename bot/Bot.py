@@ -1,3 +1,4 @@
+from bot.commands.cleverbot import CleverbotCommand
 from bot.commands.draw import DrawCommand
 from bot.commands.mute import MuteCommand
 from bot.commands.unmute import UnmuteCommand
@@ -9,6 +10,7 @@ commands = {
     "unmute": UnmuteCommand(),
     "mute": MuteCommand(),
     "çekiliş": DrawCommand(),
+    "cleverbot": CleverbotCommand()
 }
 
 
