@@ -1,10 +1,10 @@
-from bot.commands.test import TestCommand
+from bot.commands.mute import MuteCommand
 import discord
 import asyncio
 
 client = discord.Client()
 commands = {
-    "test": TestCommand()
+    "mute": MuteCommand()
 }
 
 
@@ -19,20 +19,23 @@ async def on_message(message):
         if message.author == client.user:
             return
 
-        print("[OK] Komut: (" + message.author.name + ") " + message.content[1:])
+        cmd = message.content[1:].split()[0]
+        c_args = message.content[1:].split()[1:]
 
-        if not commands.get(message.content[1:]):
+        print("[OK] Komut: (" + message.author.name + ") " + cmd + " args: " + str(c_args))
+
+        if not commands.get(cmd):
             await client.send_message(message.channel, "@" + message.author.name + " Bu komut yok!")
             return
 
-        if commands[message.content[1:]].requiresAdmin():
+        if commands[cmd].requiresAdmin():
             for role in message.author.roles:
                 for check_role in cfg["admin_roles"]:
                     if role.name == check_role:
-                        await commands[message.content[1:]].do(client, message)
+                        await commands[cmd].do(client, message, c_args, cfg)
                         return
         else:
-            commands[message.content[1:]].do(client, message)
+            commands[cmd].do(client, message, c_args, cfg)
             return
 
         await client.send_message(message.channel, "@" + message.author.name + " Yetkin yok!")
