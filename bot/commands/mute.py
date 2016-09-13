@@ -18,7 +18,7 @@ class MuteCommand(Command):
 
         nameToMute = ""
         for arg in args[1:]:
-            nameToMute = nameToMute + " " + nameToMute
+            nameToMute = nameToMute + " " + arg
 
         for member in message.channel.server.members:
             if nameToMute.lower() == member.name.lower():
