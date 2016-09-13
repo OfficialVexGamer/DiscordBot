@@ -1,5 +1,3 @@
-from discord import Role
-
 from bot.commands.command import Command
 
 
@@ -30,7 +28,7 @@ class MuteCommand(Command):
 
                 for role in list(client.servers)[0].roles:
                     if role.name == config["mute_role"]:
-                        client.add_roles(member, role)
+                        await client.add_roles(member, role)
 
                         reason = ""
                         for arg in args[1:]:
