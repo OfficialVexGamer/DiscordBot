@@ -7,7 +7,10 @@ class DrawCommand(Command):
         return True
 
     async def do(self, client, message, args, config={}):
-        participants = message.channel.server.members
-        winner = random.randint(0, len(participants))
+        while True:
+            participants = message.channel.server.members
+            winner = random.randint(0, len(participants) - 1)
 
-        await client.send_message(message.channel, "Kazanan kişi, " + list(message.channel.server.members)[winner].name)
+            if list(participants)[winner].name != client.user.name:
+                await client.send_message(message.channel, "Kazanan kişi, " + list(participants)[winner].name)
+                break
