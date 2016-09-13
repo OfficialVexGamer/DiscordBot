@@ -1,6 +1,8 @@
 # SAVE ME AS config.yml!
 
 token: BOTTOKEN
+avatar: avatar.png
+mute_role: Susturulmuş
 admin_roles:
   - Admin
 cleverbot_channels: # (#)'a gerek yok.
