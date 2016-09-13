@@ -21,7 +21,7 @@ class MuteCommand(Command):
             nameToMute = nameToMute + " " + arg
 
         for member in message.channel.server.members:
-            if nameToMute.lower() == member.name.lower():
+            if nameToMute.lower().strip() == member.name.lower():
                 for role in member.roles:
                     for check_role in config["admin_roles"]:
                         if role.name == check_role:
