@@ -1,10 +1,12 @@
 from bot.commands.test import TestCommand
+from bot.commands.draw import DrawCommand
 import discord
 import asyncio
 
 client = discord.Client()
 commands = {
-    "test": TestCommand()
+    "test": TestCommand(),
+    "çekiliş": DrawCommand()
 }
 
 
