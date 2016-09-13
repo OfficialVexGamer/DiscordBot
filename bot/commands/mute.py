@@ -29,10 +29,14 @@ class MuteCommand(Command):
                             return
 
                 for role in list(client.servers)[0].roles:
-                    print(role.name)
                     if role.name == config["mute_role"]:
                         client.add_roles(member, role)
-                        await client.send_message(message.channel, "@" + member.name + " Mutelendi")
+
+                        reason = ""
+                        for arg in args[1:]:
+                            reason = reason + " " + arg
+
+                        await client.send_message(message.channel, "@" + member.name + " Susturuldu: " + reason)
                         return
 
                 await client.send_message(message.channel, "@" + message.author.name + " Mute rolü yok!")

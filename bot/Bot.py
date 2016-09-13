@@ -37,7 +37,7 @@ async def on_message(message):
                         await commands[cmd].do(client, message, c_args, cfg)
                         return
         else:
-            commands[cmd].do(client, message, c_args, cfg)
+            commands[cmd].do(client, message)
             return
 
         await client.send_message(message.channel, "@" + message.author.name + " Yetkin yok!")

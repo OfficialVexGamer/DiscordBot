@@ -6,7 +6,7 @@ class DrawCommand(Command):
     def requiresAdmin(self):
         return True
 
-    async def do(self, client, message):
+    async def do(self, client, message, args, config={}):
         participants = message.channel.server.members
         winner = random.randint(0, len(participants))
 
