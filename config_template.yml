@@ -3,3 +3,5 @@
 token: BOTTOKEN
 admin_roles:
   - Admin
+cleverbot_channels: # (#)'a gerek yok.
+  - bot

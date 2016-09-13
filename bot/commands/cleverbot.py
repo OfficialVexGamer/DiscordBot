@@ -7,14 +7,17 @@ class CleverbotCommand(Command):
         return False
 
     async def do(self, client, message, args, config={}):
-        input = args[0]
+        for chan in config["cleverbot_channels"]:
+            if chan == message.channel:
+                input = args[0]
 
-        for i in range(1, len(args)):
-            input = input + " " + args[i]
+                for i in range(1, len(args)):
+                    input = input + " " + args[i]
 
-        cb = Cleverbot()
+                cb = Cleverbot()
 
-        await client.send_message(message.channel, message.author.mention + ", " + cb.ask(input))
+                await client.send_message(message.channel, message.author.mention + ", " + cb.ask(input))
+                return
 
-
-
+        await client.send_message(message.channel, "@" + message.author.name +
+                                  " Cleverbot belirli kanallar dışında kullanılamaz!")
