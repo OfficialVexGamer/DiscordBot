@@ -21,18 +21,16 @@ class MuteCommand(Command):
             nameToMute = nameToMute + " " + arg
 
         for member in message.channel.server.members:
-            print(nameToMute.lower().strip())
             if nameToMute.lower().strip() == member.name.lower():
                 for role in member.roles:
                     for check_role in config["admin_roles"]:
                         if role.name == check_role:
-                            print(role.name)
                             await client.send_message(message.channel, "@" + message.author.name +
                                                       " Bir admini muteleyemessin!")
                             return
 
                 for role in list(client.servers)[0].roles:
-                    if role.name == config["mute_role"]:
+                    if role.name.lower() == config["mute_role"].lower():
                         await client.add_roles(member, role)
                         await client.send_message(message.channel, "@" + member.name + " Susturuldu")
                         return
