@@ -16,8 +16,12 @@ class MuteCommand(Command):
                                       ": Bot Konfigurasyon hatası! (admin_roles bulunamadı)")
             return
 
+        nameToMute = ""
+        for arg in args[1:]:
+            nameToMute = nameToMute + " " + nameToMute
+
         for member in message.channel.server.members:
-            if args[0].lower() == member.name.lower():
+            if nameToMute.lower() == member.name.lower():
                 for role in member.roles:
                     for check_role in config["admin_roles"]:
                         if role.name == check_role:
