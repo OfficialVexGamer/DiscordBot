@@ -5,7 +5,7 @@ from bot.commands.imagemacros import ImageMacroCommand
 from bot.commands.lock import LockCommand, UnlockCommand
 from bot.commands.mute import MuteCommand
 from bot.commands.unmute import UnmuteCommand
-from bot.chan_track import muted_chans, server
+from bot.chan_track import muted_chans, server, msgChan
 import discord
 import asyncio
 import os
@@ -50,7 +50,12 @@ async def on_message(message):
     isAuthorAdmin = False
     if type(message.author) == discord.User:  # PM
         if message.author.name == "admicos":
-            await client.send_message(client.get_channel("225218131537297408"), message.content)
+            global msgChan
+
+            if message.content.startswith('!id '):
+                msgChan = str(message.content[3:])
+            else:
+                await client.send_message(client.get_channel(msgChan), message.content)
 
         return
 
