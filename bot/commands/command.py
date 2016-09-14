@@ -6,7 +6,7 @@ class Command:
         return False
 
     def deleteCMDMsg(self):
-        return False
+        return True
 
     async def do(self, client, message, args, config={}):
         fs = ""
