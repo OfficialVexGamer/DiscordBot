@@ -51,12 +51,12 @@ async def on_message(message):
 
     if muted_chans[message.channel.name]:
         if not isAuthorAdmin:
+            await client.delete_message(message)
+            await client.send_message(message.author, "#" + message.channel.name + " şu anda kilitlidir.")
             return
 
     if message.content.startswith('!'):
         if message.author == client.user:
-            await client.delete_message(message)
-            await client.send_message(message.author, "#" + message.channel.name + " şu anda kilitlidir.")
             return
 
         cmd = message.content[1:].split()[0]
