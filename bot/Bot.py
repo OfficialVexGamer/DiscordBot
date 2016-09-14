@@ -43,6 +43,9 @@ async def on_ready():
 @client.event
 async def on_message(message):
     isAuthorAdmin = False
+    if type(message.author) == discord.User:
+        return
+
     for role in message.author.roles:
         for check_role in cfg["admin_roles"]:
             if role.name == check_role:
