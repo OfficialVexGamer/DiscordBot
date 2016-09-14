@@ -10,7 +10,7 @@ class Command:
 
     async def do(self, client, message, args, config={}):
         fs = ""
-        for file in os.listdir(os.path.join(config["img_dir"], args[0] + ".png")):
+        for file in os.listdir(config["img_dir"]):
             fs = fs + " - " + file.split(".")[0] + "\n"
 
         await client.send_message(message.channel, """```
