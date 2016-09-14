@@ -5,6 +5,9 @@ class UnmuteCommand(Command):
     def requiresAdmin(self):
         return True
 
+    def deleteCMDMsg(self):
+        return True
+
     async def do(self, client, message, args, config={}):
         if not config["mute_role"]:
             await client.send_message(message.channel, message.author.mention +
@@ -30,7 +33,7 @@ class UnmuteCommand(Command):
                             return
                         elif role.name == config["mute_role"]:
                             await client.remove_roles(member, role)
-                            await client.send_message(message.channel, "@" + member.name + " Artık konuşabilir")
+                            await client.send_message(message.channel, member.mention + " Artık konuşabilir")
                             return
 
         await client.send_message(message.channel, message.author.mention + " Böyle bir kişi yok!")

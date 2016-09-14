@@ -35,7 +35,7 @@ class MuteCommand(Command):
                 for role in list(client.servers)[0].roles:
                     if role.name.lower() == config["mute_role"].lower():
                         await client.add_roles(member, role)
-                        await client.send_message(message.channel, "@" + member.name + " Susturuldu")
+                        await client.send_message(message.channel, member.mention + " Susturuldu")
                         return
 
                 await client.send_message(message.channel, message.author.mention + " Mute rolü yok!")
