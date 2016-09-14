@@ -48,7 +48,7 @@ async def on_ready():
 @client.event
 async def on_message(message):
     isAuthorAdmin = False
-    if type(message.author) == discord.User:  #PM
+    if type(message.author) == discord.User:  # PM
         if message.author.name == "admicos":
             await client.send_message(client.get_channel("225218131537297408"), message.content)
 
