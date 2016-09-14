@@ -10,6 +10,7 @@ class LockCommand(Command):
         return True
 
     async def do(self, client, message, args, config={}):
+        await client.send_message(message.channel, message.author.mention + " Kanalı kilitledi.")
         muted_chans[message.channel] = True
 
 
@@ -21,4 +22,5 @@ class UnlockCommand(Command):
         return True
 
     async def do(self, client, message, args, config={}):
+        await client.send_message(message.channel, message.author.mention + " Kanal kilidini açtı.")
         muted_chans[message.channel] = False
