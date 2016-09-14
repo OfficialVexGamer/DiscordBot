@@ -2,8 +2,10 @@ from bot.commands.cleverbot import CleverbotCommand
 from bot.commands.command import Command
 from bot.commands.draw import DrawCommand
 from bot.commands.imagemacros import ImageMacroCommand
+from bot.commands.lock import LockCommand, UnlockCommand
 from bot.commands.mute import MuteCommand
 from bot.commands.unmute import UnmuteCommand
+from bot.chan_track import muted_chans
 import discord
 import asyncio
 import os
@@ -16,6 +18,8 @@ commands = {
     "cleverbot": CleverbotCommand(),
     "i": ImageMacroCommand(),
     "help": Command(),
+    "kilitle": LockCommand(),
+    "kilitac": UnlockCommand(),
 }
 
 
@@ -35,6 +39,16 @@ async def on_ready():
 
 @client.event
 async def on_message(message):
+    isAuthorAdmin = False
+    for role in message.author.roles:
+        for check_role in cfg["admin_roles"]:
+            if role.name == check_role:
+                isAuthorAdmin = True
+
+    if muted_chans[message.channel]:
+        if not isAuthorAdmin:
+            return
+
     if message.content.startswith('!'):
         if message.author == client.user:
             return
@@ -49,24 +63,18 @@ async def on_message(message):
             return
 
         if commands[cmd].requiresAdmin():
-            for role in message.author.roles:
-                for check_role in cfg["admin_roles"]:
-                    if role.name == check_role:
-                        await commands[cmd].do(client, message, c_args, cfg)
+            if isAuthorAdmin:
+                await commands[cmd].do(client, message, c_args, cfg)
 
-                        if commands[cmd].deleteCMDMsg():
-                            await client.delete_message(message)
-
-                        return
+                if commands[cmd].deleteCMDMsg():
+                    await client.delete_message(message)
+            else:
+                await client.send_message(message.channel, message.author.mention + " Yetkin yok!")
         else:
-            await commands[cmd].do(client, message, c_args, cfg)
+            await commands[cmd].do(message, c_args, cfg)
 
             if commands[cmd].deleteCMDMsg():
                 await client.delete_message(message)
-
-            return
-
-        await client.send_message(message.channel, message.author.mention + " Yetkin yok!")
 
 
 def start(config):
