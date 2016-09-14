@@ -54,6 +54,7 @@ async def on_message(message):
 
     if message.content.startswith('!'):
         if message.author == client.user:
+            await client.delete_message(message)
             return
 
         cmd = message.content[1:].split()[0]
