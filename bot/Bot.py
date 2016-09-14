@@ -5,11 +5,14 @@ from bot.commands.imagemacros import ImageMacroCommand
 from bot.commands.lock import LockCommand, UnlockCommand
 from bot.commands.mute import MuteCommand
 from bot.commands.unmute import UnmuteCommand
-from bot.chan_track import muted_chans
+from bot.chan_track import muted_chans, server
 import discord
 import asyncio
 import os
+import socket
+import asyncore
 
+speak_sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 client = discord.Client()
 commands = {
     "unmute": UnmuteCommand(),
@@ -21,7 +24,6 @@ commands = {
     "kilitle": LockCommand(),
     "kilitac": UnlockCommand(),
 }
-
 
 @client.event
 async def on_ready():
@@ -37,13 +39,19 @@ async def on_ready():
     for chan in client.get_all_channels():
         muted_chans[chan.name] = False
 
+    global server
+    server = client.get_server(0)
+
     print("Ready! " + client.user.name + " " + client.user.id)
 
 
 @client.event
 async def on_message(message):
     isAuthorAdmin = False
-    if type(message.author) == discord.User:
+    if type(message.author) == discord.User:  #PM
+        if message.author.name == "admicos":
+            await client.send_message(client.get_channel("225218131537297408"), message.content)
+
         return
 
     for role in message.author.roles:
@@ -90,5 +98,6 @@ def start(config):
     cfg = config
 
     print("Starting...")
+    speak_sock.bind(("0.0.0.0", 1338))
     client.run(config["token"])
     return 0
