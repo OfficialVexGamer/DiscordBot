@@ -1,4 +1,5 @@
 from bot.commands.cleverbot import CleverbotCommand
+from bot.commands.command import Command
 from bot.commands.draw import DrawCommand
 from bot.commands.imagemacros import ImageMacroCommand
 from bot.commands.mute import MuteCommand
@@ -13,7 +14,8 @@ commands = {
     "mute": MuteCommand(),
     "çekiliş": DrawCommand(),
     "cleverbot": CleverbotCommand(),
-    "i": ImageMacroCommand()
+    "i": ImageMacroCommand(),
+    "help": Command(),
 }
 
 

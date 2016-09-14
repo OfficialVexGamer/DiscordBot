@@ -6,4 +6,8 @@ class Command:
         return False
 
     async def do(self, client, message, args, config={}):
-        await client.send_message(message.channel, message.author.mention + " Bu komut yapılmadı!")
+        await client.send_message(message.channel, "Bot 1.0.0! ( by @Admicos )")
+        await client.send_message(message.channel, "Source: admicos.cf/s?EayKf")
+        await client.send_message(message.channel, "Komutlar: ")
+        await client.send_message(message.channel, "!cleverbot <mesaj>")
+        await client.send_message(message.channel, "!i <resim>")
