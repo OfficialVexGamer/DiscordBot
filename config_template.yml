@@ -3,6 +3,7 @@
 token: BOTTOKEN
 avatar: avatar.png
 mute_role: Susturulmuş
+img_dir: images/
 admin_roles:
   - Admin
 cleverbot_channels: # (#)'a gerek yok.

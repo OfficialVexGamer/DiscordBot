@@ -1,5 +1,6 @@
 from bot.commands.cleverbot import CleverbotCommand
 from bot.commands.draw import DrawCommand
+from bot.commands.imagemacros import ImageMacroCommand
 from bot.commands.mute import MuteCommand
 from bot.commands.unmute import UnmuteCommand
 import discord
@@ -11,7 +12,8 @@ commands = {
     "unmute": UnmuteCommand(),
     "mute": MuteCommand(),
     "çekiliş": DrawCommand(),
-    "cleverbot": CleverbotCommand()
+    "cleverbot": CleverbotCommand(),
+    "i": ImageMacroCommand()
 }
 
 
