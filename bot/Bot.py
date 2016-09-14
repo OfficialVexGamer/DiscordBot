@@ -43,7 +43,7 @@ async def on_message(message):
         print("Komut: (" + message.author.name + ") " + cmd + " args: " + str(c_args))
 
         if not commands.get(cmd):
-            await client.send_message(message.channel, "@" + message.author.name + " Bu komut yok!")
+            await client.send_message(message.channel, message.author.mention + " Bu komut yok!")
             return
 
         if commands[cmd].requiresAdmin():
@@ -58,7 +58,7 @@ async def on_message(message):
             await client.delete_message(message)
             return
 
-        await client.send_message(message.channel, "@" + message.author.name + " Yetkin yok!")
+        await client.send_message(message.channel, message.author.mention + " Yetkin yok!")
 
 
 def start(config):

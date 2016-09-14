@@ -7,12 +7,12 @@ class MuteCommand(Command):
 
     async def do(self, client, message, args, config={}):
         if not config["mute_role"]:
-            await client.send_message(message.channel, "@" + message.author.name +
+            await client.send_message(message.channel, message.author.mention +
                                       ": Bot Konfigurasyon hatası! (mute_role bulunamadı)")
             return
 
         if not config["admin_roles"]:
-            await client.send_message(message.channel, "@" + message.author.name +
+            await client.send_message(message.channel, message.author.mention +
                                       ": Bot Konfigurasyon hatası! (admin_roles bulunamadı)")
             return
 
@@ -25,7 +25,7 @@ class MuteCommand(Command):
                 for role in member.roles:
                     for check_role in config["admin_roles"]:
                         if role.name == check_role:
-                            await client.send_message(message.channel, "@" + message.author.name +
+                            await client.send_message(message.channel, message.author.mention +
                                                       " Bir admini muteleyemessin!")
                             return
 
@@ -35,7 +35,7 @@ class MuteCommand(Command):
                         await client.send_message(message.channel, "@" + member.name + " Susturuldu")
                         return
 
-                await client.send_message(message.channel, "@" + message.author.name + " Mute rolü yok!")
+                await client.send_message(message.channel, message.author.mention + " Mute rolü yok!")
                 return
 
-        await client.send_message(message.channel, "@" + message.author.name + " Böyle bir kişi yok!")
+        await client.send_message(message.channel, message.author.mention + " Böyle bir kişi yok!")

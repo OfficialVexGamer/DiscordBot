@@ -19,5 +19,5 @@ class CleverbotCommand(Command):
                 await client.send_message(message.channel, message.author.mention + ", " + cb.ask(input))
                 return
 
-        await client.send_message(message.channel, "@" + message.author.name +
+        await client.send_message(message.channel, message.author.mention +
                                   " Cleverbot belirli kanallar dışında kullanılamaz!")
