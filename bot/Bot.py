@@ -54,7 +54,7 @@ async def on_message(message):
 
             if message.content.startswith('!id '):
                 print(msgChan)
-                msgChan = str(message.content[3:])
+                msgChan = str(message.content[4:])
             else:
                 await client.send_message(client.get_channel(msgChan), message.content)
 
