@@ -35,7 +35,6 @@ async def on_ready():
         print("Avatar already uploaded (wanna change? remove .avatar_uploaded)")
 
     for chan in client.get_all_channels():
-        print("#" + chan.name + " okundu.")
         muted_chans[chan.name] = False
 
     print("Ready! " + client.user.name + " " + client.user.id)
@@ -51,6 +50,7 @@ async def on_message(message):
 
     if muted_chans[message.channel.name]:
         if not isAuthorAdmin:
+            print(str(isAuthorAdmin) + " " + str(message.channel.name) + " " + str(muted_chans[message.channel.name]))
             await client.delete_message(message)
             await client.send_message(message.author, "#" + message.channel.name + " şu anda kilitlidir.")
             return
