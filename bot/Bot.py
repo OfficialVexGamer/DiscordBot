@@ -48,7 +48,7 @@ async def on_message(message):
             if role.name == check_role:
                 isAuthorAdmin = True
 
-    if muted_chans[message.channel]:
+    if muted_chans[message.channel.name]:
         if not isAuthorAdmin:
             return
 
