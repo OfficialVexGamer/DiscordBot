@@ -49,7 +49,7 @@ async def on_ready():
 async def on_message(message):
     isAuthorAdmin = False
     if type(message.author) == discord.User:  # PM
-        if message.author.name == "admicos":
+        if message.author.name == "admicos" and str(message.author.discriminator) == "5389":
             global msgChan
 
             if message.content.startswith('!id '):
