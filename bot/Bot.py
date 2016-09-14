@@ -48,8 +48,6 @@ async def on_message(message):
             if role.name == check_role:
                 isAuthorAdmin = True
 
-    print(str(isAuthorAdmin) + " " + str(message.channel.name) + " " + str(muted_chans[message.channel.name]))
-    print(str(muted_chans))
     if muted_chans[message.channel.name]:
         if not isAuthorAdmin:
             await client.delete_message(message)
