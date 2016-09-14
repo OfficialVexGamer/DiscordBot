@@ -58,7 +58,10 @@ async def on_message(message):
                         return
         else:
             await commands[cmd].do(client, message, c_args, cfg)
-            await client.delete_message(message)
+
+            if commands[cmd].deleteCMDMsg():
+                await client.delete_message(message)
+
             return
 
         await client.send_message(message.channel, message.author.mention + " Yetkin yok!")
