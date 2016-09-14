@@ -6,6 +6,9 @@ class DrawCommand(Command):
     def requiresAdmin(self):
         return True
 
+    def deleteCMDMsg(self):
+        return True
+
     async def do(self, client, message, args, config={}):
         while True:
             participants = message.channel.server.members

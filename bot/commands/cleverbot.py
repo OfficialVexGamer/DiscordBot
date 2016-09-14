@@ -6,6 +6,9 @@ class CleverbotCommand(Command):
     def requiresAdmin(self):
         return False
 
+    def deleteCMDMsg(self):
+        return False
+
     async def do(self, client, message, args, config={}):
         for chan in config["cleverbot_channels"]:
             if chan == message.channel.name:

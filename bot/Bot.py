@@ -51,7 +51,10 @@ async def on_message(message):
                 for check_role in cfg["admin_roles"]:
                     if role.name == check_role:
                         await commands[cmd].do(client, message, c_args, cfg)
-                        await client.delete_message(message)
+
+                        if commands[cmd].deleteCMDMsg():
+                            await client.delete_message(message)
+
                         return
         else:
             await commands[cmd].do(client, message, c_args, cfg)

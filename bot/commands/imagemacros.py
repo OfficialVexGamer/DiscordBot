@@ -6,6 +6,9 @@ class ImageMacroCommand(Command):
     def requiresAdmin(self):
         return False
 
+    def deleteCMDMsg(self):
+        return True
+
     async def do(self, client, message, args, config={}):
         if os.path.exists(os.path.join(config["img_dir"], args[0] + ".png")):
             # with open(os.path.join(config["img_dir"], args[0] + ".png"), 'rb') as f:
