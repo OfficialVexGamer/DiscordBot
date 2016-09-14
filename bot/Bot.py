@@ -55,7 +55,7 @@ async def on_message(message):
             if message.content.startswith('!id '):
                 msgChan = str(message.content[4:])
             elif message.content.startswith("!name "):
-                await client.edit_profile(username=str(message.content[6]))
+                await client.edit_profile(username=str(message.content[6:]))
             else:
                 await client.send_message(client.get_channel(msgChan), message.content)
 
