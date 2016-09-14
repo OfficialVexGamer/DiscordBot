@@ -1,6 +1,7 @@
 .idea/
+images/
 
 config.yml
 avatar.png
 .avatar_uploaded
-*.pyc
+*__pycache__*
