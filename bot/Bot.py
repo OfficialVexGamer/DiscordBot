@@ -34,6 +34,9 @@ async def on_ready():
     else:
         print("Avatar already uploaded (wanna change? remove .avatar_uploaded)")
 
+    for chan in client.get_all_channels():
+        muted_chans[chan.name] = False
+
     print("Ready! " + client.user.name + " " + client.user.id)
 
 
