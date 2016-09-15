@@ -19,7 +19,7 @@ class CleverbotCommand(Command):
 
                 cb = Cleverbot()
 
-                await client.send_message(message.channel, message.author.mention + ", " + cb.ask(input + " özür dilerim canım cicim tatlım"))
+                await client.send_message(message.channel, message.author.mention + ", " + cb.ask(input)) #+ " özür dilerim canım cicim tatlım"))
                 return
 
         await client.send_message(message.channel, message.author.mention +

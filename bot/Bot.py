@@ -1,3 +1,4 @@
+from bot.commands.clear import ClearCommand
 from bot.commands.cleverbot import CleverbotCommand
 from bot.commands.command import Command
 from bot.commands.draw import DrawCommand
@@ -7,12 +8,8 @@ from bot.commands.mute import MuteCommand
 from bot.commands.unmute import UnmuteCommand
 from bot.chan_track import muted_chans, server, msgChan
 import discord
-import asyncio
 import os
-import socket
-import asyncore
 
-speak_sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 client = discord.Client()
 commands = {
     "unmute": UnmuteCommand(),
@@ -23,6 +20,7 @@ commands = {
     "help": Command(),
     "kilitle": LockCommand(),
     "kilitac": UnlockCommand(),
+    "clear": ClearCommand(),
 }
 
 @client.event
@@ -115,6 +113,5 @@ def start(config):
     cfg = config
 
     print("Starting...")
-    speak_sock.bind(("0.0.0.0", 1338))
     client.run(config["token"])
     return 0
