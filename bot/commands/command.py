@@ -20,7 +20,7 @@ class Command:
                 for role in message.author.roles:
                     for check_role in config["admin_roles"]:
                         if role.name == check_role:
-                            cmd = cmd + "  - " + comm + "\n"
+                            cmd = cmd + "  - !" + comm + "\n"
             else:
                 cmd = cmd + "  - " + comm + "\n"
 
