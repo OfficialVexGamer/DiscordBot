@@ -1,4 +1,3 @@
-from bot.stuff import muted_chans
 from bot.commands.command import Command
 
 
