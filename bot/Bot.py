@@ -23,6 +23,7 @@ commands = {
     "clear": ClearCommand(),
 }
 
+
 @client.event
 async def on_ready():
     if not os.path.exists(".avatar_uploaded"):
