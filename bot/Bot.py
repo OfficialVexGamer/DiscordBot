@@ -44,12 +44,12 @@ async def on_ready():
 
 
 @client.event
-def on_channel_delete(channel):
+async def on_channel_delete(channel):
     muted_chans[channel.name] = None
 
 
 @client.event
-def on_channel_create(channel):
+async def on_channel_create(channel):
     muted_chans[channel.name] = False
 
 
