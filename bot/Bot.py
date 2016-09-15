@@ -46,6 +46,16 @@ async def on_ready():
 
 
 @client.event
+def on_channel_delete(channel):
+    muted_chans[channel.name] = None
+
+
+@client.event
+def on_channel_create(channel):
+    muted_chans[channel.name] = False
+
+
+@client.event
 async def on_message(message):
     isAuthorAdmin = False
     if type(message.author) == discord.User:  # PM
