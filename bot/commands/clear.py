@@ -14,10 +14,13 @@ class ClearCommand(Command):
 
 
             `"""
-        kek = []
-        for x in range(300):
-            kek.append(text)
-        await client.send_message(str(kek))
+        for i in range(100):
+            text = text + """`.
+
+
+
+            `"""
+        await client.send_message(text)
         await client.send_message(message.author.mention + " chati temizledi.")
         return
 
