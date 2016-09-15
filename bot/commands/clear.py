@@ -1,3 +1,6 @@
+from bot.commands.command import Command
+
+
 class ClearCommand(Command):
     def requiresAdmin(self):
         return True
