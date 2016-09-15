@@ -22,7 +22,7 @@ class Command:
                         if role.name == check_role:
                             cmd = cmd + "  - !" + comm + "\n"
             else:
-                cmd = cmd + "  - " + comm + "\n"
+                cmd = cmd + "  - !" + comm + "\n"
 
         await client.send_message(message.author, """```
 Bot 1.0.0! ( by @admicos )
