@@ -9,17 +9,27 @@ class Command:
         return True
 
     async def do(self, client, message, args, config={}):
-        fs = ""
+        from bot.stuff import commands
+        img = ""
         for file in os.listdir(config["img_dir"]):
-            fs = fs + "  - " + file.split(".")[0] + "\n"
+            img = img + "  - " + file.split(".")[0] + "\n"
+
+        cmd = ""
+        for comm in commands:
+            if commands[comm].requiresAdmin():
+                for role in message.author.roles:
+                    for check_role in config["admin_roles"]:
+                        if role.name == check_role:
+                            cmd = cmd + "  - " + comm + "\n"
+            else:
+                cmd = cmd + "  - " + comm + "\n"
 
         await client.send_message(message.author, """```
 Bot 1.0.0! ( by @admicos )
 Kaynak: https://admicos.cf/s?EayKf
 Komutlar:
-  - !cleverbot <mesaj>
-  - !i <resim>
+%s
 
 Resimler:
 %s
-```""" % fs)
+```""" % (cmd, img))

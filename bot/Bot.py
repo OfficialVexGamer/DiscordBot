@@ -1,27 +1,8 @@
-from bot.commands.clear import ClearCommand
-from bot.commands.cleverbot import CleverbotCommand
-from bot.commands.command import Command
-from bot.commands.draw import DrawCommand
-from bot.commands.imagemacros import ImageMacroCommand
-from bot.commands.lock import LockCommand, UnlockCommand
-from bot.commands.mute import MuteCommand
-from bot.commands.unmute import UnmuteCommand
-from bot.chan_track import muted_chans, server, msgChan
+from bot.stuff import muted_chans, server, msgChan, commands
 import discord
 import os
 
 client = discord.Client()
-commands = {
-    "unmute": UnmuteCommand(),
-    "mute": MuteCommand(),
-    "çekiliş": DrawCommand(),
-    "cleverbot": CleverbotCommand(),
-    "i": ImageMacroCommand(),
-    "help": Command(),
-    "kilitle": LockCommand(),
-    "kilitac": UnlockCommand(),
-    "clear": ClearCommand(),
-}
 
 
 @client.event
