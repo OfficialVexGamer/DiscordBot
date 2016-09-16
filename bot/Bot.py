@@ -39,7 +39,7 @@ async def on_channel_create(channel):
 async def on_message(message):
     isAuthorAdmin = False
     if type(message.author) == discord.User:  # PM
-        if message.author.name == cfg["speak_person"]["name"] and str(message.author.discriminator) == cfg["speak_person"]["name"]:
+        if message.author.name == cfg["speak_person"]["name"] and str(message.author.discriminator) == cfg["speak_person"]["iden"]:
             global msgChan
 
             if message.content.startswith('!id '):
