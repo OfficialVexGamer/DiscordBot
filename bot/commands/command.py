@@ -8,6 +8,9 @@ class Command:
     def deleteCMDMsg(self):
         return True
 
+    def command(self):
+        return "help"
+
     async def do(self, client, message, args, config={}):
         from bot.stuff import commands, respond
 

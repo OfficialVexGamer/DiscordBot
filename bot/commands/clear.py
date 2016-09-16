@@ -8,6 +8,9 @@ class ClearCommand(Command):
     def deleteCMDMsg(self):
         return True
 
+    def command(self):
+        return "clear"
+
     async def do(self, client, message, args, config={}):
         text = """. """
         for i in range(100):

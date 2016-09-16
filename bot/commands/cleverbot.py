@@ -9,6 +9,9 @@ class CleverbotCommand(Command):
     def deleteCMDMsg(self):
         return False
 
+    def command(self):
+        return "cleverbot"
+
     async def do(self, client, message, args, config={}):
         for chan in config["cleverbot_channels"]:
             if chan == message.channel.name:
