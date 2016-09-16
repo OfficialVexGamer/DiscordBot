@@ -23,4 +23,5 @@ commands = {
 }
 respond = {
     "sa": "as",
+    "op": "hayır."
 }
