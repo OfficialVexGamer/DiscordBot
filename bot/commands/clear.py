@@ -9,11 +9,10 @@ class ClearCommand(Command):
         return True
 
     async def do(self, client, message, args, config={}):
-        text = """```. """
+        text = """. """
         for i in range(100):
             text = text + """
 
              """
-        await client.send_message(message.channel, text + """ ```""")
-        await client.send_message(message.channel, message.author.mention + " chati temizledi.")
+        await client.send_message(message.channel, text + "\n" + message.author.mention + " chati temizledi.")
         return
