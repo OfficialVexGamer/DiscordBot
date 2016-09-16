@@ -21,6 +21,7 @@ commands = {
     "kilitac": UnlockCommand(),
     "clear": ClearCommand(),
 }
+
 respond = {
     "sa": "as",
     "op": "hayır."

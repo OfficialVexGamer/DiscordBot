@@ -9,10 +9,15 @@ class Command:
         return True
 
     async def do(self, client, message, args, config={}):
-        from bot.stuff import commands
+        from bot.stuff import commands, respond
+
         img = ""
         for file in os.listdir(config["img_dir"]):
             img = img + "  - " + file.split(".")[0] + "\n"
+
+        resp = ""
+        for response in respond:
+            resp = resp + "  - " + response + "\n"
 
         cmd = ""
         for comm in commands:
@@ -32,4 +37,7 @@ Komutlar:
 
 Resimler:
 %s
-```""" % (cmd, img))
+
+Bot size cevap ta verir! Şu kelimeleri yazdıklarınızda kullanmayı deneyin!:
+%s
+```""" % (cmd, img, resp))
