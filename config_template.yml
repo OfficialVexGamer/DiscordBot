@@ -9,3 +9,6 @@ admin_roles:
   - Admin
 cleverbot_channels: # (#)'a gerek yok.
   - bot
+speak_person: # This person will make the bot speak if he PMs it.
+  name: admicos
+  iden: 5389 # The number after "#" in his username.
