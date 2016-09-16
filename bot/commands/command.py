@@ -38,6 +38,6 @@ Komutlar:
 Resimler:
 %s
 
-Bot size cevap ta verir! Şu kelimeleri yazdıklarınızda kullanmayı deneyin!:
+Bot size cevap da verir! Şu kelimeleri yazdıklarınızda kullanmayı deneyin!:
 %s
 ```""" % (cmd, img, resp))
