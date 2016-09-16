@@ -8,6 +8,9 @@ class MuteCommand(Command):
     def deleteCMDMsg(self):
         return True
 
+    def command(self):
+        return "mute"
+
     async def do(self, client, message, args, config={}):
         if not config["mute_role"]:
             await client.send_message(message.channel, message.author.mention +

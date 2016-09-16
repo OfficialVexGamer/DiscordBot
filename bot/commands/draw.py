@@ -9,6 +9,9 @@ class DrawCommand(Command):
     def deleteCMDMsg(self):
         return True
 
+    def command(self):
+        return "çekiliş"
+
     async def do(self, client, message, args, config={}):
         while True:
             participants = message.channel.server.members

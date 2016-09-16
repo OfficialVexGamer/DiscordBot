@@ -9,6 +9,9 @@ class LockCommand(Command):
     def deleteCMDMsg(self):
         return True
 
+    def command(self):
+        return "kilitle"
+
     async def do(self, client, message, args, config={}):
         await client.send_message(message.channel, message.author.mention + " Kanalı kilitledi.")
         stuff.muted_chans[message.channel.name] = True
@@ -20,6 +23,9 @@ class UnlockCommand(Command):
 
     def deleteCMDMsg(self):
         return True
+
+    def command(self):
+        return "kilitaç"
 
     async def do(self, client, message, args, config={}):
         stuff.muted_chans[message.channel.name] = False

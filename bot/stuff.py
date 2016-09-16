@@ -1,28 +1,27 @@
-from bot.commands.clear import ClearCommand
-from bot.commands.cleverbot import CleverbotCommand
-from bot.commands.command import Command
-from bot.commands.draw import DrawCommand
-from bot.commands.imagemacros import ImageMacroCommand
-from bot.commands.lock import LockCommand, UnlockCommand
-from bot.commands.mute import MuteCommand
-from bot.commands.unmute import UnmuteCommand
+import inspect
+import bot.commands
+from bot.commands import NoneCommand
 
 muted_chans = {}
 server = None
 msgChan = "225218131537297408"
-commands = {
-    "unmute": UnmuteCommand(),
-    "mute": MuteCommand(),
-    "çekiliş": DrawCommand(),
-    "cleverbot": CleverbotCommand(),
-    "i": ImageMacroCommand(),
-    "help": Command(),
-    "kilitle": LockCommand(),
-    "kilitac": UnlockCommand(),
-    "clear": ClearCommand(),
-}
+# noinspection PyUnresolvedReferences
+commands = inspect.getmembers(bot.commands,
+                              predicate=lambda o: inspect.isclass(o) and issubclass(o, bot.commands.Command))
+print(commands)
 
 respond = {
     "sa": "as",
     "op": "hayır."
 }
+
+
+def find_cmd_class(cmd):
+    cmd_c = NoneCommand()
+    for command in commands:
+        cmd_c = (command[1])()
+        if cmd_c.command() != "_____________nonecommandsrsly":
+            if cmd_c.command() == cmd:
+                return cmd_c
+
+    return NoneCommand()

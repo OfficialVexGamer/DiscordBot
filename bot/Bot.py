@@ -1,4 +1,4 @@
-from bot.stuff import muted_chans, server, msgChan, commands, respond
+from bot.stuff import muted_chans, server, msgChan, respond, find_cmd_class
 import discord
 import os
 
@@ -68,25 +68,22 @@ async def on_message(message):
 
         cmd = message.content[1:].split()[0]
         c_args = message.content[1:].split()[1:]
+        cmd_class = find_cmd_class(cmd)
 
         print("Komut: (" + message.author.name + ") " + cmd + " args: " + str(c_args))
 
-        if not commands.get(cmd):
-            await client.send_message(message.channel, message.author.mention + " Bu komut yok!")
-            return
-
-        if commands[cmd].requiresAdmin():
+        if cmd_class.requiresAdmin():
             if isAuthorAdmin:
-                await commands[cmd].do(client, message, c_args, cfg)
+                await cmd_class.do(client, message, c_args, cfg)
 
-                if commands[cmd].deleteCMDMsg():
+                if cmd_class.deleteCMDMsg():
                     await client.delete_message(message)
             else:
                 await client.send_message(message.channel, message.author.mention + " Yetkin yok!")
         else:
-            await commands[cmd].do(client, message, c_args, cfg)
+            await cmd_class.do(client, message, c_args, cfg)
 
-            if commands[cmd].deleteCMDMsg():
+            if cmd_class.deleteCMDMsg():
                 await client.delete_message(message)
     else:
         for word in message.content.lower().split():
