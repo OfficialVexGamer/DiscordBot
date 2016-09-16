@@ -13,9 +13,11 @@ respond = {
 
 
 def find_cmd_class(cmd):
+    cmd_c = NoneCommand()
     for command in commands:
-        if command.command is not None:
-            if command.command() == cmd:
-                return command
+        cmd_c = command()
+        if cmd_c.command is not None:
+            if cmd_c().command() == cmd:
+                return cmd_c
 
-    return NoneCommand()
+    return cmd_c
