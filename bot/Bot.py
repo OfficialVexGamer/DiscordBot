@@ -89,7 +89,7 @@ async def on_message(message):
             if commands[cmd].deleteCMDMsg():
                 await client.delete_message(message)
     else:
-        for word in message.content.lower().strip():
+        for word in message.content.lower().split():
             if respond.get(word):
                 await client.send_message(message.channel, message.author.mention + " " + respond.get(word))
 
