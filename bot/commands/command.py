@@ -22,15 +22,23 @@ class Command:
         for response in respond:
             resp = resp + "  - " + response + "\n"
 
+        acmd_fnd = False
         cmd = ""
         for comm in commands:
-            if commands[comm].requiresAdmin():
-                for role in message.author.roles:
-                    for check_role in config["admin_roles"]:
-                        if role.name == check_role:
-                            cmd = cmd + "  - !" + comm + "\n"
-            else:
-                cmd = cmd + "  - !" + comm + "\n"
+            for command in commands:
+                cmd_c = (command[1])()
+                if cmd_c.command() != "_____________nonecommandsrsly":
+                    if cmd_c.requiresAdmin():
+                        acmd_fnd = False
+                        for role in message.author.roles:
+                            if acmd_fnd: break
+                            for check_role in config["admin_roles"]:
+                                if role.name == check_role:
+                                    cmd = cmd + "  - !" + cmd_c.command() + "\n"
+                                    acmd_fnd = True
+                                    break
+                    else:
+                        cmd = cmd + "  - !" + cmd_c.command() + "\n"
 
         await client.send_message(message.author, """```
 Bot 1.0.0! ( by @admicos )
