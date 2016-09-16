@@ -1,4 +1,4 @@
-from bot.stuff import muted_chans, server, msgChan, commands
+from bot.stuff import muted_chans, server, msgChan, commands, respond
 import discord
 import os
 
@@ -88,6 +88,8 @@ async def on_message(message):
 
             if commands[cmd].deleteCMDMsg():
                 await client.delete_message(message)
+    elif respond.get(message.content.lower()):
+        await client.send_message(message.channel, message.author.mention + " " + respond.get(message.content.lower()))
 
 
 def start(config):
