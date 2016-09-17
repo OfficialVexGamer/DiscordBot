@@ -9,8 +9,8 @@ msgChan = "225218131537297408"
 # noinspection PyUnresolvedReferences
 commands = inspect.getmembers(bot.commands,
                               predicate=lambda o: inspect.isclass(o) and issubclass(o, bot.commands.Command))
-respond = defaultdict(dict)
-timeout = defaultdict(dict)
+respond = {}
+timeout = {}
 
 
 def find_cmd_class(cmd):
