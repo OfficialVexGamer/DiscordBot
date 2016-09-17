@@ -14,7 +14,7 @@ class DrawCommand(Command):
 
     async def do(self, client, message, args, config={}):
         while True:
-            participants = message.channel.server.members
+            participants = message.server.members
             winner = random.randint(0, len(participants) - 1)
 
             if list(participants)[winner].name != client.user.name:

@@ -26,7 +26,7 @@ class UnmuteCommand(Command):
         for arg in args:
             nameToMute = nameToMute + " " + arg
 
-        for member in message.channel.server.members:
+        for member in message.server.members:
             if nameToMute.lower().strip() == member.name.lower():
                 for role in member.roles:
                     for check_role in config["admin_roles"]:
