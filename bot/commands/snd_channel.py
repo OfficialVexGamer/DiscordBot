@@ -2,7 +2,7 @@ from bot.commands.command import Command
 from bot import stuff
 
 
-class SoundTestCommand(Command):
+class SoundChanCommand(Command):
     def requiresAdmin(self):
         return True
 
