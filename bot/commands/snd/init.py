@@ -10,7 +10,7 @@ class SoundChanCommand(Command):
         return True
 
     def command(self):
-        return "snd_kanal"
+        return "snd_aktif"
 
     async def do(self, client, message, args, config={}):
         if sound.voice:
