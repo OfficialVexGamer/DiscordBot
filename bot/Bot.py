@@ -78,7 +78,8 @@ async def on_message(message):
         if cmd_class.requiresAdmin():
             if isAuthorAdmin:
                 await cmd_class.do(client, message, c_args, cfg)
-                timeout[message.author.name] += 1
+                if timeout.get(message.author.name): timeout[message.author.name] += 1
+                else: timeout[message.author.name] = 1
 
                 if cmd_class.deleteCMDMsg():
                     await client.delete_message(message)
@@ -86,7 +87,8 @@ async def on_message(message):
                 await client.send_message(message.channel, message.author.mention + " Yetkin yok!")
         else:
             await cmd_class.do(client, message, c_args, cfg)
-            timeout[message.author.name] += 1
+            if timeout.get(message.author.name): timeout[message.author.name] += 1
+            else: timeout[message.author.name] = 1
 
             if cmd_class.deleteCMDMsg():
                 await client.delete_message(message)
