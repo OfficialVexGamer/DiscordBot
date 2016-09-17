@@ -30,9 +30,16 @@ def remove_timeout_from(person):
 
 
 def remove_timeouts_except(person):
-    for person_ in timeout:
-        if person_ != person:
-            timeout[person] = 0
+    global timeout
+
+    _timeout = {}
+    for _person in timeout:
+        if _person != person:
+            _timeout[_person] = 0
+        else:
+            _timeout[person] = timeout[person]
+
+    timeout = _timeout
 
 
 def add_timeout_to(person):
