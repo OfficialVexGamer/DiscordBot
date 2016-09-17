@@ -19,14 +19,14 @@ class SoundPlayCommand(Command):
             if not sound.player:
                 sound.player = await sound.voice.create_ytdl_player(sound.queue.get())
                 await client.send_message(message.channel, """```""" + sound.player.title + """
-                by """ + sound.player.uploader + """ (""" + sound.get_snd_mins(sound.player.duration) + """)```""")
+by """ + sound.player.uploader + """ (""" + sound.get_snd_mins(sound.player.duration) + """)```""")
                 sound.player.start()
                 continue
 
             if sound.player.is_done():
                 sound.player = await sound.voice.create_ytdl_player(sound.queue.get())
                 await client.send_message(message.channel, """```""" + sound.player.title + """
-                by """ + sound.player.uploader + """ (""" + sound.get_snd_mins(sound.player.duration) + """)```""")
+by """ + sound.player.uploader + """ (""" + sound.get_snd_mins(sound.player.duration) + """)```""")
                 sound.player.start()
 
             print(sound.player.duration)
