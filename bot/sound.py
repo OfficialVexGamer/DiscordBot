@@ -1,5 +1,7 @@
 from queue import Queue
 
+import youtube_dl
+
 voice = None
 player = None
 old_vol = 1.0
@@ -34,12 +36,18 @@ def get_snd_mins(in_secs):
 async def play(client, message, music_chan):
     global player
 
-    player = await voice.create_ytdl_player(queue.get())
-    for chan in message.server.channels:
-        if chan.name == music_chan:
-            await client.send_message(chan, """```""" + player.title + """
-by """ + player.uploader + """ (""" + get_snd_mins(player.duration) + """)```""")
-            break
+    try:
+        player = await voice.create_ytdl_player(queue.get())
+        for chan in message.server.channels:
+            if chan.name == music_chan:
+                await client.send_message(chan, """```""" + player.title + """
+    by """ + player.uploader + """ (""" + get_snd_mins(player.duration) + """)```""")
+                break
 
-    player.volume = old_vol
-    player.start()
+        player.volume = old_vol
+        player.start()
+    except youtube_dl.utils.DownloadError as e:
+        for chan in message.server.channels:
+            if chan.name == music_chan:
+                await client.send_message(chan, """```""" + str(e) + """"```""")
+                break
