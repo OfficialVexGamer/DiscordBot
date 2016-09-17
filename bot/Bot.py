@@ -51,8 +51,7 @@ async def on_error(event, *args, **kwargs):
 # Args: %s, %s
 ###################################
 
-%s
-                ```""" % (event, str(args), str(kwargs), traceback.format_exc()))
+%s```""" % (event, str(args), str(kwargs), traceback.format_exc()))
                 return
 
 
