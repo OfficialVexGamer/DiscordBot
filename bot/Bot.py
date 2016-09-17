@@ -1,4 +1,4 @@
-from bot.stuff import *
+from bot import stuff
 import discord
 import os
 
@@ -17,7 +17,7 @@ async def on_ready():
         print("Avatar already uploaded (wanna change? remove .avatar_uploaded)")
 
     for chan in client.get_all_channels():
-        muted_chans[chan.name] = False
+        stuff.muted_chans[chan.name] = False
 
     global server
     server = client.get_server(0)
@@ -27,12 +27,12 @@ async def on_ready():
 
 @client.event
 async def on_channel_delete(channel):
-    muted_chans[channel.name] = None
+    stuff.muted_chans[channel.name] = None
 
 
 @client.event
 async def on_channel_create(channel):
-    muted_chans[channel.name] = False
+    stuff.muted_chans[channel.name] = False
 
 
 @client.event
@@ -40,14 +40,12 @@ async def on_message(message):
     isAuthorAdmin = False
     if type(message.author) == discord.User:  # PM
         if message.author.name == cfg["speak_person"]["name"] and str(message.author.discriminator) == str(cfg["speak_person"]["iden"]):
-            global msgChan
-
             if message.content.startswith('!id '):
-                msgChan = str(message.content[4:])
+                stuff.msgChan = str(message.content[4:])
             elif message.content.startswith("!name "):
                 await client.edit_profile(username=str(message.content[6:]))
             else:
-                await client.send_message(client.get_channel(msgChan), message.content)
+                await client.send_message(client.get_channel(stuff.msgChan), message.content)
 
         return
 
@@ -56,17 +54,17 @@ async def on_message(message):
             if role.name == check_role:
                 isAuthorAdmin = True
 
-    if muted_chans[message.channel.name]:
+    if stuff.muted_chans[message.channel.name]:
         if not isAuthorAdmin:
             await client.delete_message(message)
             await client.send_message(message.author, "#" + message.channel.name + " şu anda kilitlidir.")
             return
 
-    if timeout.get(message.author.name) and timeout.get(message.author.name) >= 10:
-        remove_timeout_from(message.author.name)
+    if stuff.timeout.get(message.author.name) and stuff.timeout.get(message.author.name) >= 10:
+        stuff.remove_timeout_from(message.author.name)
         return
     else:
-        remove_timeouts_except(message.author.name)
+        stuff.remove_timeouts_except(message.author.name)
 
     if message.content.startswith('!'):
         if message.author == client.user:
@@ -74,14 +72,14 @@ async def on_message(message):
 
         cmd = message.content[1:].split()[0]
         c_args = message.content[1:].split()[1:]
-        cmd_class = find_cmd_class(cmd)
+        cmd_class = stuff.find_cmd_class(cmd)
 
         print("Komut: (" + message.author.name + ") " + cmd + " args: " + str(c_args))
 
         if cmd_class.requiresAdmin():
             if isAuthorAdmin:
                 await cmd_class.do(client, message, c_args, cfg)
-                add_timeout_to(message.author.name)
+                stuff.add_timeout_to(message.author.name)
 
                 if cmd_class.deleteCMDMsg():
                     await client.delete_message(message)
@@ -89,7 +87,7 @@ async def on_message(message):
                 await client.send_message(message.channel, message.author.mention + " Yetkin yok!")
         else:
             await cmd_class.do(client, message, c_args, cfg)
-            add_timeout_to(message.author.name)
+            stuff.add_timeout_to(message.author.name)
 
             if cmd_class.deleteCMDMsg():
                 await client.delete_message(message)
@@ -101,16 +99,16 @@ async def on_message(message):
                 wc += 1
                 if word not in wl:
                     wl.append(word)
-                    if respond.get(word):
-                        await client.send_message(message.channel, message.author.mention + " " + respond.get(word))
-                        add_timeout_to(message.author.name)
+                    if stuff.respond.get(word):
+                        await client.send_message(message.channel, message.author.mention + " " + stuff.respond.get(word))
+                        stuff.add_timeout_to(message.author.name)
         wl = None
 
 
 def start(config):
-    global cfg, respond
+    global cfg
     cfg = config
-    respond = config["respond"]
+    stuff.respond = config["respond"]
 
     print("Starting...")
     client.run(config["token"])
