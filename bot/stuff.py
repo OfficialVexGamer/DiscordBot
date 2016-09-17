@@ -13,6 +13,7 @@ respond = {}
 timeout = {}
 voice = None
 player = None
+old_vol = 1.0
 
 
 def find_cmd_class(cmd):
