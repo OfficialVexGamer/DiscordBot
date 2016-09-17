@@ -6,6 +6,7 @@ mute_role: Susturulmuş
 img_dir: images/
 img_url_prefix: https://example.com/discord-img/
 voice_chan: Müzik Odası - Caz
+music_chan: muzik
 admin_roles:
   - Admin
 cleverbot_channels: # (#)'a gerek yok.

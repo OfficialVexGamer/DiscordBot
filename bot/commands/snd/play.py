@@ -17,10 +17,10 @@ class SoundPlayCommand(Command):
     async def do(self, client, message, args, config={}):
         while not sound.queue.empty():
             if not sound.player:
-                await sound.play(client, message)
+                await sound.play(client, message, config["music_chan"])
                 continue
 
             if sound.player.is_done():
-                await sound.play(client, message)
+                await sound.play(client, message, config["music_chan"])
 
             await asyncio.sleep(sound.player.duration + 1)
