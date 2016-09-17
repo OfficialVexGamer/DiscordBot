@@ -1,5 +1,5 @@
 from bot.commands.command import Command
-from bot import stuff
+from bot import sound
 
 
 class SoundVolCommand(Command):
@@ -13,9 +13,8 @@ class SoundVolCommand(Command):
         return "snd_vol"
 
     async def do(self, client, message, args, config={}):
-        if not stuff.player:
+        if not sound.player:
             await client.send_message(message.channel, message.author.mention +
                                       " Lütfen önce !snd_play ile bir müzik açın!")
 
-        stuff.player.volume = float(args[0])
-        stuff.old_vol = float(args[0])
+        sound.change_vol(args[0])

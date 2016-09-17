@@ -1,5 +1,7 @@
+import asyncio
+
 from bot.commands.command import Command
-from bot import stuff
+from bot import sound
 
 
 class SoundPlayCommand(Command):
@@ -12,24 +14,19 @@ class SoundPlayCommand(Command):
     def command(self):
         return "snd_play"
 
-    def get_snd_mins(self, in_secs):
-        m, s = divmod(in_secs, 60)
-        h, m = divmod(m, 60)
-
-        return "%s:%s:%s" % (h, m, s)
-
     async def do(self, client, message, args, config={}):
-        if not stuff.voice:
-            await client.send_message(message.channel, message.author.mention +
-                                      " Lütfen önce !snd_kanal ile sesi aktif edin!")
+        while not sound.queue.empty():
+            if not sound.player:
+                sound.player = await sound.voice.create_ytdl_player(sound.queue.get())
+                await client.send_message(message.channel, """```""" + sound.player.title + """
+                by """ + sound.player.uploader + """ (""" + sound.get_snd_mins(sound.player.duration) + """)```""")
+                sound.player.start()
+                continue
 
-        if stuff.player:
-            stuff.player.stop()
+            if sound.player.is_done():
+                sound.player = await sound.voice.create_ytdl_player(sound.queue.get())
+                await client.send_message(message.channel, """```""" + sound.player.title + """
+                by """ + sound.player.uploader + """ (""" + sound.get_snd_mins(sound.player.duration) + """)```""")
+                sound.player.start()
 
-        stuff.player = await stuff.voice.create_ytdl_player(args[0])  # TEST URL
-        await client.send_message(message.channel, """```""" + stuff.player.title + """
-by """ + stuff.player.uploader + """ (""" + self.get_snd_mins(stuff.player.duration) + """)```""")
-        stuff.player.start()
-
-        if stuff.old_vol:
-            stuff.player.volume = stuff.old_vol
+            await asyncio.sleep(sound.player.duration)

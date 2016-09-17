@@ -2,7 +2,7 @@ from bot.commands.command import Command
 from bot import sound
 
 
-class SoundStopCommand(Command):
+class SoundQueueCommand(Command):
     def requiresAdmin(self):
         return True
 
@@ -10,7 +10,7 @@ class SoundStopCommand(Command):
         return True
 
     def command(self):
-        return "snd_stop"
+        return "snd_queue"
 
     async def do(self, client, message, args, config={}):
-        sound.clear_queue()
+        sound.add_queue(args[0])
