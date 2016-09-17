@@ -43,13 +43,15 @@ async def on_error(event, *args, **kwargs):
         for member in server.members:
             if member.name == cfg["speak_person"]["name"] and str(member.discriminator) == str(cfg["speak_person"]["iden"]):
                 await client.send_message(member, """```python
-                ###################################
-                # Something happened to your bot!
-                # At event: %s
-                # Args: %s, %s
-                ###################################
-                %s
-                ```""" % (event, str(args), str(kwargs), sys.exc_info()))
+
+###################################
+# Something happened to your bot!
+# At event: %s
+# Args: %s, %s
+###################################
+
+%s
+                ```""" % (event, str(args), str(kwargs), sys.exc_info()[0]))
                 return
 
 
