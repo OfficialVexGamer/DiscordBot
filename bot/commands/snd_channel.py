@@ -19,4 +19,5 @@ class SoundChanCommand(Command):
         for channel in message.server.channels:
             if channel.name == config["voice_chan"]:
                 stuff.voice = await client.join_voice_channel(channel)
+                await client.send_message(message.channel, message.author.mention + " Ses aktif!")
                 break

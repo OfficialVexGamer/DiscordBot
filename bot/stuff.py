@@ -12,6 +12,8 @@ commands = inspect.getmembers(bot.commands,
 respond = {}
 timeout = {}
 voice = None
+player = None
+
 
 def find_cmd_class(cmd):
     cmd_c = NoneCommand()
