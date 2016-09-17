@@ -22,3 +22,15 @@ def find_cmd_class(cmd):
                 return cmd_c
 
     return NoneCommand()
+
+
+def remove_timeout_from(person):
+    if timeout.get(person):
+        timeout[person] -= 1
+
+
+def add_timeout_to(person):
+    if timeout.get(person):
+        timeout[person] += 1
+    else:
+        timeout[person] = 1

@@ -1,4 +1,4 @@
-from bot.stuff import muted_chans, server, msgChan, respond, timeout, find_cmd_class
+from bot.stuff import *
 import discord
 import os
 
@@ -63,6 +63,7 @@ async def on_message(message):
             return
 
     if timeout.get(message.author.name) and timeout.get(message.author.name) >= 10:
+        remove_timeout_from(message.author.name)
         return
 
     if message.content.startswith('!'):
@@ -78,8 +79,7 @@ async def on_message(message):
         if cmd_class.requiresAdmin():
             if isAuthorAdmin:
                 await cmd_class.do(client, message, c_args, cfg)
-                if timeout.get(message.author.name): timeout[message.author.name] += 1
-                else: timeout[message.author.name] = 1
+                add_timeout_to(message.author.name)
 
                 if cmd_class.deleteCMDMsg():
                     await client.delete_message(message)
@@ -87,8 +87,7 @@ async def on_message(message):
                 await client.send_message(message.channel, message.author.mention + " Yetkin yok!")
         else:
             await cmd_class.do(client, message, c_args, cfg)
-            if timeout.get(message.author.name): timeout[message.author.name] += 1
-            else: timeout[message.author.name] = 1
+            add_timeout_to(message.author.name)
 
             if cmd_class.deleteCMDMsg():
                 await client.delete_message(message)
@@ -102,8 +101,7 @@ async def on_message(message):
                     wl.append(word)
                     if respond.get(word):
                         await client.send_message(message.channel, message.author.mention + " " + respond.get(word))
-                        if timeout.get(message.author.name): timeout[message.author.name] += 1
-                        else: timeout[message.author.name] = 1
+                        add_timeout_to(message.author.name)
         wl = None
 
 
