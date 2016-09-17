@@ -17,4 +17,4 @@ class SoundStopCommand(Command):
             await client.send_message(message.channel, message.author.mention +
                                       " Lütfen önce !snd_play ile bir müzik açın!")
 
-       stuff.player.stop()
+        stuff.player.stop()
