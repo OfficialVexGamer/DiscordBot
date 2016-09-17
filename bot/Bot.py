@@ -86,9 +86,12 @@ async def on_message(message):
             if cmd_class.deleteCMDMsg():
                 await client.delete_message(message)
     else:
+        wc = 0
         for word in message.content.lower().split():
-            if respond.get(word):
-                await client.send_message(message.channel, message.author.mention + " " + respond.get(word))
+            if wc < 5:
+                wc += 1
+                if respond.get(word):
+                    await client.send_message(message.channel, message.author.mention + " " + respond.get(word))
 
 
 def start(config):
