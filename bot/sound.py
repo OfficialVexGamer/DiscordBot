@@ -8,7 +8,6 @@ queue = Queue()
 
 def add_queue(url):
     queue.put(url)
-    print(url + " to music queue")
 
 
 def change_vol(vol_add):
