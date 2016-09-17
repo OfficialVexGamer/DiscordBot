@@ -27,6 +27,7 @@ async def on_ready():
     await client.change_status(game=discord.Game(name='yardım için !help'))
 
     print("Ready! " + client.user.name + " " + client.user.id)
+    await client.send_message(server, "Bot aktif! (Yardım için !help)")
 
 
 @client.event
