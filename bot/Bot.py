@@ -1,3 +1,5 @@
+import sys
+
 from bot import stuff
 import discord
 import os
@@ -33,6 +35,22 @@ async def on_channel_delete(channel):
 @client.event
 async def on_channel_create(channel):
     stuff.muted_chans[channel.name] = False
+
+
+@client.event
+async def on_error(event, *args, **kwargs):
+    for server in client.servers:
+        for member in server.members:
+            if member.name == cfg["speak_person"]["name"] and str(member.discriminator) == str(cfg["speak_person"]["iden"]):
+                await client.send_message(member, """```python
+                ###################################
+                # Something happened to your bot!
+                # At event: %s
+                # Args: %s, %s
+                ###################################
+                %s
+                ```""" % (event, str(args), str(kwargs), sys.exc_info()))
+                return
 
 
 @client.event
