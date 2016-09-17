@@ -13,4 +13,4 @@ class SoundStopCommand(Command):
         return "snd_stop"
 
     async def do(self, client, message, args, config={}):
-        sound.clear_queue()
+        sound.player.stop()
