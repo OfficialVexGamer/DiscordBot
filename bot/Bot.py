@@ -102,7 +102,8 @@ async def on_message(message):
                     wl.append(word)
                     if respond.get(word):
                         await client.send_message(message.channel, message.author.mention + " " + respond.get(word))
-                        timeout[message.author.name] += 1
+                        if timeout.get(message.author.name): timeout[message.author.name] += 1
+                        else: timeout[message.author.name] = 1
         wl = None
 
 
