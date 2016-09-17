@@ -39,10 +39,10 @@ async def on_channel_create(channel):
 
 @client.event
 async def on_error(event, *args, **kwargs):
+    import traceback
     for server in client.servers:
         for member in server.members:
             if member.name == cfg["speak_person"]["name"] and str(member.discriminator) == str(cfg["speak_person"]["iden"]):
-                import traceback
                 await client.send_message(member, """```python
 
 ###################################
@@ -53,6 +53,14 @@ async def on_error(event, *args, **kwargs):
 
 %s```""" % (event, str(args), str(kwargs), traceback.format_exc()))
                 return
+    print("""###################################
+# Something happened to your bot!
+# Admin not available at server, so i am printing this to the console.
+# At event: %s
+# Args: %s, %s
+###################################
+
+%s""" % (event, str(args), str(kwargs), traceback.format_exc()), file=sys.stderr)
 
 
 @client.event
