@@ -21,4 +21,16 @@ class SoundTestCommand(Command):
             # note that on windows this DLL is automatically provided for you
             discord.opus.load_opus('opus')
 
-        voice = await client.join_voice_channel()#abc
+        voice = None
+        for channel in message.server.channels:
+            if channel.name == config["voice_chan"]:
+                voice = await client.join_voice_channel(channel)
+                break
+
+        if not voice:
+            await client.send_message(message.channel, message.author.mention + "Ses kanalı " +
+                                      config["voice_chan"] + " bulunamadı")
+            return
+
+        player = voice.create_ytdl_player('https://www.youtube.com/watch?v=NF26ZyZRJbU')  # TEST URL
+        player.start()
