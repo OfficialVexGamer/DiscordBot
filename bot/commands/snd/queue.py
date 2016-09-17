@@ -18,4 +18,4 @@ class SoundQueueCommand(Command):
             return
 
         sound.add_queue(args[0])
-        await client.send_message(message.channel, args[0] + " listeye eklendi!")
+        await client.send_message(message.channel, "Bir şarkı listeye eklendi! (listede %iinci)" % len(sound.queue))

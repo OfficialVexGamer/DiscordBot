@@ -22,7 +22,7 @@ async def on_ready():
         stuff.muted_chans[chan.name] = False
 
     global server
-    server = client.get_server(0)
+    server = client.servers[0]
 
     await client.change_status(game=discord.Game(name='yardım için !help'))
 
