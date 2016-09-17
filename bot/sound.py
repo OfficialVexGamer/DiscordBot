@@ -30,3 +30,14 @@ def get_snd_mins(in_secs):
     h, m = divmod(m, 60)
 
     return "%s:%s:%s" % (h, m, s)
+
+
+async def play(client, message):
+    global player
+
+    player = await voice.create_ytdl_player(queue.get())
+    await client.send_message(message.channel, """```""" + player.title + """
+    by """ + player.uploader + """ (""" + get_snd_mins(player.duration) + """)```""")
+
+    player.volume = old_vol
+    player.start()
