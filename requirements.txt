@@ -2,3 +2,5 @@ requests
 future
 discord.py
 pyyaml
+youtube_dl
+pynacl
