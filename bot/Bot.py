@@ -87,11 +87,15 @@ async def on_message(message):
                 await client.delete_message(message)
     else:
         wc = 0
+        wl = []
         for word in message.content.lower().split():
             if wc < 5:
                 wc += 1
-                if respond.get(word):
-                    await client.send_message(message.channel, message.author.mention + " " + respond.get(word))
+                if word not in wl:
+                    wl.append(word)
+                    if respond.get(word):
+                        await client.send_message(message.channel, message.author.mention + " " + respond.get(word))
+        wl = None
 
 
 def start(config):
