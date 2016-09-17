@@ -36,7 +36,7 @@ async def play(client, message):
 
     player = await voice.create_ytdl_player(queue.get())
     await client.send_message(message.channel, """```""" + player.title + """
-    by """ + player.uploader + """ (""" + get_snd_mins(player.duration) + """)```""")
+by """ + player.uploader + """ (""" + get_snd_mins(player.duration) + """)```""")
 
     player.volume = old_vol
     player.start()
