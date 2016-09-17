@@ -29,4 +29,5 @@ class SoundPlayCommand(Command):
                 by """ + sound.player.uploader + """ (""" + sound.get_snd_mins(sound.player.duration) + """)```""")
                 sound.player.start()
 
-            await asyncio.sleep(sound.player.duration)
+            print(sound.player.duration)
+            await asyncio.sleep(sound.player.duration + 1)

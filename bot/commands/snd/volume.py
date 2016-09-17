@@ -17,4 +17,4 @@ class SoundVolCommand(Command):
             await client.send_message(message.channel, message.author.mention +
                                       " Lütfen önce !snd_play ile bir müzik açın!")
 
-        sound.change_vol(args[0])
+        sound.change_vol(float(args[0]))
