@@ -23,6 +23,9 @@ class SoundPlayCommand(Command):
             await client.send_message(message.channel, message.author.mention +
                                       " Lütfen önce !snd_kanal ile sesi aktif edin!")
 
+        if stuff.player:
+            stuff.player.stop()
+
         stuff.player = await stuff.voice.create_ytdl_player(args[0])  # TEST URL
         await client.send_message(message.channel, """```""" + stuff.player.title + """
 by """ + stuff.player.uploader + """ (""" + self.get_snd_mins(stuff.player.duration) + """)```""")
