@@ -99,8 +99,9 @@ async def on_message(message):
 
 
 def start(config):
-    global cfg
+    global cfg, respond
     cfg = config
+    respond = config["respond"]
 
     print("Starting...")
     client.run(config["token"])

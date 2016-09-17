@@ -9,10 +9,7 @@ msgChan = "225218131537297408"
 commands = inspect.getmembers(bot.commands,
                               predicate=lambda o: inspect.isclass(o) and issubclass(o, bot.commands.Command))
 
-respond = {
-    "sa": "as",
-    "op": "hayır."
-}
+respond = {}
 
 
 def find_cmd_class(cmd):
