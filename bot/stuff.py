@@ -11,7 +11,7 @@ commands = inspect.getmembers(bot.commands,
                               predicate=lambda o: inspect.isclass(o) and issubclass(o, bot.commands.Command))
 respond = {}
 timeout = {}
-
+voice = None
 
 def find_cmd_class(cmd):
     cmd_c = NoneCommand()
