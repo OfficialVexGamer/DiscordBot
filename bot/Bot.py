@@ -1,4 +1,4 @@
-from bot.stuff import muted_chans, server, msgChan, respond, find_cmd_class
+from bot.stuff import muted_chans, server, msgChan, respond, timeout, find_cmd_class
 import discord
 import os
 
@@ -62,6 +62,9 @@ async def on_message(message):
             await client.send_message(message.author, "#" + message.channel.name + " şu anda kilitlidir.")
             return
 
+    if timeout.get(message.author.name) and timeout.get(message.author.name) >= 10:
+        return
+
     if message.content.startswith('!'):
         if message.author == client.user:
             return
@@ -75,6 +78,7 @@ async def on_message(message):
         if cmd_class.requiresAdmin():
             if isAuthorAdmin:
                 await cmd_class.do(client, message, c_args, cfg)
+                timeout[message.author.name] += 1
 
                 if cmd_class.deleteCMDMsg():
                     await client.delete_message(message)
@@ -82,6 +86,7 @@ async def on_message(message):
                 await client.send_message(message.channel, message.author.mention + " Yetkin yok!")
         else:
             await cmd_class.do(client, message, c_args, cfg)
+            timeout[message.author.name] += 1
 
             if cmd_class.deleteCMDMsg():
                 await client.delete_message(message)
@@ -95,6 +100,7 @@ async def on_message(message):
                     wl.append(word)
                     if respond.get(word):
                         await client.send_message(message.channel, message.author.mention + " " + respond.get(word))
+                        timeout[message.author.name] += 1
         wl = None
 
 
