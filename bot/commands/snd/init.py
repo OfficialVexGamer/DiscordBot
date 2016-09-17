@@ -14,7 +14,8 @@ class SoundChanCommand(Command):
 
     async def do(self, client, message, args, config={}):
         if sound.voice:
-            sound.voice.disconnect()
+            await client.send_message(message.channel, "Ses zaten aktif!")
+            return
 
         for channel in message.server.channels:
             if channel.name == config["voice_chan"]:

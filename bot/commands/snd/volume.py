@@ -13,6 +13,10 @@ class SoundVolCommand(Command):
         return "snd_vol"
 
     async def do(self, client, message, args, config={}):
+        if not args[0]:
+            await client.send_message(message.channel, "!snd_vol <volume (1.0 = 100%, 0.01 = 1%)>")
+            return
+
         if not sound.player:
             await client.send_message(message.channel, message.author.mention +
                                       " Lütfen önce !snd_play ile bir müzik açın!")
