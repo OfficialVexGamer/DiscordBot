@@ -8,7 +8,6 @@ msgChan = "225218131537297408"
 # noinspection PyUnresolvedReferences
 commands = inspect.getmembers(bot.commands,
                               predicate=lambda o: inspect.isclass(o) and issubclass(o, bot.commands.Command))
-print(commands)
 
 respond = {
     "sa": "as",
