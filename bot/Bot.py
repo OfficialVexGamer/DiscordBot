@@ -65,6 +65,8 @@ async def on_message(message):
     if timeout.get(message.author.name) and timeout.get(message.author.name) >= 10:
         remove_timeout_from(message.author.name)
         return
+    else:
+        remove_timeouts_except(message.author.name)
 
     if message.content.startswith('!'):
         if message.author == client.user:

@@ -29,6 +29,12 @@ def remove_timeout_from(person):
         timeout[person] -= 1
 
 
+def remove_timeouts_except(person):
+    for person_ in timeout:
+        if person_ != person:
+            timeout[person] = 0
+
+
 def add_timeout_to(person):
     if timeout.get(person):
         timeout[person] += 1
