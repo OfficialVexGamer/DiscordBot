@@ -1,15 +1,16 @@
+from bot.commands import NoneCommand
+from collections import defaultdict
 import inspect
 import bot.commands
-from bot.commands import NoneCommand
 
-muted_chans = {}
+muted_chans = defaultdict(dict)
 server = None
 msgChan = "225218131537297408"
 # noinspection PyUnresolvedReferences
 commands = inspect.getmembers(bot.commands,
                               predicate=lambda o: inspect.isclass(o) and issubclass(o, bot.commands.Command))
-respond = {}
-timeout = {}
+respond = defaultdict(dict)
+timeout = defaultdict(dict)
 
 
 def find_cmd_class(cmd):
