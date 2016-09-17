@@ -13,7 +13,7 @@ class SoundVolCommand(Command):
         return "snd_vol"
 
     async def do(self, client, message, args, config={}):
-        if not args[0]:
+        if len(args) < 1:
             await client.send_message(message.channel, "!snd_vol <volume (1.0 = 100%, 0.01 = 1%)>")
             return
 

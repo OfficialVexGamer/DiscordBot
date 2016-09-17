@@ -13,7 +13,7 @@ class SoundQueueCommand(Command):
         return "snd_queue"
 
     async def do(self, client, message, args, config={}):
-        if not args[0]:
+        if len(args) < 1:
             await client.send_message(message.channel, "!snd_queue <url>")
             return
 
