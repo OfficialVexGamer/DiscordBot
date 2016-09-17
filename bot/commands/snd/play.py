@@ -29,5 +29,4 @@ by """ + sound.player.uploader + """ (""" + sound.get_snd_mins(sound.player.dura
 by """ + sound.player.uploader + """ (""" + sound.get_snd_mins(sound.player.duration) + """)```""")
                 sound.player.start()
 
-            print(sound.player.duration)
             await asyncio.sleep(sound.player.duration + 1)
