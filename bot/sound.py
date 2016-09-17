@@ -49,5 +49,5 @@ async def play(client, message, music_chan):
     except youtube_dl.utils.DownloadError as e:
         for chan in message.server.channels:
             if chan.name == music_chan:
-                await client.send_message(chan, """```""" + str(e) + """"```""")
+                await client.send_message(chan, """```""" + str(e)[len("[0;31mERROR:[0m aaaaaaaaaaa: YouTube said: "):] + """"```""")
                 break
