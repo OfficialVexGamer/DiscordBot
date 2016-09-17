@@ -42,6 +42,7 @@ async def on_error(event, *args, **kwargs):
     for server in client.servers:
         for member in server.members:
             if member.name == cfg["speak_person"]["name"] and str(member.discriminator) == str(cfg["speak_person"]["iden"]):
+                import traceback
                 await client.send_message(member, """```python
 
 ###################################
@@ -51,7 +52,7 @@ async def on_error(event, *args, **kwargs):
 ###################################
 
 %s
-                ```""" % (event, str(args), str(kwargs), sys.exc_info()[0]))
+                ```""" % (event, str(args), str(kwargs), traceback.format_exc()))
                 return
 
 
