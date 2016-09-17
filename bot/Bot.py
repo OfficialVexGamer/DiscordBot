@@ -24,6 +24,8 @@ async def on_ready():
     global server
     server = client.get_server(0)
 
+    await client.change_status(game=discord.Game(name='yardım için !help'))
+
     print("Ready! " + client.user.name + " " + client.user.id)
 
 
