@@ -42,7 +42,7 @@ async def play(client, message, music_chan):
             if chan.name == music_chan:
                 await client.send_message(chan, """```""" + player.title + """
 by """ + player.uploader + """ (""" + get_snd_mins(player.duration) + """)
-""" + queue.qsize() + """ songs left.```""")
+""" + str(queue.qsize()) + """ songs left.```""")
                 break
 
         player.volume = old_vol
