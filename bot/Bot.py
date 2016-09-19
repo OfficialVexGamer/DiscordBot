@@ -113,7 +113,10 @@ async def on_message(message):
                 stuff.add_timeout_to(message.author.name)
 
                 if cmd_class.deleteCMDMsg():
-                    await client.delete_message(message)
+                    try:
+                        await client.delete_message(message)
+                    except discord.errors.NotFound:  # The message has been deleted before
+                        pass
             else:
                 await client.send_message(message.channel, message.author.mention + " Yetkin yok!")
         else:
