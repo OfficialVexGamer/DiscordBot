@@ -12,6 +12,10 @@ class MuteCommand(Command):
         return "mute"
 
     async def do(self, client, message, args, config={}):
+        if len(args) < 1:
+            await client.send_message(message.channel, message.author.mention + " !mute <isim>")
+            return
+
         if not config["mute_role"]:
             await client.send_message(message.channel, message.author.mention +
                                       ": Bot Konfigurasyon hatası! (mute_role bulunamadı)")
