@@ -19,5 +19,5 @@ class CurrentMusicCommand(Command):
 
         await client.send_message(message.channel, message.author.mention + """```Ad: """ + sound.player.title + """
 Yapımcı: """ + sound.player.uploader + """
-Zaman: """ + sound.get_snd_mins(sound.player.duration) + """)
+Zaman: """ + sound.get_snd_mins(sound.player.duration) + """
 URL: """ + sound.player.url + """```""")
