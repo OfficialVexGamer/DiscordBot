@@ -12,7 +12,7 @@ admin_roles:
 cleverbot_channels: # (#)'a gerek yok.
   - bot
 speak_person: # This person will make the bot speak if he PMs it.
-                # He will also get stack traces if the bot errors. (he needs to be online and on same server as the bot)
+              # He will also get stack traces if the bot errors. (he needs to be online and on same server as the bot)
   name: admicos
   iden: 5389 # The number after "#" in his username.
 respond: # Saying any of these words will make the bot respond
