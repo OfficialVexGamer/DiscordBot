@@ -13,6 +13,10 @@ class ImageMacroCommand(Command):
         return "i"
 
     async def do(self, client, message, args, config={}):
+        if len(args) < 1:
+            await client.send_message(message.channel, message.author.mention + " !i <resim>")
+            return
+
         if os.path.exists(os.path.join(config["img_dir"], args[0] + ".png")):
             # with open(os.path.join(config["img_dir"], args[0] + ".png"), 'rb') as f:
             #     await client.send_file(message.channel, f)
