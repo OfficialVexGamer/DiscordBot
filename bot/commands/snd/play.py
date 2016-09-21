@@ -22,3 +22,6 @@ class SoundPlayCommand(Command):
                 await sound.play(client, message, config["music_chan"])
 
             await asyncio.sleep(sound.player.duration + 1)
+
+        import discord
+        await client.change_status(game=discord.Game(name="yardım için !help"))
