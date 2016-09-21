@@ -13,6 +13,10 @@ class CleverbotCommand(Command):
         return "cleverbot"
 
     async def do(self, client, message, args, config={}):
+        if len(args) < 1:
+            await client.send_message(message.channel, message.author.mention + " hiç bir şey sormadın!")
+            return
+
         for chan in config["cleverbot_channels"]:
             if chan == message.channel.name:
                 input = args[0]
