@@ -1,6 +1,7 @@
 # SAVE ME AS config.yml!
 
 token: BOTTOKEN
+language: turkce
 avatar: avatar.png
 mute_role: Susturulmuş
 img_dir: images/
