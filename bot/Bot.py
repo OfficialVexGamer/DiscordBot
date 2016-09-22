@@ -1,9 +1,8 @@
-import sys
-
 from bot import i18n
 from bot import stuff
 import discord
 import os
+import sys
 
 client = discord.Client()
 

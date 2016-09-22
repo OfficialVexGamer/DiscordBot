@@ -1,5 +1,5 @@
-from bot import i18n
 from bot.commands.command import Command
+from bot import i18n
 from bot import sound
 
 
