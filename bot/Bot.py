@@ -114,7 +114,7 @@ async def on_message(message):
                     if chan.name == cfg["modlog_chan"]:
                         arg_str = ""
                         for arg in c_args:
-                            arg_str = arg_str + " " + arg
+                            arg_str = arg_str + arg + " "
 
                         await client.send_message(chan, "{0}: {1} {2}".format(message.author.name, cmd, arg_str))
                         return
