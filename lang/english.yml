@@ -10,6 +10,14 @@ cmd_i_notfound: "{mention} couldn't find this image!"
 cmd_cleverbot_nothing: "{mention} you didn't ask anything!"
 cmd_cleverbot_wrongchannel: "{mention} Cleverbot can only be used in specific channels"
 
+cmd_snd_init: "Sound is already active!"
+cmd_snd_init_ok: "Sound active!"
+
+cmd_snd_queue_help: "!snd_queue <url>"
+cmd_snd_queue: "Music has been added to the queue ({index}th)"
+
+cmd_snd_vol: "!snd_vol <volume (1.0 = 100%, 0.01 = 1%)>"
+
 sound_playing_template: |
   **Title:** {sound.title}
   **Uploader:** {sound.uploader}

@@ -10,6 +10,15 @@ cmd_i_notfound: "{mention} bu resim bulunamadı!"
 cmd_cleverbot_nothing: "{mention} hiç bir şey sormadın!"
 cmd_cleverbot_wrongchannel: "{mention} Cleverbot sadece belirli kanallarda kullanılabilir"
 
+cmd_snd_init: "Ses zaten aktif!"
+cmd_snd_init_ok: "Ses aktif!"
+
+cmd_snd_queue_help: "!snd_queue <url>"
+cmd_snd_queue: "Bir şarkı listeye eklendi ({index} inci)"
+
+cmd_snd_vol: "!snd_vol <ses (1.0 = 100%, 0.01 = 1%)>"
+cmd_snd_vol_play: "{mention} Lütfen önce !snd_play ile bir müzik açın!"
+
 sound_playing_template: |
   **Ad:** {sound.title}
   **Yapimci:** {sound.uploader}
