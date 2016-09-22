@@ -116,7 +116,7 @@ async def on_message(message):
                         for arg in c_args:
                             arg_str = arg_str + arg + " "
 
-                        await client.send_message(chan, "{0}: {1} {2}".format(message.author.name, cmd, arg_str))
+                        await client.send_message(chan, "{0}: !{1} {2}".format(message.author.name, cmd, arg_str))
                         return
 
                 stuff.add_timeout_to(message.author.name)
