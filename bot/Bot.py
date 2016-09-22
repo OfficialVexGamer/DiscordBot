@@ -120,7 +120,7 @@ async def on_message(message):
                     except discord.errors.NotFound:  # The message has been deleted before
                         pass
             else:
-                await client.send_message(message.channel, i18n.get_localized_str("noperm", {"mention":
+                await client.send_message(message.channel, i18n.get_localized_str("bot_noperm", {"mention":
                                                                                              message.author.name}))
         else:
             await cmd_class.do(client, message, c_args, cfg)

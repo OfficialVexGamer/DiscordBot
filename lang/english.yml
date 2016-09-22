@@ -1,4 +1,13 @@
 bot_active: "Bot active! (!help for help)"
-bot_game: "I'm a bot. Beep Boop"
+bot_game: "!help for help."
+
+bot_noperm: "{mention} You don't have permissions to do that!"
+bot_nocmd: "{mention} No such command!"
+
+cmd_i_help: "!i <image>"
+cmd_i_notfound: "{mention} couldn't find this image!"
+
+cmd_cleverbot_nothing: "{mention} you didn't ask anything!"
+cmd_cleverbot_wrongchannel: "{mention} Cleverbot can only be used in specific channels"
+
 channel_locked: "#{channel} is currently locked."
-noperm: "{mention} You don't have permissions to do that!"

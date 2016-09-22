@@ -1,4 +1,13 @@
 bot_active: "Bot aktif! (Yardım için !help)"
 bot_game: "yardım için !help"
+
+bot_noperm: "{mention} Yetkin yok!"
+bot_nocmd: "{mention} Bu komut yok!"
+
+cmd_i_help: "!i <resim>"
+cmd_i_notfound: "{mention} bu resim bulunamadı!"
+
+cmd_cleverbot_nothing: "{mention} hiç bir şey sormadın!"
+cmd_cleverbot_wrongchannel: "{mention} Cleverbot sadece belirli kanallarda kullanılabilir"
+
 channel_locked: "#{channel} şu anda kilitlidir."
-noperm: "{mention} Yetkin yok!"
