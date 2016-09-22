@@ -10,4 +10,9 @@ cmd_i_notfound: "{mention} bu resim bulunamadı!"
 cmd_cleverbot_nothing: "{mention} hiç bir şey sormadın!"
 cmd_cleverbot_wrongchannel: "{mention} Cleverbot sadece belirli kanallarda kullanılabilir"
 
+sound_playing_template: |
+  **Ad:** {sound.title}
+  **Yapimci:** {sound.uploader}
+  **Zaman:** {duration}
+
 channel_locked: "#{channel} şu anda kilitlidir."

@@ -10,4 +10,9 @@ cmd_i_notfound: "{mention} couldn't find this image!"
 cmd_cleverbot_nothing: "{mention} you didn't ask anything!"
 cmd_cleverbot_wrongchannel: "{mention} Cleverbot can only be used in specific channels"
 
+sound_playing_template: |
+  **Title:** {sound.title}
+  **Uploader:** {sound.uploader}
+  **Duration:** {duration}
+
 channel_locked: "#{channel} is currently locked."

@@ -1,3 +1,4 @@
+from bot import i18n
 from bot.commands.command import Command
 from bot import sound
 
@@ -17,7 +18,7 @@ class CurrentMusicCommand(Command):
             await client.send_message(message.channel, message.author.mention + " Şu anda hiç bir şey çalmıyor.")
             return
 
-        await client.send_message(message.channel, message.author.mention + """```Ad: """ + sound.player.title + """
-Yapımcı: """ + sound.player.uploader + """
-Zaman: """ + sound.get_snd_mins(sound.player.duration) + """
-URL: """ + sound.player.url + """```""")
+        await client.send_message(message.channel, i18n.get_localized_str("sound_playing_template", {
+            "sound": sound.player,
+            "duration": sound.get_snd_mins(sound.player.duration)
+        }))
