@@ -10,8 +10,8 @@ def load_lang(lang: str):
         local_strs = yaml.load(f.read())
 
 
-def get_localized_str(str_id: str, fmt=()):
+def get_localized_str(str_id: str, fmt={}):
     if not local_strs[str_id]:
         return "STRING NOT FOUND: {}".format(str_id)
 
-    return str(local_strs[str_id]).format(fmt)
+    return str(local_strs[str_id]).format(**fmt)

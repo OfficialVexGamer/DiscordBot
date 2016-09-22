@@ -1,5 +1,6 @@
 import sys
 
+from bot import i18n
 from bot import stuff
 import discord
 import os
@@ -24,10 +25,10 @@ async def on_ready():
     global server
     server = list(client.servers)[0]
 
-    await client.change_status(game=discord.Game(name='yardım için !help'))
+    await client.change_status(game=discord.Game(name=i18n.get_localized_str("bot_game")))
 
     print("Ready! " + client.user.name + " " + client.user.id)
-    await client.send_message(server, "Bot aktif! (Yardım için !help)")
+    await client.send_message(server, i18n.get_localized_str("bot_active"))
 
 
 @client.event
@@ -88,7 +89,8 @@ async def on_message(message):
     if stuff.muted_chans[message.channel.name]:
         if not isAuthorAdmin:
             await client.delete_message(message)
-            await client.send_message(message.author, "#" + message.channel.name + " şu anda kilitlidir.")
+            await client.send_message(message.author, i18n.get_localized_str("channel_locked", {"channel":
+                                                                                                message.channel.name}))
             return
 
     if stuff.timeout.get(message.author.name) and stuff.timeout.get(message.author.name) >= 10:
@@ -118,7 +120,8 @@ async def on_message(message):
                     except discord.errors.NotFound:  # The message has been deleted before
                         pass
             else:
-                await client.send_message(message.channel, message.author.mention + " Yetkin yok!")
+                await client.send_message(message.channel, i18n.get_localized_str("noperm", {"mention":
+                                                                                             message.author.name}))
         else:
             await cmd_class.do(client, message, c_args, cfg)
             stuff.add_timeout_to(message.author.name)
@@ -156,5 +159,6 @@ def start(config):
         # note that on windows this DLL is automatically provided for you
         discord.opus.load_opus('opus')
 
+    i18n.load_lang(config["language"])
     client.run(config["token"])
     return 0

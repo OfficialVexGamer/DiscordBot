@@ -1,0 +1,4 @@
+bot_active: "Bot active! (!help for help)"
+bot_game: "I'm a bot. Beep Boop"
+channel_locked: "#{channel} is currently locked."
+noperm: "{mention} You don't have permissions to do that!"

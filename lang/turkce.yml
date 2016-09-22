@@ -1,0 +1,4 @@
+bot_active: "Bot aktif! (Yardım için !help)"
+bot_game: "yardım için !help"
+channel_locked: "#{channel} şu anda kilitlidir."
+noperm: "{mention} Yetkin yok!"
