@@ -18,9 +18,4 @@ class SoundVolCommand(Command):
             await client.send_message(message.channel, i18n.get_localized_str("cmd_snd_volume_help"))
             return
 
-        if not sound.player:
-            await client.send_message(message.channel, i18n.get_localized_str("cmd_snd_vol_play", {"mention":
-                                                                                                   message.author.mention}))
-            return
-
         sound.change_vol(float(args[0]))

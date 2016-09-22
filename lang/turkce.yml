@@ -17,7 +17,6 @@ cmd_snd_queue_help: "!snd_queue <url>"
 cmd_snd_queue: "Bir şarkı listeye eklendi ({index} inci)"
 
 cmd_snd_vol: "!snd_vol <ses (1.0 = 100%, 0.01 = 1%)>"
-cmd_snd_vol_play: "{mention} Lütfen önce !snd_play ile bir müzik açın!"
 
 sound_playing_template: |
   **Ad:** {sound.title}
