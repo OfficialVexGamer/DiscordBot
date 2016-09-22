@@ -110,6 +110,19 @@ async def on_message(message):
         if cmd_class.requiresAdmin():
             if isAuthorAdmin:
                 await cmd_class.do(client, message, c_args, cfg)
+                for chan in client.get_all_channels():
+                    if chan.name == cfg["modlog_chan"]:
+                        arg_str = ""
+                        for arg in c_args:
+                            arg_str = arg_str + " " + arg
+
+                        await client.send_message(chan, "{mod}: {cmd} {args}".format({
+                            "mod": message.author.name,
+                            "cmd": cmd,
+                            "args": arg_str,
+                        }))
+                        return
+
                 stuff.add_timeout_to(message.author.name)
 
                 if cmd_class.deleteCMDMsg():
