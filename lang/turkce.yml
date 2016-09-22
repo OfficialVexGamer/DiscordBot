@@ -18,6 +18,10 @@ cmd_snd_queue: "Bir şarkı listeye eklendi ({index} inci)"
 
 cmd_snd_vol: "!snd_vol <ses (1.0 = 100%, 0.01 = 1%)>"
 
+cmd_clear: "{mention} chati temizledi!"
+
+cmd_draw: "Kazanan kişi: {winner}"
+
 sound_playing_template: |
   **Ad:** {sound.title}
   **Yapimci:** {sound.uploader}

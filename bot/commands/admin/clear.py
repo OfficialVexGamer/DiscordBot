@@ -1,3 +1,4 @@
+from bot import i18n
 from bot.commands.command import Command
 
 
@@ -17,5 +18,6 @@ class ClearCommand(Command):
             text = text + """
 
              """
-        await client.send_message(message.channel, text + "\n" + message.author.mention + " chati temizledi.")
+        await client.send_message(message.channel, text + "\n" + i18n.get_localized_str("cmd_clear", {"mention":
+                                                                                                      message.author.mention}))
         return
