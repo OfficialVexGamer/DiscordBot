@@ -1,3 +1,4 @@
+from bot import i18n
 from bot.commands.command import Command
 from bot import sound
 
@@ -14,8 +15,10 @@ class SoundQueueCommand(Command):
 
     async def do(self, client, message, args, config={}):
         if len(args) < 1:
-            await client.send_message(message.channel, "!snd_queue <url>")
+            await client.send_message(message.channel, i18n.get_localized_str("cmd_snd_queue_help"))
             return
 
         sound.add_queue(args[0])
-        await client.send_message(message.channel, "Bir şarkı listeye eklendi! (listede %i inci)" % sound.queue.qsize())
+
+        await client.send_message(message.channel, i18n.get_localized_str("cmd_snd_queue", {"index":
+                                                                                            sound.queue.qsize()}))

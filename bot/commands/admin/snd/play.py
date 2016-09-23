@@ -2,6 +2,7 @@ import asyncio
 
 from bot.commands.command import Command
 from bot import sound
+from bot import i18n
 
 
 class SoundPlayCommand(Command):
@@ -24,4 +25,4 @@ class SoundPlayCommand(Command):
             await asyncio.sleep(sound.player.duration + 1)
 
         import discord
-        await client.change_status(game=discord.Game(name="yardım için !help"))
+        await client.change_status(game=discord.Game(name=i18n.get_localized_str("bot_game")))

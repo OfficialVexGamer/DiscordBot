@@ -1,5 +1,6 @@
 from bot.commands.command import Command
 from bot import sound
+from bot import i18n
 
 
 class SoundVolCommand(Command):
@@ -14,11 +15,7 @@ class SoundVolCommand(Command):
 
     async def do(self, client, message, args, config={}):
         if len(args) < 1:
-            await client.send_message(message.channel, "!snd_vol <volume (1.0 = 100%, 0.01 = 1%)>")
+            await client.send_message(message.channel, i18n.get_localized_str("cmd_snd_volume_help"))
             return
-
-        if not sound.player:
-            await client.send_message(message.channel, message.author.mention +
-                                      " Lütfen önce !snd_play ile bir müzik açın!")
 
         sound.change_vol(float(args[0]))

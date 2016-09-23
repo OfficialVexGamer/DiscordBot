@@ -1,0 +1,45 @@
+bot_active: "Bot active! (!help for help)"
+bot_game: "!help for help."
+bot_config_error: "!{cmd}: Bot configuration error! ({key} not found!)"
+bot_serv_cfg_error: "!{cmd}: Server configuration error: {err}"
+
+err_nomuterole: "Couldn't find mute role"
+
+bot_noperm: "{mention} You don't have permissions to do that!"
+bot_nocmd: "{mention} No such command!"
+
+cmd_i_help: "!i <image>"
+cmd_i_notfound: "{mention} couldn't find this image!"
+
+cmd_cleverbot_nothing: "{mention} you didn't ask anything!"
+cmd_cleverbot_wrongchannel: "{mention} Cleverbot can only be used in specific channels"
+
+cmd_snd_init: "Sound is already active!"
+cmd_snd_init_ok: "Sound active!"
+
+cmd_snd_queue_help: "!snd_queue <url>"
+cmd_snd_queue: "Music has been added to the queue ({index}th)"
+
+cmd_snd_vol: "!snd_vol <volume (1.0 = 100%, 0.01 = 1%)>"
+
+cmd_clear: "{mention} cleared the chat!"
+
+cmd_draw: "And the winner is: {winner}"
+
+cmd_lock: "{mention} locked this channel."
+cmd_unlock: "{mention} unlocked this channel."
+
+cmd_mute: "{mention} is muted."
+cmd_mute_help: "!mute <nick>"
+cmd_mute_admin: "You cannot mute an admin!"
+cmd_mute_notfound: "{name} is not found!"
+
+cmd_unmute: "{mention} is unmuted"
+cmd_unmute_help: "!unmute <nick>"
+
+sound_playing_template: |
+  **Title:** {sound.title}
+  **Uploader:** {sound.uploader}
+  **Duration:** {duration}
+
+channel_locked: "#{channel} is currently locked."

@@ -1,4 +1,5 @@
 from bot.commands.command import Command
+from bot import i18n
 from bot.cleverbot import Cleverbot
 
 
@@ -14,7 +15,8 @@ class CleverbotCommand(Command):
 
     async def do(self, client, message, args, config={}):
         if len(args) < 1:
-            await client.send_message(message.channel, message.author.mention + " hiç bir şey sormadın!")
+            await client.send_message(message.channel, i18n.get_localized_str("cmd_cleverbot_nothing", {"mention":
+                                                                                                        message.author.mention}))
             return
 
         for chan in config["cleverbot_channels"]:
@@ -29,5 +31,5 @@ class CleverbotCommand(Command):
                 await client.send_message(message.channel, message.author.mention + ", " + cb.ask(input)) #+ " özür dilerim canım cicim tatlım"))
                 return
 
-        await client.send_message(message.channel, message.author.mention +
-                                  " Cleverbot belirli kanallar dışında kullanılamaz!")
+        await client.send_message(message.channel, i18n.get_localized_str("cmd_cleverbot_wrongchannel", {"mention":
+                                                                                                         message.author.mention}))

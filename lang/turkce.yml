@@ -1,0 +1,45 @@
+bot_active: "Bot aktif! (Yardım için !help)"
+bot_game: "yardım için !help"
+bot_config_error: "!{cmd}: Bot konfigurasyon hatası! ({key} bulunamadı!)"
+bot_serv_cfg_error: "!{cmd}: Sunucu konfigurasyon hatası: {err}"
+
+err_nomuterole: "Mute rolü bulunamadı!"
+
+bot_noperm: "{mention} Yetkin yok!"
+bot_nocmd: "{mention} Bu komut yok!"
+
+cmd_i_help: "!i <resim>"
+cmd_i_notfound: "{mention} bu resim bulunamadı!"
+
+cmd_cleverbot_nothing: "{mention} hiç bir şey sormadın!"
+cmd_cleverbot_wrongchannel: "{mention} Cleverbot sadece belirli kanallarda kullanılabilir"
+
+cmd_snd_init: "Ses zaten aktif!"
+cmd_snd_init_ok: "Ses aktif!"
+
+cmd_snd_queue_help: "!snd_queue <url>"
+cmd_snd_queue: "Bir şarkı listeye eklendi ({index} inci)"
+
+cmd_snd_vol: "!snd_vol <ses (1.0 = 100%, 0.01 = 1%)>"
+
+cmd_clear: "{mention} chati temizledi!"
+
+cmd_draw: "Kazanan kişi: {winner}"
+
+cmd_lock: "{mention} kanalı kilitledi."
+cmd_unlock: "{mention} kanal kilidini açtı."
+
+cmd_mute: "{mention} susturuldu."
+cmd_mute_help: "!mute <nick>"
+cmd_mute_admin: "Bir admini susturamassın!"
+cmd_mute_notfound: "{name} isimli bir kişi yok!"
+
+cmd_unmute: "{mention} Artık konuşabilir"
+cmd_unmute_help: "!unmute <nick>"
+
+sound_playing_template: |
+  **Ad:** {sound.title}
+  **Yapimci:** {sound.uploader}
+  **Zaman:** {duration}
+
+channel_locked: "#{channel} şu anda kilitlidir."
