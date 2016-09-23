@@ -22,6 +22,9 @@ cmd_clear: "{mention} chati temizledi!"
 
 cmd_draw: "And the winner is: {winner}"
 
+cmd_lock: "{mention} locked this channel."
+cmd_unlock: "{mention} unlocked this channel."
+
 sound_playing_template: |
   **Title:** {sound.title}
   **Uploader:** {sound.uploader}

@@ -22,6 +22,9 @@ cmd_clear: "{mention} chati temizledi!"
 
 cmd_draw: "Kazanan kişi: {winner}"
 
+cmd_lock: "{mention} kanalı kilitledi."
+cmd_unlock: "{mention} kanal kilidini açtı."
+
 sound_playing_template: |
   **Ad:** {sound.title}
   **Yapimci:** {sound.uploader}

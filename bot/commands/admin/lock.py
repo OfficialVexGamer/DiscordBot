@@ -1,3 +1,4 @@
+from bot import i18n
 from bot import stuff
 from bot.commands.command import Command
 
@@ -13,7 +14,8 @@ class LockCommand(Command):
         return "kilitle"
 
     async def do(self, client, message, args, config={}):
-        await client.send_message(message.channel, message.author.mention + " Kanalı kilitledi.")
+        await client.send_message(message.channel, i18n.get_localized_str("cmd_lock", {"mention":
+                                                                                       message.author.mention}))
         stuff.muted_chans[message.channel.name] = True
 
 
@@ -29,4 +31,5 @@ class UnlockCommand(Command):
 
     async def do(self, client, message, args, config={}):
         stuff.muted_chans[message.channel.name] = False
-        await client.send_message(message.channel, message.author.mention + " Kanal kilidini açtı.")
+        await client.send_message(message.channel, i18n.get_localized_str("cmd_unlock", {"mention":
+                                                                                         message.author.mention}))
