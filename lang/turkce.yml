@@ -1,5 +1,9 @@
 bot_active: "Bot aktif! (Yardım için !help)"
 bot_game: "yardım için !help"
+bot_config_error: "!{cmd}: Bot konfigurasyon hatası! ({key} bulunamadı!)"
+bot_serv_cfg_error: "!{cmd}: Sunucu konfigurasyon hatası: {err}"
+
+err_nomuterole: "Mute rolü bulunamadı!"
 
 bot_noperm: "{mention} Yetkin yok!"
 bot_nocmd: "{mention} Bu komut yok!"
@@ -24,6 +28,11 @@ cmd_draw: "Kazanan kişi: {winner}"
 
 cmd_lock: "{mention} kanalı kilitledi."
 cmd_unlock: "{mention} kanal kilidini açtı."
+
+cmd_mute: "{mention} susturuldu."
+cmd_mute_help: "!mute <nick>"
+cmd_mute_admin: "Bir admini susturamassın!"
+cmd_mute_notfound: "{name} isimli bir kişi yok!"
 
 sound_playing_template: |
   **Ad:** {sound.title}
