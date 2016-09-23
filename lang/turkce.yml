@@ -34,6 +34,9 @@ cmd_mute_help: "!mute <nick>"
 cmd_mute_admin: "Bir admini susturamassın!"
 cmd_mute_notfound: "{name} isimli bir kişi yok!"
 
+cmd_unmute: "{mention} Artık konuşabilir"
+cmd_unmute_help: "!unmute <nick>"
+
 sound_playing_template: |
   **Ad:** {sound.title}
   **Yapimci:** {sound.uploader}
