@@ -1,5 +1,9 @@
 bot_active: "Bot active! (!help for help)"
 bot_game: "!help for help."
+bot_config_error: "!{cmd}: Bot configuration error! ({key} not found!)"
+bot_serv_cfg_error: "!{cmd}: Server configuration error: {err}"
+
+err_nomuterole: "Couldn't find mute role"
 
 bot_noperm: "{mention} You don't have permissions to do that!"
 bot_nocmd: "{mention} No such command!"
@@ -18,12 +22,20 @@ cmd_snd_queue: "Music has been added to the queue ({index}th)"
 
 cmd_snd_vol: "!snd_vol <volume (1.0 = 100%, 0.01 = 1%)>"
 
-cmd_clear: "{mention} chati temizledi!"
+cmd_clear: "{mention} cleared the chat!"
 
 cmd_draw: "And the winner is: {winner}"
 
 cmd_lock: "{mention} locked this channel."
 cmd_unlock: "{mention} unlocked this channel."
+
+cmd_mute: "{mention} is muted."
+cmd_mute_help: "!mute <nick>"
+cmd_mute_admin: "You cannot mute an admin!"
+cmd_mute_notfound: "{name} is not found!"
+
+cmd_unmute: "{mention} is unmuted"
+cmd_unmute_help: "!unmute <nick>"
 
 sound_playing_template: |
   **Title:** {sound.title}
