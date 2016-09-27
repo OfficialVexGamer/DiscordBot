@@ -1,5 +1,6 @@
 from bot import i18n
 from bot import stuff
+from bot import config
 import discord
 import os
 import sys
@@ -25,6 +26,8 @@ async def on_ready():
     server = list(client.servers)[0]
 
     await client.change_status(game=discord.Game(name=i18n.get_localized_str("bot_game")))
+
+
 
     print("Ready! " + client.user.name + " " + client.user.id)
     await client.send_message(server, i18n.get_localized_str("bot_active"))
