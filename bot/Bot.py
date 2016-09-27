@@ -1,6 +1,6 @@
 from bot import i18n
 from bot import stuff
-from bot import config
+# from bot import config ## How did this escape from the other branch
 import discord
 import os
 import sys
