@@ -22,4 +22,4 @@ def get_key(id: str, key: str):
     if not server_config[id]:
         create_server_config(id)
 
-    return server_config[id][key]
+    return server_config[id][key] or False

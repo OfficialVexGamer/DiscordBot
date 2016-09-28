@@ -14,4 +14,4 @@ def get_localized_str(server: int, str_id: str, fmt={}):
     if not server_langs[server][str_id]:
         return "STRING NOT FOUND: {}".format(str_id)
 
-    return str(server_langs[server]).format(**fmt)
+    return str(server_langs[server][str_id]).format(**fmt)
