@@ -16,3 +16,7 @@ def load_server_config(id: str):
 
     with open("conf/cfg-{}.yml".format(id), "r") as f:
         server_config[id] = yaml.load(f.read())
+
+
+def get_key(id: str, key: str):
+    return server_config[id][key]

@@ -48,8 +48,6 @@ by """ + player.uploader + """ (""" + get_snd_mins(player.duration) + """)
 
         player.volume = old_vol
         player.start()
-
-        await client.change_status(game=discord.Game(name=player.title))
     except youtube_dl.utils.DownloadError as e:
         for chan in message.server.channels:
             if chan.name == music_chan:

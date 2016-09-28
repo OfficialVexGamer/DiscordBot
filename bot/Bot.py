@@ -7,12 +7,12 @@ import sys
 
 
 class DiscordBot(discord.Client):
+    cfg = {}
+
     def __init__(self, config: list):
         super().__init__()
-
-        global cfg
-        cfg = config
-        stuff.respond = config["respond"]
+        
+        self.self.cfg = config
 
         print("Starting...")
         if not discord.opus.is_loaded():
@@ -23,12 +23,11 @@ class DiscordBot(discord.Client):
             # note that on windows this DLL is automatically provided for you
             discord.opus.load_opus('opus')
 
-        i18n.load_lang(config["language"])
         self.run(config["token"])
 
     async def on_ready(self):
         if not os.path.exists(".avatar_uploaded"):
-            with open(cfg["avatar"], 'rb') as f:
+            with open(self.cfg["avatar"], 'rb') as f:
                 print("Uploading avatar...")
                 await self.edit_profile(avatar=f.read())
                 with open(".avatar_uploaded", 'w') as f2:
@@ -39,16 +38,14 @@ class DiscordBot(discord.Client):
         for chan in self.get_all_channels():
             stuff.muted_chans[chan.name] = False
 
-        global server
-        server = list(self.servers)[0]
-
-        await self.change_status(game=discord.Game(name=i18n.get_localized_str("bot_game")))
+        await self.change_status(game=discord.Game(name="DISCORDBOT 1.0.0 -- !help for details"))
 
         print("Ready! " + self.user.name + " " + self.user.id)
-        await self.send_message(server, i18n.get_localized_str("bot_active"))
 
     async def on_server_join(self, server: discord.Server):
         config.load_server_config(server.id)
+        i18n.load_lang(server.id, config.get_key(server.id, "language"))
+        stuff.respond[server.id] = config.get_key(server.id, "respond")
 
     async def on_channel_delete(self, channel: discord.Channel):
         stuff.muted_chans[channel.name] = None
@@ -60,8 +57,8 @@ class DiscordBot(discord.Client):
         import traceback
         for server in self.servers:
             for member in server.members:
-                if member.name == cfg["speak_person"]["name"] and str(member.discriminator) == str(
-                        cfg["speak_person"]["iden"]):
+                if member.name == self.cfg["speak_person"]["name"] and str(member.discriminator) == str(
+                        self.cfg["speak_person"]["iden"]):
                     await self.send_message(member, """```python
     
     ###################################
@@ -84,8 +81,8 @@ class DiscordBot(discord.Client):
     async def on_message(self, message: discord.Message):
         isAuthorAdmin = False
         if type(message.author) == discord.User:  # PM
-            if message.author.name == cfg["speak_person"]["name"] and str(message.author.discriminator) == str(
-                    cfg["speak_person"]["iden"]):
+            if message.author.name == self.cfg["speak_person"]["name"] and str(message.author.discriminator) == str(
+                    self.cfg["speak_person"]["iden"]):
                 if message.content.startswith('!id '):
                     stuff.msgChan = str(message.content[4:])
                 elif message.content.startswith("!name "):
@@ -96,14 +93,14 @@ class DiscordBot(discord.Client):
             return
 
         for role in message.author.roles:
-            for check_role in cfg["admin_roles"]:
+            for check_role in self.cfg["admin_roles"]:
                 if role.name == check_role:
                     isAuthorAdmin = True
 
         if stuff.muted_chans[message.channel.name]:
             if not isAuthorAdmin:
                 await self.delete_message(message)
-                await self.send_message(message.author, i18n.get_localized_str("channel_locked", {"channel":
+                await self.send_message(message.author, i18n.get_localized_str(message.server.id, "channel_locked", {"channel":
                                                                                                       message.channel.name}))
                 return
 
@@ -125,9 +122,9 @@ class DiscordBot(discord.Client):
 
             if cmd_class.requiresAdmin():
                 if isAuthorAdmin:
-                    await cmd_class.do(self, message, c_args, cfg)
+                    await cmd_class.do(self, message, c_args, self.cfg)
                     for chan in self.get_all_channels():
-                        if chan.name == cfg["modlog_chan"]:
+                        if chan.name == self.cfg["modlog_chan"]:
                             arg_str = ""
                             for arg in c_args:
                                 arg_str = arg_str + arg + " "
@@ -145,10 +142,10 @@ class DiscordBot(discord.Client):
                         except discord.errors.NotFound:  # The message has been deleted before
                             pass
                 else:
-                    await self.send_message(message.channel, i18n.get_localized_str("bot_noperm", {"mention":
+                    await self.send_message(message.channel, i18n.get_localized_str(message.server.id, "bot_noperm", {"mention":
                                                                                                        message.author.name}))
             else:
-                await cmd_class.do(self, message, c_args, cfg)
+                await cmd_class.do(self, message, c_args, self.cfg)
                 stuff.add_timeout_to(message.author.name)
 
                 if cmd_class.deleteCMDMsg():
@@ -166,6 +163,6 @@ class DiscordBot(discord.Client):
                         wl.append(word)
                         if stuff.respond.get(word):
                             await self.send_message(message.channel,
-                                                    message.author.mention + " " + stuff.respond.get(word))
+                                                    message.author.mention + " " + stuff.respond[message.server.id].get(word))
                             stuff.add_timeout_to(message.author.name)
             wl = None
