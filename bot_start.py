@@ -1,4 +1,4 @@
-from bot import Bot
+from bot.Bot import DiscordBot
 import yaml
 
 
@@ -8,7 +8,8 @@ def get_config():
 
 
 def main():
-    return Bot.start(get_config())
+    DiscordBot(get_config())
+    return 0
 
 if __name__ == "__main__":
     exit(main())
