@@ -20,7 +20,7 @@ class CurrentMusicCommand(Command):
             await client.send_message(message.channel, message.author.mention + " Şu anda hiç bir şey çalmıyor.")
             return
 
-        await client.send_message(message.channel, i18n.get_localized_str("sound_playing_template", {
+        await client.send_message(message.channel, i18n.get_localized_str(message.server.id, "sound_playing_template", {
             "sound": sound.player,
             "duration": sound.get_snd_mins(sound.player.duration)
         }))

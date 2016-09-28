@@ -20,6 +20,6 @@ class ClearCommand(Command):
             text = text + """
 
              """
-        await client.send_message(message.channel, text + "\n" + i18n.get_localized_str("cmd_clear", {"mention":
+        await client.send_message(message.channel, text + "\n" + i18n.get_localized_str(message.server.id, "cmd_clear", {"mention":
                                                                                                       message.author.mention}))
         return

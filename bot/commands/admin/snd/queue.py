@@ -17,10 +17,10 @@ class SoundQueueCommand(Command):
 
     async def do(self, client: discord.Client, message: discord.Message, args: list, config={}):
         if len(args) < 1:
-            await client.send_message(message.channel, i18n.get_localized_str("cmd_snd_queue_help"))
+            await client.send_message(message.channel, i18n.get_localized_str(message.server.id, "cmd_snd_queue_help"))
             return
 
         sound.add_queue(args[0])
 
-        await client.send_message(message.channel, i18n.get_localized_str("cmd_snd_queue", {"index":
+        await client.send_message(message.channel, i18n.get_localized_str(message.server.id, "cmd_snd_queue", {"index":
                                                                                             sound.queue.qsize()}))

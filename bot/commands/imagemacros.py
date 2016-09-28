@@ -17,7 +17,7 @@ class ImageMacroCommand(Command):
 
     async def do(self, client: discord.Client, message: discord.Message, args: list, config={}):
         if len(args) < 1:
-            await client.send_message(message.channel, i18n.get_localized_str("cmd_i_help", {"mention":
+            await client.send_message(message.channel, i18n.get_localized_str(message.server.id, "cmd_i_help", {"mention":
                                                                                              message.author.mention}))
             return
 
@@ -27,5 +27,5 @@ class ImageMacroCommand(Command):
             #     return
             await client.send_message(message.channel, message.author.mention + " " + config["img_url_prefix"] + args[0] + ".png")
         else:
-            await client.send_message(message.channel, i18n.get_localized_str("cmd_i_notfound", {"mention":
+            await client.send_message(message.channel, i18n.get_localized_str(message.server.id, "cmd_i_notfound", {"mention":
                                                                                                  message.author.mention}))

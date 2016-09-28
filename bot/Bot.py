@@ -1,9 +1,9 @@
 from bot import i18n
 from bot import stuff
+from bot import config
 import discord
 import os
 import sys
-import asyncio
 
 
 class DiscordBot(discord.Client):
@@ -26,7 +26,6 @@ class DiscordBot(discord.Client):
         i18n.load_lang(config["language"])
         self.run(config["token"])
 
-    @asyncio.coroutine
     async def on_ready(self):
         if not os.path.exists(".avatar_uploaded"):
             with open(cfg["avatar"], 'rb') as f:
@@ -49,17 +48,14 @@ class DiscordBot(discord.Client):
         await self.send_message(server, i18n.get_localized_str("bot_active"))
 
     async def on_server_join(self, server: discord.Server):
-        pass
+        config.load_server_config(server.id)
 
-    @asyncio.coroutine
     async def on_channel_delete(self, channel: discord.Channel):
         stuff.muted_chans[channel.name] = None
 
-    @asyncio.coroutine
     async def on_channel_create(self, channel: discord.Channel):
         stuff.muted_chans[channel.name] = False
 
-    @asyncio.coroutine
     async def on_error(self, event, *args, **kwargs):
         import traceback
         for server in self.servers:
@@ -85,7 +81,6 @@ class DiscordBot(discord.Client):
     
     %s""" % (event, str(args), str(kwargs), traceback.format_exc()), file=sys.stderr)
 
-    @asyncio.coroutine
     async def on_message(self, message: discord.Message):
         isAuthorAdmin = False
         if type(message.author) == discord.User:  # PM

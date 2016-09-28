@@ -17,7 +17,7 @@ class CleverbotCommand(Command):
 
     async def do(self, client: discord.Client, message: discord.Message, args: list, config={}):
         if len(args) < 1:
-            await client.send_message(message.channel, i18n.get_localized_str("cmd_cleverbot_nothing", {"mention":
+            await client.send_message(message.channel, i18n.get_localized_str(message.server.id, "cmd_cleverbot_nothing", {"mention":
                                                                                                         message.author.mention}))
             return
 
@@ -33,5 +33,5 @@ class CleverbotCommand(Command):
                 await client.send_message(message.channel, message.author.mention + ", " + cb.ask(input)) #+ " özür dilerim canım cicim tatlım"))
                 return
 
-        await client.send_message(message.channel, i18n.get_localized_str("cmd_cleverbot_wrongchannel", {"mention":
+        await client.send_message(message.channel, i18n.get_localized_str(message.server.id, "cmd_cleverbot_wrongchannel", {"mention":
                                                                                                          message.author.mention}))

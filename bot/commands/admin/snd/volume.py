@@ -17,7 +17,7 @@ class SoundVolCommand(Command):
 
     async def do(self, client: discord.Client, message: discord.Message, args: list, config={}):
         if len(args) < 1:
-            await client.send_message(message.channel, i18n.get_localized_str("cmd_snd_volume_help"))
+            await client.send_message(message.channel, i18n.get_localized_str(message.server.id, "cmd_snd_volume_help"))
             return
 
         sound.change_vol(float(args[0]))

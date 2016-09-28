@@ -16,7 +16,7 @@ class LockCommand(Command):
         return "kilitle"
 
     async def do(self, client: discord.Client, message: discord.Message, args: list, config={}):
-        await client.send_message(message.channel, i18n.get_localized_str("cmd_lock", {"mention":
+        await client.send_message(message.channel, i18n.get_localized_str(message.server.id, "cmd_lock", {"mention":
                                                                                        message.author.mention}))
         stuff.muted_chans[message.channel.id] = True
 
@@ -33,5 +33,5 @@ class UnlockCommand(Command):
 
     async def do(self, client: discord.Client, message: discord.Message, args: list, config={}):
         stuff.muted_chans[message.channel.name] = False
-        await client.send_message(message.channel, i18n.get_localized_str("cmd_unlock", {"mention":
+        await client.send_message(message.channel, i18n.get_localized_str(message.server.id, "cmd_unlock", {"mention":
                                                                                          message.author.mention}))

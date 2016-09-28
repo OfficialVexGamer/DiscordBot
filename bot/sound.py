@@ -13,7 +13,7 @@ def add_queue(url: str):
     queue.put(url)
 
 
-def change_vol(vol_add: int):
+def change_vol(vol_add: float):
     global old_vol
 
     old_vol = vol_add
