@@ -11,8 +11,8 @@ class DiscordBot(discord.Client):
 
     def __init__(self, config: list):
         super().__init__()
-        
-        self.self.cfg = config
+
+        self.cfg = config
 
         print("Starting...")
         if not discord.opus.is_loaded():
@@ -38,11 +38,15 @@ class DiscordBot(discord.Client):
         for chan in self.get_all_channels():
             stuff.muted_chans[chan.name] = False
 
-        await self.change_status(game=discord.Game(name="DISCORDBOT 1.0.0 -- !help for details"))
+        for server in self.servers:
+            await self.on_server_join(server)
+
+        await self.change_status(game=discord.Game(name=self.cfg["game"]))
 
         print("Ready! " + self.user.name + " " + self.user.id)
 
     async def on_server_join(self, server: discord.Server):
+        print("Loading config for server: {0}".format(server.name))
         config.load_server_config(server.id)
         i18n.load_lang(server.id, config.get_key(server.id, "language"))
         stuff.respond[server.id] = config.get_key(server.id, "respond")
@@ -93,7 +97,7 @@ class DiscordBot(discord.Client):
             return
 
         for role in message.author.roles:
-            for check_role in self.cfg["admin_roles"]:
+            for check_role in config.get_key(message.server.id, "admin_roles"):
                 if role.name == check_role:
                     isAuthorAdmin = True
 
@@ -161,7 +165,7 @@ class DiscordBot(discord.Client):
                     wc += 1
                     if word not in wl:
                         wl.append(word)
-                        if stuff.respond.get(word):
+                        if stuff.respond[message.server.id].get(word):
                             await self.send_message(message.channel,
                                                     message.author.mention + " " + stuff.respond[message.server.id].get(word))
                             stuff.add_timeout_to(message.author.name)

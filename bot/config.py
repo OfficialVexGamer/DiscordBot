@@ -19,4 +19,7 @@ def load_server_config(id: str):
 
 
 def get_key(id: str, key: str):
+    if not server_config[id]:
+        create_server_config(id)
+
     return server_config[id][key]
