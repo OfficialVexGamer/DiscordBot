@@ -31,12 +31,12 @@ async def on_ready():
 
 
 @client.event
-async def on_channel_delete(channel):
+async def on_channel_delete(channel: discord.Channel):
     stuff.muted_chans[channel.name] = None
 
 
 @client.event
-async def on_channel_create(channel):
+async def on_channel_create(channel: discord.Channel):
     stuff.muted_chans[channel.name] = False
 
 
@@ -67,7 +67,7 @@ async def on_error(event, *args, **kwargs):
 
 
 @client.event
-async def on_message(message):
+async def on_message(message: discord.Message):
     isAuthorAdmin = False
     if type(message.author) == discord.User:  # PM
         if message.author.name == cfg["speak_person"]["name"] and str(message.author.discriminator) == str(cfg["speak_person"]["iden"]):
@@ -155,7 +155,7 @@ async def on_message(message):
         wl = None
 
 
-def start(config):
+def start(config: list):
     global cfg
     cfg = config
     stuff.respond = config["respond"]

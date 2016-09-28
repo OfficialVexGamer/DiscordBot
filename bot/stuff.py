@@ -13,7 +13,7 @@ respond = {}
 timeout = {}
 
 
-def find_cmd_class(cmd):
+def find_cmd_class(cmd: str):
     cmd_c = NoneCommand()
     for command in commands:
         cmd_c = (command[1])()
@@ -24,12 +24,12 @@ def find_cmd_class(cmd):
     return NoneCommand()
 
 
-def remove_timeout_from(person):
+def remove_timeout_from(person: str):
     if timeout.get(person):
         timeout[person] -= 1
 
 
-def remove_timeouts_except(person):
+def remove_timeouts_except(person: str):
     global timeout
 
     _timeout = {}
@@ -42,7 +42,7 @@ def remove_timeouts_except(person):
     timeout = _timeout
 
 
-def add_timeout_to(person):
+def add_timeout_to(person: str):
     if timeout.get(person):
         timeout[person] += 1
     else:

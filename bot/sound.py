@@ -1,5 +1,6 @@
 from queue import Queue
 
+import discord
 import youtube_dl
 
 voice = None
@@ -8,11 +9,11 @@ old_vol = 1.0
 queue = Queue()
 
 
-def add_queue(url):
+def add_queue(url: str):
     queue.put(url)
 
 
-def change_vol(vol_add):
+def change_vol(vol_add: int):
     global old_vol
 
     old_vol = vol_add
@@ -26,14 +27,14 @@ def clear_queue():
         queue.get()  # run out of queue items, there is probably a better way
 
 
-def get_snd_mins(in_secs):
+def get_snd_mins(in_secs: int):
     m, s = divmod(in_secs, 60)
     h, m = divmod(m, 60)
 
     return "%s:%s:%s" % (h, m, s)
 
 
-async def play(client, message, music_chan):
+async def play(client: discord.Client, message: discord.Message, music_chan: str):
     global player
 
     try:
@@ -48,7 +49,6 @@ by """ + player.uploader + """ (""" + get_snd_mins(player.duration) + """)
         player.volume = old_vol
         player.start()
 
-        import discord
         await client.change_status(game=discord.Game(name=player.title))
     except youtube_dl.utils.DownloadError as e:
         for chan in message.server.channels:
