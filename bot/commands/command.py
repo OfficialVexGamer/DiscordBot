@@ -1,5 +1,7 @@
 import os
 
+import discord
+
 
 class Command:
     def requiresAdmin(self):
@@ -11,7 +13,7 @@ class Command:
     def command(self):
         return "help"
 
-    async def do(self, client, message, args, config={}):
+    async def do(self, client: discord.Client, message: discord.Message, args: list, config={}):
         from bot.stuff import commands, respond
 
         img = ""

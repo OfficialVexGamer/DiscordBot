@@ -1,5 +1,7 @@
 import asyncio
 
+import discord
+
 from bot.commands.command import Command
 from bot import sound
 from bot import i18n
@@ -15,7 +17,7 @@ class SoundPlayCommand(Command):
     def command(self):
         return "snd_play"
 
-    async def do(self, client, message, args, config={}):
+    async def do(self, client: discord.Client, message: discord.Message, args: list, config={}):
         while not sound.queue.empty():
             if not sound.player:
                 await sound.play(client, message, config["music_chan"])
@@ -24,5 +26,4 @@ class SoundPlayCommand(Command):
 
             await asyncio.sleep(sound.player.duration + 1)
 
-        import discord
         await client.change_status(game=discord.Game(name=i18n.get_localized_str("bot_game")))

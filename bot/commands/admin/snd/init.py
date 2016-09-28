@@ -1,3 +1,5 @@
+import discord
+
 from bot.commands.command import Command
 from bot import sound
 from bot import i18n
@@ -13,7 +15,7 @@ class SoundChanCommand(Command):
     def command(self):
         return "snd_aktif"
 
-    async def do(self, client, message, args, config={}):
+    async def do(self, client: discord.Client, message: discord.Message, args: list, config={}):
         if sound.voice:
             await client.send_message(message.channel, i18n.get_localized_str("cmd_snd_init"))
             return

@@ -1,3 +1,5 @@
+import discord
+
 from bot.commands.command import Command
 from bot import i18n
 from bot import sound
@@ -13,7 +15,7 @@ class CurrentMusicCommand(Command):
     def command(self):
         return "snd_suanki"
 
-    async def do(self, client, message, args, config={}):
+    async def do(self, client: discord.Client, message: discord.Message, args: list, config={}):
         if not sound.player:
             await client.send_message(message.channel, message.author.mention + " Şu anda hiç bir şey çalmıyor.")
             return

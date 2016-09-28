@@ -1,3 +1,5 @@
+import discord
+
 from bot import i18n
 from bot.commands.command import Command
 
@@ -12,7 +14,7 @@ class ClearCommand(Command):
     def command(self):
         return "clear"
 
-    async def do(self, client, message, args, config={}):
+    async def do(self, client: discord.Client, message: discord.Message, args: list, config={}):
         text = """. """
         for i in range(100):
             text = text + """

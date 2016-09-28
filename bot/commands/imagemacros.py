@@ -1,3 +1,5 @@
+import discord
+
 from bot.commands.command import Command
 from bot import i18n
 import os
@@ -13,7 +15,7 @@ class ImageMacroCommand(Command):
     def command(self):
         return "i"
 
-    async def do(self, client, message, args, config={}):
+    async def do(self, client: discord.Client, message: discord.Message, args: list, config={}):
         if len(args) < 1:
             await client.send_message(message.channel, i18n.get_localized_str("cmd_i_help", {"mention":
                                                                                              message.author.mention}))

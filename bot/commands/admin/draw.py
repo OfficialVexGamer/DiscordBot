@@ -1,3 +1,5 @@
+import discord
+
 from bot import i18n
 from bot.commands.command import Command
 import random
@@ -13,7 +15,7 @@ class DrawCommand(Command):
     def command(self):
         return "çekiliş"
 
-    async def do(self, client, message, args, config={}):
+    async def do(self, client: discord.Client, message: discord.Message, args: list, config={}):
         while True:
             participants = message.server.members
             winner = random.randint(0, len(participants) - 1)
