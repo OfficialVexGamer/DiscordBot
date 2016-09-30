@@ -37,6 +37,8 @@ cmd_mute_notfound: "{name} is not found!"
 cmd_unmute: "{mention} is unmuted"
 cmd_unmute_help: "!unmute <nick>"
 
+cmd_conf_help: "!conf <key> <value>"
+
 sound_playing_template: |
   **Title:** {sound.title}
   **Uploader:** {sound.uploader}

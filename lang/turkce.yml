@@ -37,6 +37,8 @@ cmd_mute_notfound: "{name} isimli bir kişi yok!"
 cmd_unmute: "{mention} Artık konuşabilir"
 cmd_unmute_help: "!unmute <nick>"
 
+cmd_conf_help: "!conf <ayar> <...>"
+
 sound_playing_template: |
   **Ad:** {sound.title}
   **Yapimci:** {sound.uploader}

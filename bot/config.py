@@ -18,8 +18,21 @@ def load_server_config(id: str):
         server_config[id] = yaml.load(f.read())
 
 
+def save_server_config(id):
+    with open("conf/cfg-{}.yml".format(id), "w") as f:
+        yaml.dump(server_config[id], f, default_flow_style=False, allow_unicode=True)
+
+
 def get_key(id: str, key: str):
     if not server_config[id]:
         create_server_config(id)
 
     return server_config[id][key] or False
+
+
+def set_key(id: str, key: str, val: str):
+    if not server_config[id]:
+        create_server_config(id)
+
+    server_config[id][key] = val
+    save_server_config(id)
