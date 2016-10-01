@@ -3,10 +3,10 @@ from queue import Queue
 import discord
 import youtube_dl
 
-voice = list()
-player = list()
-old_vol = list()
-queue = list()
+voice = {}
+player = {}
+old_vol = {}
+queue = {}
 
 
 def mk_server_queue(id: str):
@@ -46,12 +46,15 @@ async def play(id: str, client: discord.Client, message: discord.Message, music_
         for chan in message.server.channels:
             if chan.name == music_chan:
                 await client.send_message(chan, """```""" + player[id].title + """
-by """ + player.uploader + """ (""" + get_snd_mins(player[id].duration) + """)
+by """ + player[id].uploader + """ (""" + get_snd_mins(player[id].duration) + """)
 """ + str(queue[id].qsize()) + """ songs left.```""")
                 break
 
-        player.volume = old_vol
-        player.start()
+        if not old_vol.get(id):
+            old_vol[id] = 1.0
+
+        player[id].volume = old_vol[id]
+        player[id].start()
     except youtube_dl.utils.DownloadError as e:
         for chan in message.server.channels:
             if chan.name == music_chan:

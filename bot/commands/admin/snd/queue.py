@@ -22,5 +22,6 @@ class SoundQueueCommand(Command):
 
         sound.add_queue(message.server.id, args[0])
 
-        await client.send_message(message.channel, i18n.get_localized_str(message.server.id, "cmd_snd_queue", {"index":
-                                                                                            sound.queue.qsize()}))
+        await client.send_message(message.channel, i18n.get_localized_str(message.server.id, "cmd_snd_queue", {
+            "index": sound.queue[message.server.id].qsize()
+        }))

@@ -17,10 +17,13 @@ class SoundPlayCommand(Command):
         return "snd_play"
 
     async def do(self, client: discord.Client, message: discord.Message, args: list, cfg={}):
-        while not sound.queue.empty():
-            if not sound.player:
+        if not sound.queue[message.server.id]:
+            sound.mk_server_queue(message.server.id)
+
+        while not sound.queue[message.server.id].empty():
+            if not sound.player.get(message.server.id):
                 await sound.play(message.server.id, client, message, config.get_key(message.server.id, "music_chan"))
-            elif sound.player.is_done():
+            elif sound.player[message.server.id].is_done():
                 await sound.play(message.server.id, client, message, config.get_key(message.server.id, "music_chan"))
 
-            await asyncio.sleep(sound.player.duration + 1)
+            await asyncio.sleep(sound.player[message.server.id].duration + 1)
