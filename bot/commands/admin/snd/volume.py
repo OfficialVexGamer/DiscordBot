@@ -20,4 +20,4 @@ class SoundVolCommand(Command):
             await client.send_message(message.channel, i18n.get_localized_str(message.server.id, "cmd_snd_volume_help"))
             return
 
-        sound.change_vol(float(args[0]))
+        sound.change_vol(message.server.id, float(args[0]))

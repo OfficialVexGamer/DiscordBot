@@ -22,6 +22,8 @@ cmd_snd_queue: "Music has been added to the queue ({index}th)"
 
 cmd_snd_vol: "!snd_vol <volume (1.0 = 100%, 0.01 = 1%)>"
 
+cmd_snd_current_npy: "{mention} Nothing is playing yet!"
+
 cmd_clear: "{mention} cleared the chat!"
 
 cmd_draw: "And the winner is: {winner}"

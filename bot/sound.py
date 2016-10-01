@@ -3,28 +3,32 @@ from queue import Queue
 import discord
 import youtube_dl
 
-voice = None
-player = None
-old_vol = 1.0
-queue = Queue()
+voice = list()
+player = list()
+old_vol = list()
+queue = list()
 
 
-def add_queue(url: str):
-    queue.put(url)
+def mk_server_queue(id: str):
+    queue[id] = Queue()
 
 
-def change_vol(vol_add: float):
+def add_queue(id: str, url: str):
+    queue[id].put(url)
+
+
+def change_vol(id: str, vol_add: float):
     global old_vol
 
-    old_vol = vol_add
+    old_vol[id] = vol_add
 
-    if player:
-        player.volume = old_vol
+    if player[id]:
+        player[id].volume = old_vol[id]
 
 
-def clear_queue():
-    while not queue.empty():
-        queue.get()  # run out of queue items, there is probably a better way
+def clear_queue(id: str):
+    while not queue[id].empty():
+        queue[id].get()  # run out of queue items, there is probably a better way
 
 
 def get_snd_mins(in_secs: int):
@@ -34,16 +38,16 @@ def get_snd_mins(in_secs: int):
     return "%s:%s:%s" % (h, m, s)
 
 
-async def play(client: discord.Client, message: discord.Message, music_chan: str):
+async def play(id: str, client: discord.Client, message: discord.Message, music_chan: str):
     global player
 
     try:
-        player = await voice.create_ytdl_player(queue.get())
+        player[id] = await voice[id].create_ytdl_player(queue[id].get())
         for chan in message.server.channels:
             if chan.name == music_chan:
-                await client.send_message(chan, """```""" + player.title + """
-by """ + player.uploader + """ (""" + get_snd_mins(player.duration) + """)
-""" + str(queue.qsize()) + """ songs left.```""")
+                await client.send_message(chan, """```""" + player[id].title + """
+by """ + player.uploader + """ (""" + get_snd_mins(player[id].duration) + """)
+""" + str(queue[id].qsize()) + """ songs left.```""")
                 break
 
         player.volume = old_vol

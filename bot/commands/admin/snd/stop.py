@@ -15,4 +15,4 @@ class SoundStopCommand(Command):
         return "snd_stop"
 
     async def do(self, client: discord.Client, message: discord.Message, args: list, config={}):
-        sound.player.stop()
+        sound.player[message.server.id].stop()
