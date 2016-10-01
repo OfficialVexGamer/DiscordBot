@@ -127,7 +127,7 @@ class DiscordBot(discord.Client):
             if cmd_class.requiresAdmin():
                 if isAuthorAdmin:
                     await cmd_class.do(self, message, c_args, self.cfg)
-                    for chan in self.get_all_channels():
+                    for chan in message.server.channels:
                         if chan.name == config.get_key(message.server.id, "modlog_chan"):
                             arg_str = ""
                             for arg in c_args:
