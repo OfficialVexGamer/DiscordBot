@@ -1,4 +1,4 @@
-language: turkce
+language: english
 mute_role: Susturulmuş
 voice_chan: Müzik Odası
 music_chan: muzik
@@ -6,7 +6,7 @@ modlog_chan: mod-log
 admin_roles:
   - Admin
 cleverbot_channels: # (#)'a gerek yok.
-  - bot
+  - cleverbot
 respond: # Saying any of these words will make the bot respond
   sa: as
   op: hayır.

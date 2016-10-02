@@ -17,8 +17,20 @@ class ConfCommand(Command):
 
     async def do(self, client: discord.Client, message: discord.Message, args: list, cfg={}):
         if len(args) > 1:
-            config.set_key(message.server.id, args.pop(), " ".join(args))
-            await client.on_server_join(message.server)
+            key_name = args.pop(0)
+            key = config.get_key(message.server.id, key_name)
+            if key:
+                val = " ".join(args)
+
+                if isinstance(key, dict):
+                    config.set_key(message.server.id, key_name, val.split(","))
+                    await client.on_server_join(message.server)
+                    return
+
+                config.set_key(message.server.id, key_name, val)
+            client.send_message(message.channel, i18n.get_localized_str(message.server.id, "cmd_conf_nokey", {
+                "key": key_name
+            }))
             return
 
         client.send_message(message.channel, i18n.get_localized_str(message.server.id, "cmd_conf_help"))

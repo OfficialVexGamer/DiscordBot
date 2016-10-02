@@ -30,7 +30,7 @@ def get_key(id: str, key: str):
     return server_config[id][key] or False
 
 
-def set_key(id: str, key: str, val: str):
+def set_key(id: str, key: str, val: object):
     if not server_config[id]:
         create_server_config(id)
 

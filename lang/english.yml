@@ -40,6 +40,7 @@ cmd_unmute: "{mention} is unmuted"
 cmd_unmute_help: "!unmute <nick>"
 
 cmd_conf_help: "!conf <key> <value>"
+cmd_conf_nokey: "couldn't find key {key}"
 
 sound_playing_template: |
   **Title:** {sound.title}

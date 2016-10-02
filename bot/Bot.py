@@ -129,13 +129,10 @@ class DiscordBot(discord.Client):
                     await cmd_class.do(self, message, c_args, self.cfg)
                     for chan in message.server.channels:
                         if chan.name == config.get_key(message.server.id, "modlog_chan"):
-                            arg_str = ""
-                            for arg in c_args:
-                                arg_str = arg_str + arg + " "
 
-                            await self.send_message(chan, "{0} (#{1}): !{2} {3}".format(message.author.name,
-                                                                                        message.channel.name,
-                                                                                        cmd, arg_str))
+                            await self.send_message(chan, "{0} (#{1}): {2}".format(message.author.name,
+                                                                                   message.channel.name,
+                                                                                   message.content))
                             return
 
                     stuff.add_timeout_to(message.author.name)
