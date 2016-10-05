@@ -1,4 +1,4 @@
-from bot.commands import NoneCommand
+from bot.commands import NoneCommand, Command
 from collections import defaultdict
 import inspect
 import bot.commands
@@ -7,9 +7,7 @@ muted_chans = defaultdict(dict)
 server = None
 msgChan = "225218131537297408"
 # noinspection PyUnresolvedReferences
-commands = inspect.getmembers(bot.commands,
-                              predicate=lambda o: inspect.isclass(o) and issubclass(o, bot.commands.Command))
-respond = {}
+commands = inspect.getmembers(bot.commands, predicate=lambda o: inspect.isclass(o) and issubclass(o, Command))
 timeout = {}
 
 
@@ -22,28 +20,3 @@ def find_cmd_class(cmd: str):
                 return cmd_c
 
     return NoneCommand()
-
-
-def remove_timeout_from(person: str):
-    if timeout.get(person):
-        timeout[person] -= 1
-
-
-def remove_timeouts_except(person: str):
-    global timeout
-
-    _timeout = {}
-    for _person in timeout:
-        if _person != person:
-            _timeout[_person] = 0
-        else:
-            _timeout[person] = timeout[person]
-
-    timeout = _timeout
-
-
-def add_timeout_to(person: str):
-    if timeout.get(person):
-        timeout[person] += 1
-    else:
-        timeout[person] = 1

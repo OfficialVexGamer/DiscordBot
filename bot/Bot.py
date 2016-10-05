@@ -108,12 +108,6 @@ class DiscordBot(discord.Client):
                                                                                                       message.channel.name}))
                 return
 
-        if stuff.timeout.get(message.author.name) and stuff.timeout.get(message.author.name) >= 10:
-            stuff.remove_timeout_from(message.author.name)
-            return
-        else:
-            stuff.remove_timeouts_except(message.author.name)
-
         if message.content.startswith('!'):
             if message.author == self.user:
                 return
@@ -154,16 +148,3 @@ class DiscordBot(discord.Client):
                         await self.delete_message(message)
                     except discord.errors.NotFound:  # The message has been deleted before
                         pass
-        else:
-            wc = 0
-            wl = []
-            for word in message.content.lower().split():
-                if wc < 5:
-                    wc += 1
-                    if word not in wl:
-                        wl.append(word)
-                        if stuff.respond[message.server.id].get(word):
-                            await self.send_message(message.channel,
-                                                    message.author.mention + " " + stuff.respond[message.server.id].get(word))
-                            stuff.add_timeout_to(message.author.name)
-            wl = None

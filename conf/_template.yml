@@ -1,12 +1,9 @@
 language: english
-mute_role: Susturulmuş
-voice_chan: Müzik Odası
-music_chan: muzik
+mute_role: Muted
+voice_chan: Müzic Room
+music_chan: music
 modlog_chan: mod-log
 admin_roles:
   - Admin
 cleverbot_channels: # (#)'a gerek yok.
   - cleverbot
-respond: # Saying any of these words will make the bot respond
-  sa: as
-  op: hayır.
