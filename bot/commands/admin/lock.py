@@ -18,7 +18,7 @@ class LockCommand(Command):
     async def do(self, client: discord.Client, message: discord.Message, args: list, config={}):
         await client.send_message(message.channel, i18n.get_localized_str(message.server.id, "cmd_lock", {"mention":
                                                                                        message.author.mention}))
-        stuff.muted_chans[message.channel.id] = True
+        stuff.muted_chans[message.server.id][message.channel.name] = True
 
 
 class UnlockCommand(Command):
@@ -32,6 +32,6 @@ class UnlockCommand(Command):
         return "unlock"
 
     async def do(self, client: discord.Client, message: discord.Message, args: list, config={}):
-        stuff.muted_chans[message.channel.name] = False
+        stuff.muted_chans[message.server.id][message.channel.name] = False
         await client.send_message(message.channel, i18n.get_localized_str(message.server.id, "cmd_unlock", {"mention":
                                                                                          message.author.mention}))

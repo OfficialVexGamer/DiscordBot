@@ -22,14 +22,18 @@ class Command:
             if cmd_c.command() != "_____________nonecommandsrsly":
                 if cmd_c.requiresAdmin():
                     acmd_fnd = False
-                    for role in message.author.roles:
-                        if acmd_fnd: break
-                        for check_role in config.get_key(message.server.id, "admin_roles"):
-                            if role.name == check_role:
-                                cmd = cmd + "  - " + config.get_key(message.server.id, "cmd_prefix") + cmd_c.command() \
-                                          + "\n"
-                                acmd_fnd = True
-                                break
+                    if message.author.permissions_in(message.channel).administrator:
+                        cmd = cmd + "  - " + config.get_key(message.server.id, "cmd_prefix") + cmd_c.command() \
+                              + "\n"
+                    else:
+                        for role in message.author.roles:
+                            if acmd_fnd: break
+                            for check_role in config.get_key(message.server.id, "admin_roles"):
+                                if role.name == check_role:
+                                    cmd = cmd + "  - " + config.get_key(message.server.id, "cmd_prefix") + cmd_c.command() \
+                                              + "\n"
+                                    acmd_fnd = True
+                                    break
                 else:
                     cmd = cmd + "  - " + config.get_key(message.server.id, "cmd_prefix") + cmd_c.command() + "\n"
 

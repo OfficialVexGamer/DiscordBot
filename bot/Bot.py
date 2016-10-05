@@ -1,3 +1,5 @@
+from collections import defaultdict
+
 from bot import i18n
 from bot import stuff
 from bot import config
@@ -51,12 +53,13 @@ class DiscordBot(discord.Client):
         print("Loading config for server: {0} ({1})".format(server.id, server.name))
         config.load_server_config(server.id)
         i18n.load_lang(server.id, config.get_key(server.id, "language"))
+        stuff.muted_chans[server.id] = defaultdict(dict)
 
     async def on_channel_delete(self, channel: discord.Channel):
-        stuff.muted_chans[channel.name] = None
+        stuff.muted_chans[channel.server.id][channel.name] = None
 
     async def on_channel_create(self, channel: discord.Channel):
-        stuff.muted_chans[channel.name] = False
+        stuff.muted_chans[channel.server.id][channel.name] = False
 
     async def on_error(self, event, *args, **kwargs):
         import traceback
@@ -100,12 +103,15 @@ class DiscordBot(discord.Client):
 
             return
 
-        for role in message.author.roles:
-            for check_role in config.get_key(message.server.id, "admin_roles"):
-                if role.name == check_role:
-                    isAuthorAdmin = True
+        if message.author.permissions_in(message.channel).administrator:
+            isAuthorAdmin = True
+        else:
+            for role in message.author.roles:
+                for check_role in config.get_key(message.server.id, "admin_roles"):
+                    if role.name == check_role:
+                        isAuthorAdmin = True
 
-        if stuff.muted_chans[message.channel.name]:
+        if stuff.muted_chans[message.server.id][message.channel.name]:
             if not isAuthorAdmin:
                 await self.delete_message(message)
                 await self.send_message(message.author, i18n.get_localized_str(message.server.id, "channel_locked", {"channel":

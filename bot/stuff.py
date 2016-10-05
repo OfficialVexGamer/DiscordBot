@@ -1,9 +1,8 @@
 from bot.commands import NoneCommand, Command
-from collections import defaultdict
 import inspect
 import bot.commands
 
-muted_chans = defaultdict(dict)
+muted_chans = {}
 server = None
 msgChan = "225218131537297408"
 # noinspection PyUnresolvedReferences

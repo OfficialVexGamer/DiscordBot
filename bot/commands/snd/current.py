@@ -13,7 +13,7 @@ class CurrentMusicCommand(Command):
         return True
 
     def command(self):
-        return "snd_suanki"
+        return "snd_current"
 
     async def do(self, client: discord.Client, message: discord.Message, args: list, config={}):
         if not sound.player:
