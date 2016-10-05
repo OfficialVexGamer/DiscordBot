@@ -47,7 +47,7 @@ class DiscordBot(discord.Client):
         await self.change_status(game=discord.Game(name=self.cfg["game"]))
 
         self.works = True
-        print("Ready! " + self.user.name + " " + self.user.id)
+        print("Ready! " + self.user.id + " (" + self.user.name + ")")
 
     async def on_server_join(self, server: discord.Server):
         print("Loading config for server: {0} ({1})".format(server.id, server.name))

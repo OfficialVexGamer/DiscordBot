@@ -25,7 +25,7 @@ class SoundChanCommand(Command):
             if channel.name == config.get_key(message.server.id, "voice_chan"):
                 sound.voice[message.server.id] = await client.join_voice_channel(channel)
                 sound.mk_server_queue(message.server.id)
-                await client.send_message(message.channel, i18n.get_localized_str(message.server.id, "Ccmd_snd_init_ok", {
+                await client.send_message(message.channel, i18n.get_localized_str(message.server.id, "cmd_snd_init_ok", {
                     "mention": message.author.mention
                 }))
                 break
