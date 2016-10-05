@@ -22,8 +22,8 @@ class ConfCommand(Command):
             if key:
                 val = " ".join(args)
 
-                if isinstance(key, dict):
-                    config.set_key(message.server.id, key_name, val.split(","))
+                if isinstance(key, list):
+                    config.set_key(message.server.id, key_name, list(val.split(",")))
                     await client.on_server_join(message.server)
                     return
 

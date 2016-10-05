@@ -45,7 +45,7 @@ class Command:
 
         await client.send_message(message.author, """```
 Bot 1.0.0! ( by @admicos )
-Kaynak: https://admicos.cf/s?EayKf
+Kaynak: https://admi.ml/EayKf
 Komutlar:
 %s
 
