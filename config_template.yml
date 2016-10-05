@@ -3,8 +3,6 @@
 token: BOTTOKEN
 avatar: avatar.png
 game: "DISCORDBOT 1.0.0 -- !help for details"
-img_dir: images/
-img_url_prefix: https://example.com/discord-img/
 speak_person: # This person will make the bot speak if he PMs it.
               # He will also get stack traces if the bot errors. (he needs to be online and on same server as the bot)
   name: admicos
