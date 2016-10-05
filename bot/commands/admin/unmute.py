@@ -43,7 +43,9 @@ class UnmuteCommand(Command):
                             return
                         elif role.name == config.get_key(message.server.id, "mute_role"):
                             await client.remove_roles(member, role)
-                            await client.send_message(message.channel, i18n.get_localized_str(message.server.id, "cmd_unmute", {"mention":
-                                                                                                                 member.mention}))                            return
+                            await client.send_message(message.channel, i18n.get_localized_str(message.server.id, "cmd_unmute", {
+                                "mention": member.mention
+                            }))
+                            return
 
         await client.send_message(message.channel, i18n.get_localized_str(message.server.id, "cmd_mute_notfound", {"name": nameToMute}))
