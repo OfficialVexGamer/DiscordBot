@@ -1,22 +1,9 @@
 # SAVE ME AS config.yml!
 
 token: BOTTOKEN
-language: turkce
 avatar: avatar.png
-mute_role: Susturulmuş
-img_dir: images/
-img_url_prefix: https://example.com/discord-img/
-voice_chan: Müzik Odası
-music_chan: muzik
-modlog_chan: mod-log
-admin_roles:
-  - Admin
-cleverbot_channels: # (#)'a gerek yok.
-  - bot
+game: "DISCORDBOT 1.0.0 -- !help for details"
 speak_person: # This person will make the bot speak if he PMs it.
               # He will also get stack traces if the bot errors. (he needs to be online and on same server as the bot)
   name: admicos
   iden: 5389 # The number after "#" in his username.
-respond: # Saying any of these words will make the bot respond
-  sa: as
-  op: hayır.

@@ -1,3 +1,6 @@
+import discord
+
+from bot import config
 from bot.commands.command import Command
 from bot import sound
 from bot import i18n
@@ -11,16 +14,18 @@ class SoundChanCommand(Command):
         return True
 
     def command(self):
-        return "snd_aktif"
+        return "snd_enable"
 
-    async def do(self, client, message, args, config={}):
-        if sound.voice:
-            await client.send_message(message.channel, i18n.get_localized_str("cmd_snd_init"))
+    async def do(self, client: discord.Client, message: discord.Message, args: list, cfg={}):
+        if sound.voice.get(message.server.id):
+            await client.send_message(message.channel, i18n.get_localized_str(message.server.id, "cmd_snd_init"))
             return
 
         for channel in message.server.channels:
-            if channel.name == config["voice_chan"]:
-                sound.voice = await client.join_voice_channel(channel)
-                await client.send_message(message.channel, i18n.get_localized_str("cmd_snd_init_ok", {"mention":
-                                                                                                      message.author.mention}))
+            if channel.name == config.get_key(message.server.id, "voice_chan"):
+                sound.voice[message.server.id] = await client.join_voice_channel(channel)
+                sound.mk_server_queue(message.server.id)
+                await client.send_message(message.channel, i18n.get_localized_str(message.server.id, "cmd_snd_init_ok", {
+                    "mention": message.author.mention
+                }))
                 break

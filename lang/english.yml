@@ -22,6 +22,8 @@ cmd_snd_queue: "Music has been added to the queue ({index}th)"
 
 cmd_snd_vol: "!snd_vol <volume (1.0 = 100%, 0.01 = 1%)>"
 
+cmd_snd_current_npy: "{mention} Nothing is playing yet!"
+
 cmd_clear: "{mention} cleared the chat!"
 
 cmd_draw: "And the winner is: {winner}"
@@ -37,9 +39,21 @@ cmd_mute_notfound: "{name} is not found!"
 cmd_unmute: "{mention} is unmuted"
 cmd_unmute_help: "!unmute <nick>"
 
+cmd_conf_help: "!conf <key> <value>"
+cmd_conf_nokey: "couldn't find key {key}"
+
 sound_playing_template: |
   **Title:** {sound.title}
   **Uploader:** {sound.uploader}
   **Duration:** {duration}
+
+help: |
+  ```
+  Admicos/DiscordBot {version}
+  Source Code: https://admi.ml/EayKf
+  Commands:
+  {commands}
+  ```
+
 
 channel_locked: "#{channel} is currently locked."

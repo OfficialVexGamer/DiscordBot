@@ -1,3 +1,5 @@
+import discord
+
 from bot import i18n
 from bot import stuff
 from bot.commands.command import Command
@@ -11,12 +13,12 @@ class LockCommand(Command):
         return True
 
     def command(self):
-        return "kilitle"
+        return "lock"
 
-    async def do(self, client, message, args, config={}):
-        await client.send_message(message.channel, i18n.get_localized_str("cmd_lock", {"mention":
+    async def do(self, client: discord.Client, message: discord.Message, args: list, config={}):
+        await client.send_message(message.channel, i18n.get_localized_str(message.server.id, "cmd_lock", {"mention":
                                                                                        message.author.mention}))
-        stuff.muted_chans[message.channel.name] = True
+        stuff.muted_chans[message.server.id][message.channel.name] = True
 
 
 class UnlockCommand(Command):
@@ -27,9 +29,9 @@ class UnlockCommand(Command):
         return True
 
     def command(self):
-        return "kilitaç"
+        return "unlock"
 
-    async def do(self, client, message, args, config={}):
-        stuff.muted_chans[message.channel.name] = False
-        await client.send_message(message.channel, i18n.get_localized_str("cmd_unlock", {"mention":
+    async def do(self, client: discord.Client, message: discord.Message, args: list, config={}):
+        stuff.muted_chans[message.server.id][message.channel.name] = False
+        await client.send_message(message.channel, i18n.get_localized_str(message.server.id, "cmd_unlock", {"mention":
                                                                                          message.author.mention}))

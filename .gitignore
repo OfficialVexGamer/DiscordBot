@@ -1,7 +1,17 @@
+# Ignore IDE stuff
 .idea/
+
+# Ignore images
 images/
 
+# Ignore configuration files
+conf/
 config.yml
+
+# Do not ignore the template.
+!conf/_template.yml
+
+# Ignore everything else.
 avatar.png
 .avatar_uploaded
 *__pycache__*
