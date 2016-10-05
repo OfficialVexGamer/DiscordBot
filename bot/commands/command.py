@@ -26,11 +26,12 @@ class Command:
                         if acmd_fnd: break
                         for check_role in config.get_key(message.server.id, "admin_roles"):
                             if role.name == check_role:
-                                cmd = cmd + "  - !" + cmd_c.command() + "\n"
+                                cmd = cmd + "  - " + config.get_key(message.server.id, "cmd_prefix") + cmd_c.command() \
+                                          + "\n"
                                 acmd_fnd = True
                                 break
                 else:
-                    cmd = cmd + "  - !" + cmd_c.command() + "\n"
+                    cmd = cmd + "  - " + config.get_key(message.server.id, "cmd_prefix") + cmd_c.command() + "\n"
 
         await client.send_message(message.author, i18n.get_localized_str(message.server.id, "help", {
             "commands": cmd,

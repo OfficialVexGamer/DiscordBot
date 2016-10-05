@@ -1,8 +1,9 @@
 language: english
 mute_role: Muted
-voice_chan: Müzic Room
+voice_chan: Music Room
 music_chan: music
 modlog_chan: mod-log
+cmd_prefix: "!"
 admin_roles:
   - Admin
 cleverbot_channels: # (#)'a gerek yok.

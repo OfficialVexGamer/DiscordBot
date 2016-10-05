@@ -8,6 +8,7 @@ import sys
 
 class DiscordBot(discord.Client):
     cfg = {}
+    works = False
 
     def __init__(self, config: list):
         print("Starting...")
@@ -43,6 +44,7 @@ class DiscordBot(discord.Client):
 
         await self.change_status(game=discord.Game(name=self.cfg["game"]))
 
+        self.works = True
         print("Ready! " + self.user.name + " " + self.user.id)
 
     async def on_server_join(self, server: discord.Server):
@@ -63,14 +65,14 @@ class DiscordBot(discord.Client):
                 if member.name == self.cfg["speak_person"]["name"] and str(member.discriminator) == str(
                         self.cfg["speak_person"]["iden"]):
                     await self.send_message(member, """```python
-    
-    ###################################
-    # Something happened to your bot!
-    # At event: %s
-    # Args: %s, %s
-    ###################################
-    
-    %s```""" % (event, str(args), str(kwargs), traceback.format_exc()))
+
+###################################
+# Something happened to your bot!
+# At event: %s
+# Args: %s, %s
+###################################
+
+%s```""" % (event, str(args), str(kwargs), traceback.format_exc()))
                     return
         print("""###################################
     # Something happened to your bot!
@@ -82,6 +84,9 @@ class DiscordBot(discord.Client):
     %s""" % (event, str(args), str(kwargs), traceback.format_exc()), file=sys.stderr)
 
     async def on_message(self, message: discord.Message):
+        if not self.works:
+            return
+
         isAuthorAdmin = False
         if type(message.author) == discord.User:  # PM
             if message.author.name == self.cfg["speak_person"]["name"] and str(message.author.discriminator) == str(
@@ -107,11 +112,11 @@ class DiscordBot(discord.Client):
                                                                                                       message.channel.name}))
                 return
 
-        if message.content.startswith('!'):
+        if message.content.startswith(config.get_key(message.server.id, "cmd_prefix")):
             if message.author == self.user:
                 return
 
-            cmd = message.content[1:].split()[0]
+            cmd = message.content[len(config.get_key(message.server.id, "cmd_prefix")):].split()[0]
             c_args = message.content[1:].split()[1:]
             cmd_class = stuff.find_cmd_class(cmd)
 
