@@ -1,8 +1,6 @@
-import os
-
-import discord
-
 from bot import config
+from bot import i18n
+import discord
 
 
 class Command:
@@ -16,17 +14,8 @@ class Command:
         return "help"
 
     async def do(self, client: discord.Client, message: discord.Message, args: list, cfg={}):
-        from bot.stuff import commands, respond
+        from bot.stuff import commands, bot_version
 
-        img = ""
-        for file in os.listdir(cfg["img_dir"]):
-            img = img + "  - " + file.split(".")[0] + "\n"
-
-        resp = ""
-        for response in respond[message.server.id]:
-            resp = resp + "  - " + response + "\n"
-
-        acmd_fnd = False
         cmd = ""
         for command in commands:
             cmd_c = (command[1])()
@@ -43,15 +32,7 @@ class Command:
                 else:
                     cmd = cmd + "  - !" + cmd_c.command() + "\n"
 
-        await client.send_message(message.author, """```
-Bot 1.0.0! ( by @admicos )
-Kaynak: https://admi.ml/EayKf
-Komutlar:
-%s
-
-Resimler:
-%s
-
-Bot size cevap da verir! Şu kelimeleri yazdıklarınızda kullanmayı deneyin!:
-%s
-```""" % (cmd, img, resp))
+        await client.send_message(message.author, i18n.get_localized_str(message.server.id, "help", {
+            "commands": cmd,
+            "version": bot_version,
+        }))

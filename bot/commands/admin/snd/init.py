@@ -14,7 +14,7 @@ class SoundChanCommand(Command):
         return True
 
     def command(self):
-        return "snd_aktif"
+        return "snd_enable"
 
     async def do(self, client: discord.Client, message: discord.Message, args: list, cfg={}):
         if sound.voice.get(message.server.id):

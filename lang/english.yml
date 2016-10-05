@@ -47,4 +47,13 @@ sound_playing_template: |
   **Uploader:** {sound.uploader}
   **Duration:** {duration}
 
+help: |
+  ```
+  Admicos/DiscordBot {version}
+  Source Code: https://admi.ml/EayKf
+  Commands:
+  {commands}
+  ```
+
+
 channel_locked: "#{channel} is currently locked."

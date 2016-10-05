@@ -13,7 +13,7 @@ class DrawCommand(Command):
         return True
 
     def command(self):
-        return "çekiliş"
+        return "raffle"
 
     async def do(self, client: discord.Client, message: discord.Message, args: list, config={}):
         while True:

@@ -13,7 +13,7 @@ class LockCommand(Command):
         return True
 
     def command(self):
-        return "kilitle"
+        return "lock"
 
     async def do(self, client: discord.Client, message: discord.Message, args: list, config={}):
         await client.send_message(message.channel, i18n.get_localized_str(message.server.id, "cmd_lock", {"mention":
@@ -29,7 +29,7 @@ class UnlockCommand(Command):
         return True
 
     def command(self):
-        return "kilitaç"
+        return "unlock"
 
     async def do(self, client: discord.Client, message: discord.Message, args: list, config={}):
         stuff.muted_chans[message.channel.name] = False

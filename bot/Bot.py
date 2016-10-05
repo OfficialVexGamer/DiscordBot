@@ -10,11 +10,11 @@ class DiscordBot(discord.Client):
     cfg = {}
 
     def __init__(self, config: list):
+        print("Starting...")
         super().__init__()
 
         self.cfg = config
 
-        print("Starting...")
         if not discord.opus.is_loaded():
             # the 'opus' library here is opus.dll on windows
             # or libopus.so on linux in the current directory
@@ -46,10 +46,9 @@ class DiscordBot(discord.Client):
         print("Ready! " + self.user.name + " " + self.user.id)
 
     async def on_server_join(self, server: discord.Server):
-        print("Loading config for server: {0}".format(server.name))
+        print("Loading config for server: {0} ({1})".format(server.id, server.name))
         config.load_server_config(server.id)
         i18n.load_lang(server.id, config.get_key(server.id, "language"))
-        stuff.respond[server.id] = config.get_key(server.id, "respond")
 
     async def on_channel_delete(self, channel: discord.Channel):
         stuff.muted_chans[channel.name] = None
@@ -129,8 +128,6 @@ class DiscordBot(discord.Client):
                                                                                    message.content))
                             return
 
-                    stuff.add_timeout_to(message.author.name)
-
                     if cmd_class.deleteCMDMsg():
                         try:
                             await self.delete_message(message)
@@ -141,7 +138,6 @@ class DiscordBot(discord.Client):
                                                                                                        message.author.name}))
             else:
                 await cmd_class.do(self, message, c_args, self.cfg)
-                stuff.add_timeout_to(message.author.name)
 
                 if cmd_class.deleteCMDMsg():
                     try:
