@@ -2,7 +2,7 @@
 A (badly written) Discord bot. It does admin stuff and music
 
 ##Add to your server
-1. Go to https://admi.ml/a2RLx
+1. Go to https://admi.ml/a2RLx (or to https://admi.ml/ApURo for the test version that only gets online when i'm testing it)
 2. Select your server
 3. Configure bot
 4. Profit!
