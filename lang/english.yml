@@ -42,6 +42,8 @@ cmd_unmute_help: "!unmute <nick>"
 cmd_conf_help: "!conf <key> <value>"
 cmd_conf_nokey: "couldn't find key {key}"
 
+cmd_reloadconf: "Config reloaded!"
+
 sound_playing_template: |
   **Title:** {sound.title}
   **Uploader:** {sound.uploader}

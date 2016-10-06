@@ -42,6 +42,8 @@ cmd_unmute_help: "!unmute <nick>"
 cmd_conf_help: "!conf <ayar> <...>"
 cmd_conf_nokey: "Ayar {key} bululnamadı"
 
+cmd_reloadconf: "Config okundu!"
+
 sound_playing_template: |
   **Ad:** {sound.title}
   **Yapimci:** {sound.uploader}
