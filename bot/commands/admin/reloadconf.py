@@ -16,5 +16,5 @@ class ReloadConfCommand(Command):
         return "conf_reload"
 
     async def do(self, client: discord.Client, message: discord.Message, args: list, cfg={}):
-        client.on_server_join(message.server)
-        client.send_message(message.channel, i18n.get_localized_str(message.server.id, "cmd_reloadconf"))
+        await client.on_server_join(message.server)
+        await client.send_message(message.channel, i18n.get_localized_str(message.server.id, "cmd_reloadconf"))
