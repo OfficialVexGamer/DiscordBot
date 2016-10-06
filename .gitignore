@@ -15,3 +15,6 @@ config.yml
 avatar.png
 .avatar_uploaded
 *__pycache__*
+
+# Just to make sure
+!*__init__.py
