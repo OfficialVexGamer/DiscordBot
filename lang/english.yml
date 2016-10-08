@@ -2,6 +2,7 @@ bot_active: "Bot active! (!help for help)"
 bot_game: "!help for help."
 bot_config_error: "!{cmd}: Bot configuration error! ({key} not found!)"
 bot_serv_cfg_error: "!{cmd}: Server configuration error: {err}"
+bot_command_disabled: "This command is disabled!"
 
 err_nomuterole: "Couldn't find mute role"
 

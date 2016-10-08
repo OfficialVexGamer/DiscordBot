@@ -8,3 +8,5 @@ admin_roles:
   - Admin
 cleverbot_channels: # (#)'a gerek yok.
   - cleverbot
+disabled_commands:
+  - none
