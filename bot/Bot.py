@@ -128,6 +128,12 @@ class DiscordBot(discord.Client):
 
             print("Komut: (" + message.author.name + ") " + cmd + " args: " + str(c_args))
 
+            for dcmd in config.get_key(message.server.id, "disabled_commands"):
+                if dcmd == cmd:
+                    await self.send_message(message.author,
+                                            i18n.get_localized_str(message.server.id, "bot_command_disabled"))
+                    return
+
             if cmd_class.requiresAdmin():
                 if isAuthorAdmin:
                     await cmd_class.do(self, message, c_args, self.cfg)

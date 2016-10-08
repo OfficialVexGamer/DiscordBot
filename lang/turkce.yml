@@ -2,6 +2,7 @@ bot_active: "Bot aktif! (Yardım için !help)"
 bot_game: "yardım için !help"
 bot_config_error: "!{cmd}: Bot konfigurasyon hatası! ({key} bulunamadı!)"
 bot_serv_cfg_error: "!{cmd}: Sunucu konfigurasyon hatası: {err}"
+bot_command_disabled: "Bu komut kapatılmıştır!"
 
 err_nomuterole: "Mute rolü bulunamadı!"
 
