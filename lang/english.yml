@@ -44,6 +44,8 @@ cmd_conf_nokey: "couldn't find key {key}"
 
 cmd_reloadconf: "Config reloaded!"
 
+cmd_getconf_help: "!getconf <key>"
+
 sound_playing_template: |
   **Title:** {sound.title}
   **Uploader:** {sound.uploader}
