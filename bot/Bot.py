@@ -38,6 +38,8 @@ class DiscordBot(discord.Client):
         else:
             print("Avatar already uploaded (wanna change? remove .avatar_uploaded)")
 
+        config.load_template_config()
+
         for chan in self.get_all_channels():
             stuff.muted_chans[chan.name] = False
 
