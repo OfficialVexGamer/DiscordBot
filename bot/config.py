@@ -49,9 +49,7 @@ def get_key(id: str, key: str):
     if not server_config[id]:
         create_server_config(id)
 
-    k = check_key(id, key)
-
-    return k
+    return check_key(id, key)
 
 
 def set_key(id: str, key: str, val: object):
