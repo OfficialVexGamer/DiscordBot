@@ -38,6 +38,8 @@ class DiscordBot(discord.Client):
         else:
             print("Avatar already uploaded (wanna change? remove .avatar_uploaded)")
 
+        config.load_template_config()
+
         for chan in self.get_all_channels():
             stuff.muted_chans[chan.name] = False
 
@@ -127,6 +129,12 @@ class DiscordBot(discord.Client):
             cmd_class = stuff.find_cmd_class(cmd)
 
             print("Komut: (" + message.author.name + ") " + cmd + " args: " + str(c_args))
+
+            for dcmd in config.get_key(message.server.id, "disabled_commands"):
+                if dcmd == cmd:
+                    await self.send_message(message.channel,
+                                            i18n.get_localized_str(message.server.id, "bot_command_disabled"))
+                    return
 
             if cmd_class.requiresAdmin():
                 if isAuthorAdmin:

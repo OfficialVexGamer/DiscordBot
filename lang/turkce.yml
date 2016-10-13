@@ -2,6 +2,7 @@ bot_active: "Bot aktif! (Yardım için !help)"
 bot_game: "yardım için !help"
 bot_config_error: "!{cmd}: Bot konfigurasyon hatası! ({key} bulunamadı!)"
 bot_serv_cfg_error: "!{cmd}: Sunucu konfigurasyon hatası: {err}"
+bot_command_disabled: "Bu komut kapatılmıştır!"
 
 err_nomuterole: "Mute rolü bulunamadı!"
 
@@ -43,6 +44,8 @@ cmd_conf_help: "!conf <ayar> <...>"
 cmd_conf_nokey: "Ayar {key} bululnamadı"
 
 cmd_reloadconf: "Config okundu!"
+
+cmd_getconf_help: "!getconf <ayar>"
 
 sound_playing_template: |
   **Ad:** {sound.title}

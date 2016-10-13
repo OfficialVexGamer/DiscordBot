@@ -30,9 +30,7 @@ class MuteCommand(Command):
                                                                                                    "key": "admin_roles"}))
             return
 
-        nameToMute = ""
-        for arg in args:
-            nameToMute = nameToMute + " " + arg
+        nameToMute = " ".join(args)
 
         for member in message.channel.server.members:
             if nameToMute.lower().strip() == member.name.lower():
