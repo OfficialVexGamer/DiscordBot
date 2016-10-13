@@ -46,7 +46,8 @@ class DiscordBot(discord.Client):
         for server in self.servers:
             await self.on_server_join(server)
 
-        await self.change_status(game=discord.Game(name=self.cfg["game"]))
+        await self.change_status(game=discord.Game(name=self.cfg[
+            "game"].format(version=stuff.bot_version)))
 
         self.works = True
         print("Ready! " + self.user.id + " (" + self.user.name + ")")
