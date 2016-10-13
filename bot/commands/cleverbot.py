@@ -7,6 +7,8 @@ from bot.cleverbot import Cleverbot
 
 
 class CleverbotCommand(Command):
+    cb = Cleverbot()
+
     def requiresAdmin(self):
         return False
 
@@ -24,14 +26,11 @@ class CleverbotCommand(Command):
 
         for chan in config.get_key(message.server.id, "cleverbot_channels"):
             if chan == message.channel.name:
-                input = args[0]
+                input = " ".join(args)
 
-                for i in range(1, len(args)):
-                    input = input + " " + args[i]
-
-                cb = Cleverbot()
-
-                await client.send_message(message.channel, message.author.mention + ", " + cb.ask(input)) #+ " özür dilerim canım cicim tatlım"))
+                await client.send_message(message.channel,
+                                          message.author.mention + ", " +
+                                          self.cb.ask(input))
                 return
 
         await client.send_message(message.channel, i18n.get_localized_str(message.server.id, "cmd_cleverbot_wrongchannel", {"mention":
