@@ -1,8 +1,7 @@
-bot_active: "Bot active! (!help for help)"
-bot_game: "!help for help."
 bot_config_error: "!{cmd}: Bot configuration error! ({key} not found!)"
 bot_serv_cfg_error: "!{cmd}: Server configuration error: {err}"
 bot_command_disabled: "This command is disabled!"
+bot_channel_locked: "#{channel} is currently locked."
 
 bot_welcome: "Hello, {name}! Welcome to the server!"
 bot_goodbye: "Bye, {name}!"
@@ -12,19 +11,13 @@ err_nomuterole: "Couldn't find mute role"
 bot_noperm: "{mention} You don't have permissions to do that!"
 bot_nocmd: "{mention} No such command!"
 
-cmd_i_help: "!i <image>"
-cmd_i_notfound: "{mention} couldn't find this image!"
-
 cmd_cleverbot_nothing: "{mention} you didn't ask anything!"
 cmd_cleverbot_wrongchannel: "{mention} Cleverbot can only be used in specific channels"
 
 cmd_snd_init: "Sound is already active!"
 cmd_snd_init_ok: "Sound active!"
 
-cmd_snd_queue_help: "!snd_queue <url>"
 cmd_snd_queue: "Music has been added to the queue ({index}th)"
-
-cmd_snd_vol: "!snd_vol <volume (1.0 = 100%, 0.01 = 1%)>"
 
 cmd_snd_current_npy: "{mention} Nothing is playing yet!"
 
@@ -36,19 +29,102 @@ cmd_lock: "{mention} locked this channel."
 cmd_unlock: "{mention} unlocked this channel."
 
 cmd_mute: "{mention} is muted."
-cmd_mute_help: "!mute <nick>"
 cmd_mute_admin: "You cannot mute an admin!"
 cmd_mute_notfound: "{name} is not found!"
 
 cmd_unmute: "{mention} is unmuted"
-cmd_unmute_help: "!unmute <nick>"
 
-cmd_conf_help: "!conf <key> <value>"
 cmd_conf_nokey: "couldn't find key {key}"
-
 cmd_reloadconf: "Config reloaded!"
 
-cmd_getconf_help: "!getconf <key>"
+help_notfound: |
+  <???>
+    Help not found for this command. It might be too obvious or the dev just
+    forgot to put it in.
+
+help_snd_play: |
+  <>
+    Starts sound.
+
+help_snd_init: |
+  <>
+    Initializes sound and moves bot to the voice channel.
+
+help_snd_queue: |
+  <url>
+    Adds <url> to the sound queue.
+    <url> must be a valid URL that youtube_dl can understand
+    (Tested with YouTube and Soundcloud, possibly more)
+
+help_snd_stop: |
+  <>
+    Stops sound.
+
+help_snd_vol: |
+  <volume>
+    Changes current sound's volume.
+    Can be between 0.1 (1%) to 1.0 (100%)
+
+help_announce: |
+  <message>
+    Sends <message> to every single channel the bot can in the current server.
+    Pretty spammy and members will probably hate it.
+
+help_clear: |
+  <>
+    Tries to clear chat
+    The best way we have yet.
+
+help_raffle: |
+  <>
+    Returns a random member
+
+help_getconf: |
+  <key>
+    Shows the value of <key>
+    <key> must exist
+
+help_lock: |
+  <>
+    Locks the current channel
+    Nobody except admins can talk
+
+help_unlock: |
+  <>
+    Unlocks the current channel
+    Anybody can talk
+
+help_mute: |
+  <nick>
+    Removes <nick>'s ability to talk
+    <nick> must be the display name of user
+
+help_reloadconf: |
+  <>
+    Reloads config.
+
+help_conf: |
+  <key> <value>
+    Sets <key> to <value>
+    <key> must exist
+
+help_unmute: |
+  <nick>
+    Add the ability to talk to <nick>.
+    <nick> must be the display name of user
+
+help_snd_current: |
+  <>
+    Shows the current sound
+
+help_cleverbot: |
+  <question>
+    Ask <question> to Cleverbot.
+
+help_help: |
+  <command>
+    Shows help for <command>
+    I assume you figured that out.
 
 sound_playing_template: |
   **Title:** {sound.title}
@@ -59,9 +135,8 @@ help: |
   ```
   Admicos/DiscordBot {version}
   Source Code: https://admi.ml/EayKf
+  For more info about a command, type `!help <command>`
+
   Commands:
   {commands}
   ```
-
-
-channel_locked: "#{channel} is currently locked."

@@ -11,7 +11,7 @@ def load_lang(server: int, lang: str):
 
 
 def get_localized_str(server: int, str_id: str, fmt={}):
-    if not server_langs[server][str_id]:
-        return "STRING NOT FOUND: {}".format(str_id)
+    if server_langs[server].get(str_id):
+        return str(server_langs[server][str_id]).format(**fmt)
 
-    return str(server_langs[server][str_id]).format(**fmt)
+    return "STRING NOT FOUND: {}".format(str_id)

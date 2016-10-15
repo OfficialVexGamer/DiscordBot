@@ -141,7 +141,7 @@ class DiscordBot(discord.Client):
             if not isAuthorAdmin:
                 await self.delete_message(message)
                 await self.send_message(message.author, i18n.get_localized_str(
-                    message.server.id, "channel_locked", {
+                    message.server.id, "bot_channel_locked", {
                         "channel": message.channel.name
                     }
                 ))

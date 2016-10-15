@@ -1,19 +1,15 @@
-bot_active: "Bot aktif! (Yardım için !help)"
-bot_game: "yardım için !help"
 bot_config_error: "!{cmd}: Bot konfigurasyon hatası! ({key} bulunamadı!)"
-bot_serv_cfg_error: "!{cmd}: Sunucu konfigurasyon hatası: {err}"
-bot_command_disabled: "Bu komut kapatılmıştır!"
+bot_serv_cfg_error: "!{cmd}: Server konfigurasyon hatası: {err}"
+bot_command_disabled: "Bu komut engellidir!"
+bot_channel_locked: "#{channel} is currently locked."
 
-bot_welcome: "Hoşgeldin, {name}!"
+bot_welcome: "Merhaba, {name}!"
 bot_goodbye: "Hoşçakal, {name}!"
 
-err_nomuterole: "Mute rolü bulunamadı!"
+err_nomuterole: "Mute rolü bulunamadı"
 
-bot_noperm: "{mention} Yetkin yok!"
-bot_nocmd: "{mention} Bu komut yok!"
-
-cmd_i_help: "!i <resim>"
-cmd_i_notfound: "{mention} bu resim bulunamadı!"
+bot_noperm: "{mention} Bunu yapacak yetkiniz yok!"
+bot_nocmd: "{mention} Böyle bir komut yok!"
 
 cmd_cleverbot_nothing: "{mention} hiç bir şey sormadın!"
 cmd_cleverbot_wrongchannel: "{mention} Cleverbot sadece belirli kanallarda kullanılabilir"
@@ -21,46 +17,125 @@ cmd_cleverbot_wrongchannel: "{mention} Cleverbot sadece belirli kanallarda kulla
 cmd_snd_init: "Ses zaten aktif!"
 cmd_snd_init_ok: "Ses aktif!"
 
-cmd_snd_queue_help: "!snd_queue <url>"
-cmd_snd_queue: "Bir şarkı listeye eklendi ({index} inci)"
+cmd_snd_queue: "Ses sarki listesine eklendi ({index}.)"
 
-cmd_snd_vol: "!snd_vol <ses (1.0 = 100%, 0.01 = 1%)>"
+cmd_snd_current_npy: "{mention} Hiç bir şey çalmıyor!"
 
-cnd_snd_current: "{mention} Şu anda hiç bir şey çalmıyor."
+cmd_clear: "{mention} sohbeti temizledi!"
 
-cmd_clear: "{mention} chati temizledi!"
-
-cmd_draw: "Kazanan kişi: {winner}"
+cmd_draw: "Ve kazanan: {winner}"
 
 cmd_lock: "{mention} kanalı kilitledi."
 cmd_unlock: "{mention} kanal kilidini açtı."
 
 cmd_mute: "{mention} susturuldu."
-cmd_mute_help: "!mute <nick>"
 cmd_mute_admin: "Bir admini susturamassın!"
-cmd_mute_notfound: "{name} isimli bir kişi yok!"
+cmd_mute_notfound: "{name} bulunamadı!"
 
-cmd_unmute: "{mention} Artık konuşabilir"
-cmd_unmute_help: "!unmute <nick>"
+cmd_unmute: "{mention} artık konuşabilir"
 
-cmd_conf_help: "!conf <ayar> <...>"
-cmd_conf_nokey: "Ayar {key} bululnamadı"
+cmd_conf_nokey: "{key} bulunamadı"
+cmd_reloadconf: "Config yenilendi!"
 
-cmd_reloadconf: "Config okundu!"
+help_notfound: |
+  <???>
+    Bu komut için yardım bulunamadı.
 
-cmd_getconf_help: "!getconf <ayar>"
+help_snd_play: |
+  <>
+    Sesi başlatır.
+
+help_snd_init: |
+  <>
+    Ses sistemini açar ve botu ses odasına ekler.
+
+help_snd_queue: |
+  <url>
+    <url>yi ses listesine ekler.
+    <url> youtube_dl'nin algılayabileceği bir URL olmalıdır.
+    (YouTube ve Soundcloud denendi, büyük ihtimalle öbür sitelerde çalışabilir)
+
+help_snd_stop: |
+  <>
+    Sesi kapatır.
+
+help_snd_vol: |
+  <ses>
+    Sesi açar
+    0.1 (1%) ve 1.0 (100%) arasında olmalıdır.
+
+help_announce: |
+  <messaj>
+    Bot <mesaj>'ı, sunucudaki gönderebildiği her kanala gönderir
+    Spam gibi olduğu için bazıları tarafından nefret edilebilir.
+
+help_clear: |
+  <>
+    Chati temizlemeye çalışır.
+    Yapabildiğimiz en iyisi bu.
+
+help_raffle: |
+  <>
+    Rastgele birini seçer.
+
+help_getconf: |
+  <key>
+    <key>'in ne olduğunu gösterir.
+    <key> önceden var olmalıdır
+
+help_lock: |
+  <>
+    Şu anki kanalı kilitler
+    Adminler dışında hiç kimse konuşamaz
+
+help_unlock: |
+  <>
+    Şu anki kanalın kilidini açar
+    Herkes konuşabilir
+
+help_mute: |
+  <nick>
+    <nick>in konuşmasını engeller
+    <nick> bir kullanıcının görünen ismi olmalıdır. (@mention değil!)
+
+help_reloadconf: |
+  <>
+    Configi yeniler
+
+help_conf: |
+  <key> <value>
+    <key>'i <value> yapar
+    <key> önceden var olmalıdır
+
+help_unmute: |
+  <nick>
+    <nick>in konuşmasını açar
+    <nick> bir kullanıcının görünen ismi olmalıdır. (@mention değil!)
+
+help_snd_current: |
+  <>
+    Şu anki şarkıyı gösterir
+
+help_cleverbot: |
+  <soru>
+    Cleverbot'a <soru>yu sor.
+
+help_help: |
+  <komut>
+    <komut> için yardımı gösterir.
+    Bunu anladığını sanıyorum.
 
 sound_playing_template: |
-  **Ad:** {sound.title}
-  **Yapimci:** {sound.uploader}
+  **Başlık:** {sound.title}
+  **Gönderen:** {sound.uploader}
   **Zaman:** {duration}
 
 help: |
   ```
   Admicos/DiscordBot {version}
-  Kaynak: https://admi.ml/EayKf
+  Kaynak kodu: https://admi.ml/EayKf
+  Bir komut için yardım gerekirse, `!help <command>`
+
   Komutlar:
   {commands}
   ```
-
-channel_locked: "#{channel} şu anda kilitlidir."
