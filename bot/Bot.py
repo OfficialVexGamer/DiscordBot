@@ -59,17 +59,19 @@ class DiscordBot(discord.Client):
         stuff.muted_chans[server.id] = defaultdict(dict)
 
     async def on_channel_delete(self, channel: discord.Channel):
-        stuff.muted_chans[channel.server.id][channel.name] = None
+        if channel.type == discord.ChannelType.text:
+            stuff.muted_chans[channel.server.id][channel.name] = None
 
     async def on_channel_create(self, channel: discord.Channel):
-        stuff.muted_chans[channel.server.id][channel.name] = False
+        if channel.type == discord.ChannelType.text:
+            stuff.muted_chans[channel.server.id][channel.name] = False
 
     async def on_error(self, event, *args, **kwargs):
         import traceback
         for server in self.servers:
             for member in server.members:
-                if member.name == self.cfg["speak_person"]["name"] and str(member.discriminator) == str(
-                        self.cfg["speak_person"]["iden"]):
+                if member.name == self.cfg["speak_person"]["name"] and \
+                str(member.discriminator) == str(self.cfg["speak_person"]["iden"]):
                     await self.send_message(member, """```python
 
 ###################################
@@ -81,20 +83,37 @@ class DiscordBot(discord.Client):
 %s```""" % (event, str(args), str(kwargs), traceback.format_exc()))
                     return
         print("""###################################
-    # Something happened to your bot!
-    # Admin not available at server, so i am printing this to the console.
-    # At event: %s
-    # Args: %s, %s
-    ###################################
-    
-    %s""" % (event, str(args), str(kwargs), traceback.format_exc()), file=sys.stderr)
+# Something happened to your bot!
+# Admin not available at server, so i am printing this to the console.
+# At event: %s
+# Args: %s, %s
+###################################
+
+%s""" % (event, str(args), str(kwargs), traceback.format_exc()), file=sys.stderr)
+
+    async def on_member_join(self, member: discord.Member):
+        await self.send_message(member.server, i18n.get_localized_str(
+            member.server.id, "bot_welcome", {
+                "name": member.display_name
+            }
+        ))
+
+    async def on_member_remove(self, member: discord.Member):
+        await self.send_message(member.server, i18n.get_localized_str(
+            member.server.id, "bot_goodbye", {
+                "name": member.display_name
+            }
+        ))
 
     async def on_message(self, message: discord.Message):
         if not self.works:
             return
 
+        if message.author == self.user:
+            return
+
         isAuthorAdmin = False
-        if type(message.author) == discord.User:  # PM
+        if message.channel.type == discord.ChannelType.private:
             if message.author.name == self.cfg["speak_person"]["name"] and str(message.author.discriminator) == str(
                     self.cfg["speak_person"]["iden"]):
                 if message.content.startswith('!id '):
@@ -103,7 +122,11 @@ class DiscordBot(discord.Client):
                     await self.edit_profile(username=str(message.content[6:]))
                 else:
                     await self.send_message(self.get_channel(stuff.msgChan), message.content)
-
+            else:
+                # Cannot translate due to there being no language configuration
+                # for private message servers.
+                await self.send_message(message.channel, "Please do not pm // "
+                                                         "Özel mesaj atmayınız")
             return
 
         if message.author.permissions_in(message.channel).administrator:
@@ -117,14 +140,14 @@ class DiscordBot(discord.Client):
         if stuff.muted_chans[message.server.id][message.channel.name]:
             if not isAuthorAdmin:
                 await self.delete_message(message)
-                await self.send_message(message.author, i18n.get_localized_str(message.server.id, "channel_locked", {"channel":
-                                                                                                      message.channel.name}))
+                await self.send_message(message.author, i18n.get_localized_str(
+                    message.server.id, "channel_locked", {
+                        "channel": message.channel.name
+                    }
+                ))
                 return
 
         if message.content.startswith(config.get_key(message.server.id, "cmd_prefix")):
-            if message.author == self.user:
-                return
-
             cmd = message.content[len(config.get_key(message.server.id, "cmd_prefix")):].split()[0]
             c_args = message.content[1:].split()[1:]
             cmd_class = stuff.find_cmd_class(cmd)
@@ -143,9 +166,11 @@ class DiscordBot(discord.Client):
                     for chan in message.server.channels:
                         if chan.name == config.get_key(message.server.id, "modlog_chan"):
 
-                            await self.send_message(chan, "{0} (#{1}): {2}".format(message.author.name,
-                                                                                   message.channel.name,
-                                                                                   message.content))
+                            await self.send_message(chan, "{0} (#{1}): {2}".format(
+                                message.author.name,
+                                message.channel.name,
+                                message.content
+                            ))
                             return
 
                     if cmd_class.deleteCMDMsg():
@@ -154,8 +179,11 @@ class DiscordBot(discord.Client):
                         except discord.errors.NotFound:  # The message has been deleted before
                             pass
                 else:
-                    await self.send_message(message.channel, i18n.get_localized_str(message.server.id, "bot_noperm", {"mention":
-                                                                                                       message.author.name}))
+                    await self.send_message(message.channel, i18n.get_localized_str(
+                        message.server.id, "bot_noperm", {
+                            "mention": message.author.name
+                        }
+                    ))
             else:
                 await cmd_class.do(self, message, c_args, self.cfg)
 

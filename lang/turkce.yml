@@ -4,6 +4,9 @@ bot_config_error: "!{cmd}: Bot konfigurasyon hatası! ({key} bulunamadı!)"
 bot_serv_cfg_error: "!{cmd}: Sunucu konfigurasyon hatası: {err}"
 bot_command_disabled: "Bu komut kapatılmıştır!"
 
+bot_welcome: "Hoşgeldin, {name}!"
+bot_goodbye: "Hoşçakal, {name}!"
+
 err_nomuterole: "Mute rolü bulunamadı!"
 
 bot_noperm: "{mention} Yetkin yok!"
