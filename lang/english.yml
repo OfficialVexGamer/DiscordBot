@@ -37,6 +37,8 @@ cmd_unmute: "{mention} is unmuted"
 cmd_conf_nokey: "couldn't find key {key}"
 cmd_reloadconf: "Config reloaded!"
 
+cmd_markov_not_enough_msg: "There isn't enough messages to create a markov chain."
+
 help_notfound: |
   <???>
     Help not found for this command. It might be too obvious or the dev just
@@ -98,6 +100,10 @@ help_mute: |
   <nick>
     Removes <nick>'s ability to talk
     <nick> must be the display name of user
+
+help_markov: |
+  <>
+    Creates a markov chain from the last 300 messages.
 
 help_reloadconf: |
   <>

@@ -37,6 +37,8 @@ cmd_unmute: "{mention} artık konuşabilir"
 cmd_conf_nokey: "{key} bulunamadı"
 cmd_reloadconf: "Config yenilendi!"
 
+cmd_markov_not_enough_msg: "Bir markov zinciri yapacak kadar mesaj yok."
+
 help_notfound: |
   <???>
     Bu komut için yardım bulunamadı.
@@ -124,6 +126,10 @@ help_help: |
   <komut>
     <komut> için yardımı gösterir.
     Bunu anladığını sanıyorum.
+
+help_markov: |
+  <>
+    Son 300 mesajdan bir markov zinciri yaratır.
 
 sound_playing_template: |
   **Başlık:** {sound.title}

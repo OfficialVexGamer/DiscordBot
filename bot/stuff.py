@@ -1,3 +1,4 @@
+from queue import Queue
 from bot.commands import NoneCommand, Command
 import inspect
 import bot.commands

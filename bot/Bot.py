@@ -1,4 +1,5 @@
 from collections import defaultdict
+from collections import deque
 
 from bot import i18n
 from bot import stuff
@@ -6,6 +7,7 @@ from bot import config
 import discord
 import os
 import sys
+import shlex
 
 
 class DiscordBot(discord.Client):
@@ -57,6 +59,8 @@ class DiscordBot(discord.Client):
         config.load_server_config(server.id)
         i18n.load_lang(server.id, config.get_key(server.id, "language"))
         stuff.muted_chans[server.id] = defaultdict(dict)
+        for ch in server.channels:
+            await self.on_channel_create(ch)
 
     async def on_channel_delete(self, channel: discord.Channel):
         if channel.type == discord.ChannelType.text:
@@ -148,8 +152,9 @@ class DiscordBot(discord.Client):
                 return
 
         if message.content.startswith(config.get_key(message.server.id, "cmd_prefix")):
-            cmd = message.content[len(config.get_key(message.server.id, "cmd_prefix")):].split()[0]
-            c_args = message.content[1:].split()[1:]
+            _s_cmd = shlex.split(message.content[len(config.get_key(message.server.id, "cmd_prefix")):])
+            cmd = _s_cmd[0]
+            c_args = _s_cmd[1:]
             cmd_class = stuff.find_cmd_class(cmd)
 
             print("Komut: (" + message.author.name + ") " + cmd + " args: " + str(c_args))
@@ -165,13 +170,16 @@ class DiscordBot(discord.Client):
                     await cmd_class.do(self, message, c_args, self.cfg)
                     for chan in message.server.channels:
                         if chan.name == config.get_key(message.server.id, "modlog_chan"):
-
-                            await self.send_message(chan, "{0} (#{1}): {2}".format(
-                                message.author.name,
-                                message.channel.name,
-                                message.content
-                            ))
-                            return
+                            try:
+                                await self.send_message(chan, "{0} (#{1}): {2}".format(
+                                    message.author.name,
+                                    message.channel.name,
+                                    message.content
+                                ))
+                                return
+                            except discord.errors.Forbidden:
+                                print("Tried to modlog, but FORBIDDEN")
+                                return
 
                     if cmd_class.deleteCMDMsg():
                         try:
