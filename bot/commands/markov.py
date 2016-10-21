@@ -29,5 +29,7 @@ class MarkovCommand(Command):
         if ret is None:
             ret = i18n.get_localized_str(message.server.id,
                                          "cmd_markov_not_enough_msg")
+        else:
+            print("Generated markov chain: " + ret)
 
         await client.send_message(message.channel, ret)

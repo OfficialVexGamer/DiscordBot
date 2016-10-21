@@ -96,6 +96,10 @@ class DiscordBot(discord.Client):
 %s""" % (event, str(args), str(kwargs), traceback.format_exc()), file=sys.stderr)
 
     async def on_member_join(self, member: discord.Member):
+        for dcmd in config.get_key(member.server.id, "disabled_commands"):
+            if dcmd == "_welcomes":
+                return
+
         await self.send_message(member.server, i18n.get_localized_str(
             member.server.id, "bot_welcome", {
                 "name": member.display_name
@@ -103,6 +107,10 @@ class DiscordBot(discord.Client):
         ))
 
     async def on_member_remove(self, member: discord.Member):
+        for dcmd in config.get_key(member.server.id, "disabled_commands"):
+            if dcmd == "_welcomes":
+                return
+
         await self.send_message(member.server, i18n.get_localized_str(
             member.server.id, "bot_goodbye", {
                 "name": member.display_name
