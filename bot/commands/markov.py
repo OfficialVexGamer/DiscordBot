@@ -1,3 +1,4 @@
+from bot import config
 from bot import i18n
 from bot.commands.command import Command
 import discord
@@ -14,12 +15,15 @@ class MarkovCommand(Command):
     def command(self):
         return "markov"
 
-    async def do(self, client: discord.Client, message: discord.Message, args: list, cfg={}):
+    async def do(self, client: discord.Client, message: discord.Message,
+                 args: list, cfg={}):
         text = ""
         ret = ""
 
         async for msg in client.logs_from(message.channel, limit=500):
-            text += msg.content + "\n"
+            if not (msg.content.startswith(config.get_key(
+                    msg.server.id, "cmd_prefix")) and msg.author == client.user):
+                    text += msg.content + "\n"
 
         text_model = markovify.Text(text)
         ret = text_model.make_sentence(
