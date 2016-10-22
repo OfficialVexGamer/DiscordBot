@@ -54,7 +54,6 @@ def set_key(id: str, key: str, val: object):
     if not server_config[id]:
         create_server_config(id)
 
-    check_config(id, key)
-
-    server_config[id][key] = val
-    save_server_config(id)
+    if check_config(id, key) != "KEY NOT FOUND":
+        server_config[id][key] = val
+        save_server_config(id)

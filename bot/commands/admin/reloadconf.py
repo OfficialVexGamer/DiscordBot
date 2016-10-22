@@ -13,7 +13,7 @@ class ReloadConfCommand(Command):
         return True
 
     def command(self):
-        return "conf_reload"
+        return "reloadconf"
 
     async def do(self, client: discord.Client, message: discord.Message, args: list, cfg={}):
         await client.on_server_join(message.server)
