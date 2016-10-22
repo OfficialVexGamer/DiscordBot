@@ -1,5 +1,5 @@
 # DiscordBot
-A (badly written) Discord bot. It does admin stuff and music
+A Discord bot. It's used for moderating, music and other stuff
 
 ##Add to your server
 1. Go to https://admi.ml/a2RLx (or to https://admi.ml/ApURo for the test version that only gets online when i'm testing it)
@@ -23,3 +23,7 @@ Do `!help` in your server while the bot is running.
 
 ##Configuration
 You can configure the bot using the `!conf <key> <value>` command. The keys and defaults can be found [here](/conf/_template.yml). Lists are seperated using commas (without spaces) (ex. `!conf admin_roles Admin,Moderator,Developer`)
+
+##### You can also disable these extra "commands" to disable certain functions:  
+  * `_welcomes`: Disables the welcome messages
+  * `_modlog`: Disables moderator log, which will only work if there is a `#mod-log` channel on your server.
