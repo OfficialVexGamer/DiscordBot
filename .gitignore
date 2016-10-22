@@ -1,9 +1,6 @@
 # Ignore IDE stuff
 .idea/
 
-# Ignore images
-images/
-
 # Ignore configuration files
 conf/
 config.yml
