@@ -178,6 +178,12 @@ class DiscordBot(discord.Client):
                                             i18n.get_localized_str(message.server.id, "bot_command_disabled"))
                     return
 
+            for dcmd in config.get_key(message.server.id, "disabled_commands"):
+                if dcmd == cmd:
+                    await self.send_message(message.channel,
+                                            i18n.get_localized_str(message.server.id, "bot_command_disabled"))
+                    return
+
             if cmd_class.requiresAdmin():
                 if isAuthorAdmin:
                     await cmd_class.do(self, message, c_args, self.cfg)
