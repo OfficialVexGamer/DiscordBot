@@ -165,7 +165,8 @@ class DiscordBot(discord.Client):
             c_args = _s_cmd[1:]
             cmd_class = stuff.find_cmd_class(cmd)
 
-            print("Komut: (" + message.author.name + ") " + cmd + " args: " + str(c_args))
+            print("Komut: (" + message.author.name + ") (#" +
+                  message.channel.name + ") " + cmd + " args: " + str(c_args))
 
             for dcmd in config.get_key(message.server.id, "disabled_commands"):
                 if dcmd == cmd:
