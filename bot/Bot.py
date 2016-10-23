@@ -186,7 +186,13 @@ class DiscordBot(discord.Client):
 
             if cmd_class.requiresAdmin():
                 if isAuthorAdmin:
-                    await cmd_class.do(self, message, c_args, self.cfg)
+                    try:
+                        await cmd_class.do(self, message, c_args, self.cfg)
+                    except discord.errors.Forbidden as e:
+                        print("Forbidden while trying to DO")
+                        print(e.response)
+                        pass
+
                     for chan in message.server.channels:
                         if chan.name == config.get_key(message.server.id, "modlog_chan"):
                             for dcmd in config.get_key(message.server.id, "disabled_commands"):
@@ -201,22 +207,25 @@ class DiscordBot(discord.Client):
                                 ))
                                 return
                             except discord.errors.Forbidden:
-                                print("Tried to modlog, but FORBIDDEN")
                                 return
 
                     if cmd_class.deleteCMDMsg():
                         try:
                             await self.delete_message(message)
-                        except discord.errors.NotFound:  # The message has been deleted before
+                        except (discord.errors.NotFound, discord.errors.Forbidden):
                             pass
-                else:
                     await self.send_message(message.channel, i18n.get_localized_str(
                         message.server.id, "bot_noperm", {
                             "mention": message.author.name
                         }
                     ))
             else:
-                await cmd_class.do(self, message, c_args, self.cfg)
+                try:
+                    await cmd_class.do(self, message, c_args, self.cfg)
+                except discord.errors.Forbidden as e:
+                    print("Forbidden while trying to DO")
+                    print(e.response)
+                    pass
 
                 if cmd_class.deleteCMDMsg():
                     try:
