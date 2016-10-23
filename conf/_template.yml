@@ -3,7 +3,7 @@ mute_role: Muted
 voice_chan: Music Room
 music_chan: music
 modlog_chan: mod-log
-cmd_prefix: "!"
+cmd_prefix: "?_"
 admin_roles:
   - Admin
 cleverbot_channels: # (#)'a gerek yok.

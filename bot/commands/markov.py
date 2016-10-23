@@ -18,7 +18,6 @@ class MarkovCommand(Command):
     async def do(self, client: discord.Client, message: discord.Message,
                  args: list, cfg={}):
         text = ""
-        ret = ""
 
         async for msg in client.logs_from(message.channel, limit=500):
             if not (msg.content.startswith(config.get_key(
@@ -36,4 +35,7 @@ class MarkovCommand(Command):
         else:
             print("Generated markov chain: " + ret)
 
-        await client.send_message(message.channel, ret)
+        try:
+            await client.send_message(message.channel, ret)
+        except discord.errors.HTTPException:
+            pass

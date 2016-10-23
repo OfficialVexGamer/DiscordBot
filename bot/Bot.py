@@ -140,14 +140,14 @@ class DiscordBot(discord.Client):
                 await self.send_message(message.channel, "Please do not pm // "
                                                          "Özel mesaj atmayınız")
             return
-
-        if message.author.permissions_in(message.channel).administrator:
-            isAuthorAdmin = True
         else:
-            for role in message.author.roles:
-                for check_role in config.get_key(message.server.id, "admin_roles"):
-                    if role.name == check_role:
-                        isAuthorAdmin = True
+            if message.author.permissions_in(message.channel).administrator:
+                isAuthorAdmin = True
+            else:
+                for role in message.author.roles:
+                    for check_role in config.get_key(message.server.id, "admin_roles"):
+                        if role.name == check_role:
+                            isAuthorAdmin = True
 
         if stuff.muted_chans[message.server.id][message.channel.name]:
             if not isAuthorAdmin:
@@ -191,7 +191,6 @@ class DiscordBot(discord.Client):
                     except discord.errors.Forbidden as e:
                         print("Forbidden while trying to DO")
                         print(e.response)
-                        pass
 
                     for chan in message.server.channels:
                         if chan.name == config.get_key(message.server.id, "modlog_chan"):
@@ -225,7 +224,6 @@ class DiscordBot(discord.Client):
                 except discord.errors.Forbidden as e:
                     print("Forbidden while trying to DO")
                     print(e.response)
-                    pass
 
                 if cmd_class.deleteCMDMsg():
                     try:
