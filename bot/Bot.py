@@ -1,6 +1,4 @@
 from collections import defaultdict
-from collections import deque
-
 from bot import i18n
 from bot import stuff
 from bot import config
@@ -137,17 +135,16 @@ class DiscordBot(discord.Client):
             else:
                 # Cannot translate due to there being no language configuration
                 # for private message servers.
-                await self.send_message(message.channel, "Please do not pm // "
-                                                         "Özel mesaj atmayınız")
+                await self.send_message(message.channel, "Please do not pm")
             return
-
-        if message.author.permissions_in(message.channel).administrator:
-            isAuthorAdmin = True
-        else:
-            for role in message.author.roles:
-                for check_role in config.get_key(message.server.id, "admin_roles"):
-                    if role.name == check_role:
-                        isAuthorAdmin = True
+        elif message.author.roles:
+            if message.author.permissions_in(message.channel).administrator:
+                isAuthorAdmin = True
+            else:
+                for role in message.author.roles:
+                    for check_role in config.get_key(message.server.id, "admin_roles"):
+                        if role.name == check_role:
+                            isAuthorAdmin = True
 
         if stuff.muted_chans[message.server.id][message.channel.name]:
             if not isAuthorAdmin:
@@ -186,7 +183,12 @@ class DiscordBot(discord.Client):
 
             if cmd_class.requiresAdmin():
                 if isAuthorAdmin:
-                    await cmd_class.do(self, message, c_args, self.cfg)
+                    try:
+                        await cmd_class.do(self, message, c_args, self.cfg)
+                    except discord.errors.Forbidden as e:
+                        print("Forbidden while trying to DO")
+                        print(e.response)
+
                     for chan in message.server.channels:
                         if chan.name == config.get_key(message.server.id, "modlog_chan"):
                             for dcmd in config.get_key(message.server.id, "disabled_commands"):
@@ -201,22 +203,24 @@ class DiscordBot(discord.Client):
                                 ))
                                 return
                             except discord.errors.Forbidden:
-                                print("Tried to modlog, but FORBIDDEN")
                                 return
 
                     if cmd_class.deleteCMDMsg():
                         try:
                             await self.delete_message(message)
-                        except discord.errors.NotFound:  # The message has been deleted before
+                        except (discord.errors.NotFound, discord.errors.Forbidden):
                             pass
-                else:
                     await self.send_message(message.channel, i18n.get_localized_str(
                         message.server.id, "bot_noperm", {
                             "mention": message.author.name
                         }
                     ))
             else:
-                await cmd_class.do(self, message, c_args, self.cfg)
+                try:
+                    await cmd_class.do(self, message, c_args, self.cfg)
+                except discord.errors.Forbidden as e:
+                    print("Forbidden while trying to DO")
+                    print(e.response)
 
                 if cmd_class.deleteCMDMsg():
                     try:
