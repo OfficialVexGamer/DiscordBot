@@ -1,6 +1,4 @@
 from collections import defaultdict
-from collections import deque
-
 from bot import i18n
 from bot import stuff
 from bot import config
@@ -137,10 +135,9 @@ class DiscordBot(discord.Client):
             else:
                 # Cannot translate due to there being no language configuration
                 # for private message servers.
-                await self.send_message(message.channel, "Please do not pm // "
-                                                         "Özel mesaj atmayınız")
+                await self.send_message(message.channel, "Please do not pm")
             return
-        else:
+        elif message.author.roles:
             if message.author.permissions_in(message.channel).administrator:
                 isAuthorAdmin = True
             else:
