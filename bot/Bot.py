@@ -109,11 +109,14 @@ class DiscordBot(discord.Client):
             if dcmd == "_welcomes":
                 return
 
-        await self.send_message(member.server, i18n.get_localized_str(
-            member.server.id, "bot_goodbye", {
-                "name": member.display_name
-            }
-        ))
+        try:
+            await self.send_message(member.server, i18n.get_localized_str(
+                member.server.id, "bot_goodbye", {
+                    "name": member.display_name
+                }
+            ))
+        except discord.errors.Forbidden:
+            pass
 
     async def on_message(self, message: discord.Message):
         if not self.works:
