@@ -140,7 +140,8 @@ class DiscordBot(discord.Client):
                 # for private message servers.
                 await self.send_message(message.channel, "Please do not pm")
             return
-        elif message.author.roles:
+
+        try:
             if message.author.permissions_in(message.channel).administrator:
                 isAuthorAdmin = True
             else:
@@ -148,6 +149,8 @@ class DiscordBot(discord.Client):
                     for check_role in config.get_key(message.server.id, "admin_roles"):
                         if role.name == check_role:
                             isAuthorAdmin = True
+        except AttributeError:
+            return # Probably a webhook.
 
         if stuff.muted_chans[message.server.id][message.channel.name]:
             if not isAuthorAdmin:
