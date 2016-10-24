@@ -11,6 +11,7 @@ commands = inspect.getmembers(bot.commands, predicate=lambda o: inspect.isclass(
 timeout = {}
 bot_version = "1.3.0"
 
+
 def find_cmd_class(cmd: str):
     cmd_c = NoneCommand()
     for command in commands:
