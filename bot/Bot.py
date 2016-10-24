@@ -231,5 +231,5 @@ class DiscordBot(discord.Client):
                 if cmd_class.deleteCMDMsg():
                     try:
                         await self.delete_message(message)
-                    except discord.errors.NotFound:  # The message has been deleted before
+                    except (discord.errors.NotFound, discord.errors.Forbidden):
                         pass

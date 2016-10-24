@@ -21,7 +21,7 @@ class MarkovCommand(Command):
 
         async for msg in client.logs_from(message.channel, limit=500):
             if not (msg.content.startswith(config.get_key(
-                    msg.server.id, "cmd_prefix")) and msg.author == client.user):
+                    msg.server.id, "cmd_prefix")) or msg.author == client.user):
                     text += msg.content + "\n"
 
         text_model = markovify.Text(text)
