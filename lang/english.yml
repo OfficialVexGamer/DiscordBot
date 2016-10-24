@@ -146,3 +146,9 @@ help: |
   Commands:
   {commands}
   ```
+
+stats: |
+  The bot is currently running on **{server_count}** servers, serving
+  **{user_count}** users at **{channel_count}** channels.
+
+  **{considered_large}** of those servers are considered "large".

@@ -146,3 +146,9 @@ help: |
   Komutlar:
   {commands}
   ```
+
+stats: |
+  Bot şu anda **{server_count}** sunucuda, **{channel_count}** kanalda
+  **{user_count}** kişiye hizmet ediyor.
+
+  Sunucuların **{considered_large}**'si discord.py için "büyük".
