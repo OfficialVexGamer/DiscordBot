@@ -98,11 +98,14 @@ class DiscordBot(discord.Client):
             if dcmd == "_welcomes":
                 return
 
-        await self.send_message(member.server, i18n.get_localized_str(
-            member.server.id, "bot_welcome", {
-                "name": member.display_name
-            }
-        ))
+        try:
+            await self.send_message(member.server, i18n.get_localized_str(
+                member.server.id, "bot_welcome", {
+                    "name": member.display_name
+                }
+            ))
+        except discord.errors.Forbidden:
+            pass
 
     async def on_member_remove(self, member: discord.Member):
         for dcmd in config.get_key(member.server.id, "disabled_commands"):
