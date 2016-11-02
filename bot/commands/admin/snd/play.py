@@ -17,7 +17,7 @@ class SoundPlayCommand(Command):
         return "snd_play"
 
     async def do(self, client: discord.Client, message: discord.Message, args: list, cfg={}):
-        if not sound.queue[message.server.id]:
+        if not sound.queue.get(message.server.id):
             sound.mk_server_queue(message.server.id)
 
         while not sound.queue[message.server.id].empty():

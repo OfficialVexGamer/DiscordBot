@@ -18,6 +18,7 @@ class AnnounceCommand(Command):
             if channel.type == discord.ChannelType.text:
                 try:
                     await client.send_message(channel, " ".join(args))
-                except discord.errors.Forbidden: pass
+                except (discord.errors.Forbidden, discord.errors.HTTPException):
+                    pass
                 # The bot doesnt have permission to post to the channel so
                 # we'll ignore it and move on.
