@@ -3,6 +3,7 @@ bot_channel_locked: "#{channel} is currently locked."
 bot_serv_cfg_error: "!{cmd}: Sunucu konfigurasyon hatası: {err}"
 bot_command_disabled: "Bu komut kapatılmıştır!"
 
+bot_possiblespam: "Spam mı deniyorsunuz?"
 
 bot_welcome: "Merhaba, {name}!"
 bot_goodbye: "Hoşçakal, {name}!"

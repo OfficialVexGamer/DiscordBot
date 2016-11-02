@@ -3,6 +3,8 @@ bot_serv_cfg_error: "!{cmd}: Server configuration error: {err}"
 bot_command_disabled: "This command is disabled!"
 bot_channel_locked: "#{channel} is currently locked."
 
+bot_possiblespam: "Possible spam?"
+
 bot_welcome: "Hello, {name}! Welcome to the server!"
 bot_goodbye: "Bye, {name}!"
 
