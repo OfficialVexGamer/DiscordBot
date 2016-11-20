@@ -2,6 +2,7 @@ bot_config_error: "!{cmd}: Bot konfigurasyon hatası! ({key} bulunamadı!)"
 bot_channel_locked: "#{channel} is currently locked."
 bot_serv_cfg_error: "!{cmd}: Sunucu konfigurasyon hatası: {err}"
 bot_command_disabled: "Bu komut kapatılmıştır!"
+bot_command_syntax_error: "Komut okunamadı, lütfen tırnaklarınıza dikkat edin"
 
 bot_possiblespam: "Spam mı deniyorsunuz?"
 

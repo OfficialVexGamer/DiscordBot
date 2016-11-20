@@ -46,7 +46,7 @@ class DiscordBot(discord.Client):
         for server in self.servers:
             await self.on_server_join(server)
 
-        await self.change_status(game=discord.Game(name=self.cfg[
+        await self.change_presence(game=discord.Game(name=self.cfg[
             "game"].format(version=stuff.bot_version)))
 
         self.works = True
@@ -173,7 +173,14 @@ class DiscordBot(discord.Client):
                     print("User {0} timing out".format(message.author.name))
                     return
 
-            _s_cmd = shlex.split(message.content[len(config.get_key(message.server.id, "cmd_prefix")):])
+            try:
+                _s_cmd = shlex.split(message.content[len(config.get_key(message.server.id, "cmd_prefix")):])
+            except ValueError as e:
+                await self.send_message(message.channel, i18n.get_localized_str(
+                    message.server.id, "bot_command_syntax_error"
+                ))
+                return
+
             cmd = _s_cmd[0]
             c_args = _s_cmd[1:]
             cmd_class = stuff.find_cmd_class(cmd)
