@@ -28,6 +28,8 @@ class ConfCommand(Command):
                     return
 
                 config.set_key(message.server.id, key_name, val)
+                return
+
             await client.send_message(message.channel, i18n.get_localized_str(message.server.id, "cmd_conf_nokey", {
                 "key": key_name
             }))
