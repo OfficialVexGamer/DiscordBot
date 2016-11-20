@@ -218,7 +218,6 @@ class DiscordBot(discord.Client):
                                     message.channel.name,
                                     message.content
                                 ))
-                                return
                             except discord.errors.Forbidden:
                                 return
 
@@ -227,6 +226,8 @@ class DiscordBot(discord.Client):
                             await self.delete_message(message)
                         except (discord.errors.NotFound, discord.errors.Forbidden):
                             pass
+
+                else:
                     await self.send_message(message.channel, i18n.get_localized_str(
                         message.server.id, "bot_noperm", {
                             "mention": message.author.name

@@ -4,7 +4,7 @@ bot_serv_cfg_error: "!{cmd}: Sunucu konfigurasyon hatası: {err}"
 bot_command_disabled: "Bu komut kapatılmıştır!"
 bot_command_syntax_error: "Komut okunamadı, lütfen tırnaklarınıza dikkat edin"
 
-bot_possiblespam: "Spam mı deniyorsunuz?"
+bot_possiblespam: "Lütfen spam denemeyin."
 
 bot_welcome: "Merhaba, {name}!"
 bot_goodbye: "Hoşçakal, {name}!"

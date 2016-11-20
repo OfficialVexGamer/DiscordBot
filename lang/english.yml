@@ -5,7 +5,7 @@ bot_command_syntax_error: "Couldn't parse that command. Please check your quotes
 
 bot_channel_locked: "#{channel} is currently locked."
 
-bot_possiblespam: "Possible spam?"
+bot_possiblespam: "Please try not to spam."
 
 bot_welcome: "Hello, {name}! Welcome to the server!"
 bot_goodbye: "Bye, {name}!"
