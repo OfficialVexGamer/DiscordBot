@@ -46,7 +46,7 @@ class DiscordBot(discord.Client):
         for server in self.servers:
             await self.on_server_join(server)
 
-        await self.change_status(game=discord.Game(name=self.cfg[
+        await self.change_presence(game=discord.Game(name=self.cfg[
             "game"].format(version=stuff.bot_version)))
 
         self.works = True
@@ -67,6 +67,7 @@ class DiscordBot(discord.Client):
     async def on_channel_create(self, channel: discord.Channel):
         if channel.type == discord.ChannelType.text:
             stuff.muted_chans[channel.server.id][channel.name] = False
+            stuff.timeout[channel.server.id] = {}
 
     async def on_error(self, event, *args, **kwargs):
         import traceback
@@ -98,11 +99,14 @@ class DiscordBot(discord.Client):
             if dcmd == "_welcomes":
                 return
 
-        await self.send_message(member.server, i18n.get_localized_str(
-            member.server.id, "bot_welcome", {
-                "name": member.display_name
-            }
-        ))
+        try:
+            await self.send_message(member.server, i18n.get_localized_str(
+                member.server.id, "bot_welcome", {
+                    "name": member.display_name
+                }
+            ))
+        except discord.errors.Forbidden:
+            pass
 
     async def on_member_remove(self, member: discord.Member):
         for dcmd in config.get_key(member.server.id, "disabled_commands"):
@@ -119,11 +123,8 @@ class DiscordBot(discord.Client):
             pass
 
     async def on_message(self, message: discord.Message):
-        if not self.works:
-            return
-
-        if message.author == self.user:
-            return
+        if not self.works: return
+        if message.author == self.user: return
 
         isAuthorAdmin = False
         if message.channel.type == discord.ChannelType.private:
@@ -162,8 +163,24 @@ class DiscordBot(discord.Client):
                 ))
                 return
 
+        for usr in stuff.timeout[message.server.id]:
+            if usr != message.author.id:
+                stuff.timeout[message.server.id][usr] = 0
+
         if message.content.startswith(config.get_key(message.server.id, "cmd_prefix")):
-            _s_cmd = shlex.split(message.content[len(config.get_key(message.server.id, "cmd_prefix")):])
+            if stuff.timeout[message.server.id].get(message.author.id):
+                if stuff.timeout[message.server.id][message.author.id] > 5:
+                    print("User {0} timing out".format(message.author.name))
+                    return
+
+            try:
+                _s_cmd = shlex.split(message.content[len(config.get_key(message.server.id, "cmd_prefix")):])
+            except ValueError as e:
+                await self.send_message(message.channel, i18n.get_localized_str(
+                    message.server.id, "bot_command_syntax_error"
+                ))
+                return
+
             cmd = _s_cmd[0]
             c_args = _s_cmd[1:]
             cmd_class = stuff.find_cmd_class(cmd)
@@ -174,12 +191,6 @@ class DiscordBot(discord.Client):
                 cmd,
                 str(c_args)
             ))
-
-            for dcmd in config.get_key(message.server.id, "disabled_commands"):
-                if dcmd == cmd:
-                    await self.send_message(message.channel,
-                                            i18n.get_localized_str(message.server.id, "bot_command_disabled"))
-                    return
 
             for dcmd in config.get_key(message.server.id, "disabled_commands"):
                 if dcmd == cmd:
@@ -207,7 +218,6 @@ class DiscordBot(discord.Client):
                                     message.channel.name,
                                     message.content
                                 ))
-                                return
                             except discord.errors.Forbidden:
                                 return
 
@@ -216,6 +226,8 @@ class DiscordBot(discord.Client):
                             await self.delete_message(message)
                         except (discord.errors.NotFound, discord.errors.Forbidden):
                             pass
+
+                else:
                     await self.send_message(message.channel, i18n.get_localized_str(
                         message.server.id, "bot_noperm", {
                             "mention": message.author.name
@@ -233,3 +245,14 @@ class DiscordBot(discord.Client):
                         await self.delete_message(message)
                     except (discord.errors.NotFound, discord.errors.Forbidden):
                         pass
+
+            if not stuff.timeout[message.server.id].get(message.author.id):
+                stuff.timeout[message.server.id][message.author.id] = 0
+
+            stuff.timeout[message.server.id][message.author.id] += 1
+
+            if stuff.timeout[message.server.id][message.author.id] == 4:
+                await self.send_message(message.author, i18n.get_localized_str(
+                    message.server.id,
+                    "bot_possiblespam"
+                ))
