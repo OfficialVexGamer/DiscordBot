@@ -155,3 +155,5 @@ stats: |
   **{user_count}** kişiye hizmet ediyor.
 
   Sunucuların **{considered_large}**'si discord.py için "büyük".
+
+  Sunucu **{uptime}**'dan beri açık iken bot **{bot_uptime}**'dan beri açıktır.

@@ -158,3 +158,5 @@ stats: |
   **{user_count}** users at **{channel_count}** channels.
 
   **{considered_large}** of those servers are considered "large".
+
+  The server was up for **{uptime}** while the bot itself was up for **{bot_uptime}**

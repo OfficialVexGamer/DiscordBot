@@ -1,4 +1,7 @@
 from collections import defaultdict
+
+import time
+
 from bot import i18n
 from bot import stuff
 from bot import config
@@ -17,6 +20,7 @@ class DiscordBot(discord.Client):
         super().__init__()
 
         self.cfg = config
+        self.start_time = time.time()
 
         if not discord.opus.is_loaded():
             # the 'opus' library here is opus.dll on windows

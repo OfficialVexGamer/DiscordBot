@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 from bot.Bot import DiscordBot
 import yaml
 
