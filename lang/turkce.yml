@@ -110,9 +110,10 @@ help_unlock: |
     Herkes konuşabilir
 
 help_mute: |
-  <nick>
+  <nick> <neden>
     <nick>in konuşmasını engeller
     <nick> bir kullanıcının görünen ismi olmalıdır. (@mention değil!)
+    Eğer nickte boşluklar varsa nicki "tırnak içine alın"
 
 help_reloadconf: |
   <>
@@ -124,9 +125,10 @@ help_conf: |
     <key> önceden var olmalıdır
 
 help_unmute: |
-  <nick>
+  <nick> <neden>
     <nick>in konuşmasını açar
     <nick> bir kullanıcının görünen ismi olmalıdır. (@mention değil!)
+    Eğer nickte boşluklar varsa nicki "tırnak içine alın"
 
 help_snd_current: |
   <>
