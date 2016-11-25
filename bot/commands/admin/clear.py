@@ -14,6 +14,9 @@ class ClearCommand(Command):
     def command(self):
         return "clear"
 
+    def shouldModlog(self):
+        return False
+
     async def do(self, client: discord.Client, message: discord.Message, args: list, config={}):
         text = """. """
         for i in range(100):

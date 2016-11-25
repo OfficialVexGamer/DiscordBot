@@ -14,6 +14,8 @@ class NoneCommand(Command):
     def command(self):
         return "_____________nonecommandsrsly"
 
+    def shouldModlog(self):
+        return False
 
     async def do(self, client: discord.Client, message: discord.Message, args: list, config={}):
         pass

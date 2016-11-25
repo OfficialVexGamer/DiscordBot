@@ -15,6 +15,9 @@ class StatsCommand(Command):
     def command(self):
         return "stats"
 
+    def shouldModlog(self):
+        return False
+
     async def do(self, client: discord.Client, message: discord.Message, args: list, config={}):
         members = 0
         channels = 0

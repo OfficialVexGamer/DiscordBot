@@ -15,6 +15,9 @@ class MarkovCommand(Command):
     def command(self):
         return "markov"
 
+    def shouldModlog(self):
+        return False
+
     async def do(self, client: discord.Client, message: discord.Message,
                  args: list, cfg={}):
         text = ""

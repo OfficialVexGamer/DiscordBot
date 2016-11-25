@@ -35,8 +35,19 @@ cmd_unlock: "{mention} unlocked this channel."
 cmd_mute: "{mention} is muted."
 cmd_mute_admin: "You cannot mute an admin!"
 cmd_mute_notfound: "{name} is not found!"
+cmd_mute_log: |
+  .
+  **Muted {name}**
+  **Reason:** {reason}
+  **Responsible Mod:** {responsible}
 
 cmd_unmute: "{mention} is unmuted"
+cmd_unmute_emptyreason: "No reason"
+cmd_unmute_log: |
+  .
+  **Unmuted {name}**
+  **Reason:** {reason}
+  **Responsible Mod:** {responsible}
 
 cmd_conf_nokey: "couldn't find key {key}"
 cmd_reloadconf: "Config reloaded!"
@@ -101,9 +112,10 @@ help_unlock: |
     Anybody can talk
 
 help_mute: |
-  <nick>
+  <nick> <reason>
     Removes <nick>'s ability to talk
     <nick> must be the display name of user
+    With nicks that have spaces, contain the nick in "quotes like so"
 
 help_markov: |
   <>
@@ -119,9 +131,10 @@ help_conf: |
     <key> must exist
 
 help_unmute: |
-  <nick>
+  <nick> <reason>
     Add the ability to talk to <nick>.
     <nick> must be the display name of user
+    With nicks that have spaces, contain the nick in "quotes like so"
 
 help_snd_current: |
   <>

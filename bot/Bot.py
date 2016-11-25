@@ -15,7 +15,7 @@ class DiscordBot(discord.Client):
     cfg = {}
     works = False
 
-    def __init__(self, config: list):
+    def __init__(self, config: dict):
         print("Starting...")
         super().__init__()
 
@@ -23,11 +23,6 @@ class DiscordBot(discord.Client):
         self.start_time = time.time()
 
         if not discord.opus.is_loaded():
-            # the 'opus' library here is opus.dll on windows
-            # or libopus.so on linux in the current directory
-            # you should replace this with the location the
-            # opus library is located in and with the proper filename.
-            # note that on windows this DLL is automatically provided for you
             discord.opus.load_opus('opus')
 
         self.run(config["token"])
@@ -213,32 +208,29 @@ class DiscordBot(discord.Client):
             if cmd_class.requiresAdmin():
                 if isAuthorAdmin:
                     try:
-                        await cmd_class.do(self, message, c_args, self.cfg)
+                        _ret = await cmd_class.do(self, message, c_args, self.cfg)
+
+                        if cmd_class.shouldModlog():
+                            for chan in message.server.channels:
+                                if chan.name == config.get_key(message.server.id, "modlog_chan"):
+                                    for dcmd in config.get_key(message.server.id, "disabled_commands"):
+                                        if dcmd == "_modlog":
+                                            return
+
+                                    try:
+                                        if _ret:
+                                            await self.send_message(chan, _ret)
+                                    except discord.errors.Forbidden:
+                                        return
+
+                        if cmd_class.deleteCMDMsg():
+                            try:
+                                await self.delete_message(message)
+                            except (discord.errors.NotFound, discord.errors.Forbidden):
+                                pass
                     except discord.errors.Forbidden as e:
                         print("Forbidden while trying to DO")
                         print(e.response)
-
-                    for chan in message.server.channels:
-                        if chan.name == config.get_key(message.server.id, "modlog_chan"):
-                            for dcmd in config.get_key(message.server.id, "disabled_commands"):
-                                if dcmd == "_modlog":
-                                    return
-
-                            try:
-                                await self.send_message(chan, "{0} (#{1}): {2}".format(
-                                    message.author.name,
-                                    message.channel.name,
-                                    message.content
-                                ))
-                            except discord.errors.Forbidden:
-                                return
-
-                    if cmd_class.deleteCMDMsg():
-                        try:
-                            await self.delete_message(message)
-                        except (discord.errors.NotFound, discord.errors.Forbidden):
-                            pass
-
                 else:
                     await self.send_message(message.channel, i18n.get_localized_str(
                         message.server.id, "bot_noperm", {

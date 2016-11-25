@@ -15,7 +15,10 @@ class MuteCommand(Command):
     def command(self):
         return "mute"
 
-    async def do(self, client: discord.Client, message: discord.Message, args: list, cfg={}):
+    def shouldModlog(self):
+        return True
+
+    async def do(self, client: discord.Client, message: discord.Message, args: list, cfg={}) -> str:
         if len(args) < 1:
             await client.send_message(message.channel, i18n.get_localized_str(message.server.id, message.server.id, "cmd_mute_help"))
             return
@@ -30,7 +33,11 @@ class MuteCommand(Command):
                                                                                                    "key": "admin_roles"}))
             return
 
-        nameToMute = " ".join(args)
+        nameToMute = args[0]
+        muteReason = i18n.get_localized_str(message.server.id, "cmd_unmute_emptyreason")
+
+        if len(args) > 1:
+            muteReason = args[1]
 
         for member in message.channel.server.members:
             if nameToMute.lower().strip() == member.name.lower():
@@ -45,7 +52,11 @@ class MuteCommand(Command):
                         await client.add_roles(member, role)
                         await client.send_message(message.channel, i18n.get_localized_str(message.server.id, "cmd_mute", {"mention":
                                                                                                        member.mention}))
-                        return
+                        return i18n.get_localized_str(message.server.id, "cmd_mute_log", {
+                                "name": member.name,
+                                "reason": muteReason,
+                                "responsible": message.author.name
+                            })
 
                 await client.send_message(message.channel, i18n.get_localized_str(message.server.id, "bot_serv_cfg_error", {
                     "cmd": self.command(),

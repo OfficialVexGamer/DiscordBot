@@ -15,6 +15,9 @@ class DrawCommand(Command):
     def command(self):
         return "raffle"
 
+    def shouldModlog(self):
+        return False
+
     async def do(self, client: discord.Client, message: discord.Message, args: list, config={}):
         while True:
             participants = message.server.members

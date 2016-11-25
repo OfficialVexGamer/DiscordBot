@@ -15,6 +15,9 @@ class GetConfCommand(Command):
     def command(self):
         return "getconf"
 
+    def shouldModlog(self):
+        return False
+
     async def do(self, client: discord.Client, message: discord.Message, args: list, cfg={}):
         if len(args) == 1:
             key_name = args[0]

@@ -15,7 +15,10 @@ class UnmuteCommand(Command):
     def command(self):
         return "unmute"
 
-    async def do(self, client: discord.Client, message: discord.Message, args: list, cfg={}):
+    def shouldModlog(self):
+        return True
+
+    async def do(self, client: discord.Client, message: discord.Message, args: list, cfg={}) -> str:
         if len(args) < 1:
             await client.send_message(message.channel, i18n.get_localized_str(message.server.id, "cmd_unmute_help"))
             return
@@ -30,7 +33,11 @@ class UnmuteCommand(Command):
                                                                                                    "key": "admin_roles"}))
             return
 
-        nameToMute = " ".join(args)
+        nameToMute = args[0]
+        muteReason = i18n.get_localized_str(message.server.id, "cmd_unmute_emptyreason")
+
+        if len(args) > 1:
+            muteReason = args[1]
 
         for member in message.server.members:
             if nameToMute.lower().strip() == member.name.lower():
@@ -44,6 +51,10 @@ class UnmuteCommand(Command):
                             await client.send_message(message.channel, i18n.get_localized_str(message.server.id, "cmd_unmute", {
                                 "mention": member.mention
                             }))
-                            return
+                            return i18n.get_localized_str(message.server.id, "cmd_unmute_log", {
+                                "name": member.name,
+                                "reason": muteReason,
+                                "responsible": message.author.name
+                            })
 
         await client.send_message(message.channel, i18n.get_localized_str(message.server.id, "cmd_mute_notfound", {"name": nameToMute}))

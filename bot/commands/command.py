@@ -13,6 +13,10 @@ class Command:
     def command(self):
         return "help"
 
+    def shouldModlog(self):
+        return False  # The log message is taken from Command.do()'s return.
+                      # only affects if Command.requiresAdmin() is true.
+
     def help(self, server_id: str):
         _hlp = i18n.get_localized_str(server_id, "help_" + self.command())
         if _hlp == "STRING NOT FOUND: help_" + self.command():

@@ -13,6 +13,9 @@ class AnnounceCommand(Command):
     def command(self):
         return "announce"
 
+    def shouldModlog(self):
+        return False
+
     async def do(self, client: discord.Client, message: discord.Message, args: list, config={}):
         for channel in message.server.channels:
             if channel.type == discord.ChannelType.text:

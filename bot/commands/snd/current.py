@@ -15,6 +15,9 @@ class CurrentMusicCommand(Command):
     def command(self):
         return "snd_current"
 
+    def shouldModlog(self):
+        return False
+
     async def do(self, client: discord.Client, message: discord.Message, args: list, config={}):
         if not sound.player:
             await client.send_message(message.channel, i18n.get_localized_str(message.server.id, "cmd_snd_current_npy"))

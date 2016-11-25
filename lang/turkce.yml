@@ -34,8 +34,19 @@ cmd_unlock: "{mention} kanal kilidini açtı."
 cmd_mute: "{mention} susturuldu."
 cmd_mute_admin: "Bir admini susturamassın!"
 cmd_mute_notfound: "{name} bulunamadı!"
+cmd_mute_log: |
+  .
+  **{name} Susturuldu**
+  **Neden:** {reason}
+  **Yapan:** {responsible}
 
 cmd_unmute: "{mention} artık konuşabilir"
+cmd_unmute_emptyreason: "Neden yok"
+cmd_unmute_log: |
+  .
+  **{name} Susturuldu**
+  **Neden:** {reason}
+  **Yapan:** {responsible}
 
 cmd_conf_nokey: "{key} bulunamadı"
 cmd_reloadconf: "Config yenilendi!"

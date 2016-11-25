@@ -18,6 +18,9 @@ class CleverbotCommand(Command):
     def command(self):
         return "cleverbot"
 
+    def shouldModlog(self):
+        return False
+
     async def do(self, client: discord.Client, message: discord.Message, args: list, cfg={}):
         if len(args) < 1:
             await client.send_message(message.channel, i18n.get_localized_str(message.server.id, "cmd_cleverbot_nothing", {"mention":
