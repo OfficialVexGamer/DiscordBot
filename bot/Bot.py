@@ -104,11 +104,15 @@ class DiscordBot(discord.Client):
                 return
 
         try:
-            await self.send_message(member.server, i18n.get_localized_str(
-                member.server.id, "bot_welcome", {
-                    "name": member.display_name
-                }
-            ))
+            for chan in member.server.channels:
+                if chan.name == config.get_key(member.server.id,
+                                               "welcome_chan"):
+                    await self.send_message(chan, i18n.get_localized_str(
+                        member.server.id, "bot_welcome", {
+                            "name": member.display_name
+                        }
+                    ))
+                    break
         except discord.errors.Forbidden:
             pass
 
@@ -118,11 +122,15 @@ class DiscordBot(discord.Client):
                 return
 
         try:
-            await self.send_message(member.server, i18n.get_localized_str(
-                member.server.id, "bot_goodbye", {
-                    "name": member.display_name
-                }
-            ))
+            for chan in member.server.channels:
+                if chan.name == config.get_key(member.server.id,
+                                               "welcome_chan"):
+                    await self.send_message(chan, i18n.get_localized_str(
+                        member.server.id, "bot_goodbye", {
+                            "name": member.display_name
+                        }
+                    ))
+                    break
         except discord.errors.Forbidden:
             pass
 

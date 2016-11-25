@@ -2,6 +2,7 @@ language: english
 mute_role: Muted
 voice_chan: Music Room
 music_chan: music
+welcome_chan: general
 modlog_chan: mod-log
 cmd_prefix: "?_"
 admin_roles:
