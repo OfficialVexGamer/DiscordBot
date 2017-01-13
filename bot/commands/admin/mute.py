@@ -43,7 +43,7 @@ class MuteCommand(Command):
         member = message.server.get_member(idToMute)
         if not member:
             await client.send_message(message.channel, i18n.get_localized_str(message.server.id, "cmd_mute_notfound", {
-                idToMute
+                "name": idToMute
             }))
             return
 
