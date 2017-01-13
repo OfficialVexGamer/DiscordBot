@@ -5,3 +5,4 @@ pyyaml
 youtube_dl
 pynacl
 markovify
+cleverbot

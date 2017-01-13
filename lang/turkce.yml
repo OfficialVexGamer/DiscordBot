@@ -39,6 +39,7 @@ cmd_mute_log: |
   **{name} Susturuldu**
   **Neden:** {reason}
   **Yapan:** {responsible}
+  **Zaman:** {date}
 
 cmd_unmute: "{mention} artık konuşabilir"
 cmd_unmute_emptyreason: "Neden yok"
@@ -47,6 +48,7 @@ cmd_unmute_log: |
   **{name} Susturuldu**
   **Neden:** {reason}
   **Yapan:** {responsible}
+  **Zaman:** {date}
 
 cmd_conf_nokey: "{key} bulunamadı"
 cmd_reloadconf: "Config yenilendi!"

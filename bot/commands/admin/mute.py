@@ -1,3 +1,4 @@
+import datetime
 import discord
 
 from bot import config
@@ -55,7 +56,8 @@ class MuteCommand(Command):
                         return i18n.get_localized_str(message.server.id, "cmd_mute_log", {
                                 "name": member.name,
                                 "reason": muteReason,
-                                "responsible": message.author.name
+                                "responsible": message.author.name,
+                                "date": datetime.datetime.today().strftime('%Y-%m-%d %H:%M')
                             })
 
                 await client.send_message(message.channel, i18n.get_localized_str(message.server.id, "bot_serv_cfg_error", {
